@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/media/zigork/UBUNTU 24_0/GitHub/U_net/build",
+  "command": "/usr/bin/c++   -g -o CMakeFiles/U-Net.dir/main.cpp.o -c \"/media/zigork/UBUNTU 24_0/GitHub/U_net/main.cpp\"",
+  "file": "/media/zigork/UBUNTU 24_0/GitHub/U_net/main.cpp",
+  "output": "CMakeFiles/U-Net.dir/main.cpp.o"
+}
+]
