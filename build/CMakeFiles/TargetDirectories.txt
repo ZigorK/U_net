@@ -1,34 +1,3 @@
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/U-Net.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/Experimental.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/Nightly.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/Continuous.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/NightlyMemoryCheck.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/NightlyStart.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/NightlyUpdate.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/NightlyConfigure.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/NightlyBuild.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/NightlyTest.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/NightlyCoverage.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/NightlyMemCheck.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/NightlySubmit.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/ExperimentalStart.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/ExperimentalUpdate.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/ExperimentalConfigure.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/ExperimentalBuild.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/ExperimentalTest.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/ExperimentalCoverage.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/ExperimentalMemCheck.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/ExperimentalSubmit.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/ContinuousStart.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/ContinuousUpdate.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/ContinuousConfigure.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/ContinuousBuild.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/ContinuousTest.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/ContinuousCoverage.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/ContinuousMemCheck.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/ContinuousSubmit.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/package.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/package_source.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/test.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/edit_cache.dir
-/media/zigork/UBUNTU 24_0/GitHub/U_net/build/CMakeFiles/rebuild_cache.dir
+/home/zigork/GitHub/U_net/build/CMakeFiles/unet.dir
+/home/zigork/GitHub/U_net/build/CMakeFiles/edit_cache.dir
+/home/zigork/GitHub/U_net/build/CMakeFiles/rebuild_cache.dir
