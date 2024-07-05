@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/g++
 CXX_DEFINES = 
 
-CXX_INCLUDES = 
+CXX_INCLUDES = -isystem /usr/include/opencv4
 
-CXX_FLAGS = -std=gnu++11
+CXX_FLAGS = -g -std=gnu++11
 

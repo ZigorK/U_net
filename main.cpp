@@ -1,8 +1,36 @@
+#include <opencv2/opencv.hpp>
 #include <vector>
 #include <iostream>
 #include <cmath>
 #include <cstdlib>
 #include <limits>
+#include <string>
+
+using namespace cv;
+using namespace std;
+
+vector<Mat> loadImages(const string& folderPath, const string& fileExtension) {
+    vector<String> fileNames;
+    glob(folderPath + "/*" + fileExtension, fileNames, false);
+
+    vector<Mat> images;
+    for (size_t i = 0; i < fileNames.size(); ++i) {
+        Mat img = imread(fileNames[i]);
+        if (!img.empty()) {
+            images.push_back(img);
+        } else {
+            cout << "Failed to load image: " << fileNames[i] << endl;
+        }
+    }
+    return images;
+}
+
+Mat preprocess(const Mat& img, int targetHeight, int targetWidth) {
+    Mat resizedImg;
+    resize(img, resizedImg, Size(targetHeight, targetWidth));
+    resizedImg.convertTo(resizedImg, CV_64F, 1.0 / 255.0);
+    return resizedImg;
+}
 
 // свёрточный слой
 class ConvLayer {
@@ -220,11 +248,26 @@ private:
 int main() {
     UNet unet;
 
-    // пример входного изображения (3 канала, 256x256 пикселей)
-    std::vector<std::vector<std::vector<double>>> input_image(3, std::vector<std::vector<double>>(256, std::vector<double>(256, 1.0)));
+    // загрузка изображений
+    vector<Mat> images = loadImages("/home/zigork/GitHub/carla_hd/train", ".png");
+
+    // предобработка изображений
+    vector<vector<vector<double>>> input_images;
+    for (const auto& img : images) {
+        Mat preprocessed = preprocess(img, 256, 256);
+        vector<vector<vector<double>>> input_image(3, vector<vector<double>>(256, vector<double>(256, 0.0)));
+        for (int c = 0; c < 3; ++c) {
+            for (int i = 0; i < 256; ++i) {
+                for (int j = 0; j < 256; ++j) {
+                    input_image[c][i][j] = preprocessed.at<Vec3d>(i, j)[c];
+                }
+            }
+        }
+        input_images.push_back(input_image);
+    }
 
     // прямое распространение
-    auto output = unet.forward(input_image);
+    auto output = unet.forward(input_images[0]);
 
     // вывод размера выходного изображения
     std::cout << "Output size: " << output.size() << " x " << output[0].size() << " x " << output[0][0].size() << std::endl;
