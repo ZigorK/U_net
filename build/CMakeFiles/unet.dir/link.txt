@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/unet.dir/main.cpp.o -o unet 
+/usr/bin/g++ CMakeFiles/unet.dir/main.cpp.o -o unet 
