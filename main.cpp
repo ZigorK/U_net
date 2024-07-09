@@ -4,33 +4,6 @@
 #include <cmath>
 #include <cstdlib>
 #include <limits>
-#include <string>
-
-using namespace cv;
-using namespace std;
-
-vector<Mat> loadImages(const string& folderPath, const string& fileExtension) {
-    vector<String> fileNames;
-    glob(folderPath + "/*" + fileExtension, fileNames, false);
-
-    vector<Mat> images;
-    for (size_t i = 0; i < fileNames.size(); ++i) {
-        Mat img = imread(fileNames[i]);
-        if (!img.empty()) {
-            images.push_back(img);
-        } else {
-            cout << "Failed to load image: " << fileNames[i] << endl;
-        }
-    }
-    return images;
-}
-
-Mat preprocess(const Mat& img, int targetHeight, int targetWidth) {
-    Mat resizedImg;
-    resize(img, resizedImg, Size(targetHeight, targetWidth));
-    resizedImg.convertTo(resizedImg, CV_64F, 1.0 / 255.0);
-    return resizedImg;
-}
 
 // свёрточный слой
 class ConvLayer {
@@ -203,74 +176,68 @@ private:
 // U-Net архитектура
 class UNet {
 public:
-    UNet() : conv1(3, 64, 3), conv2(64, 128, 3), pool1(2, 2), pool2(2, 2), deconv1(128, 64, 2), deconv2(64, 3, 2){
-        // Encoder
-        conv1 = ConvLayer(3, 64, 3, 1, 1);
-        relu1 = ReLU();
-        pool1 = MaxPooling(2, 2);
-
-        conv2 = ConvLayer(64, 128, 3, 1, 1);
-        relu2 = ReLU();
-        pool2 = MaxPooling(2, 2);
-
-        // Decoder
-        deconv1 = DeconvLayer(128, 64, 3, 2, 1);
-        relu3 = ReLU();
-        deconv2 = DeconvLayer(64, 1, 3, 2, 1); // 1 выходной канал для сегментации
-    }
+    UNet() : conv1(3, 64, 3), conv2(64, 128, 3), pool1(2, 2), pool2(2, 2), deconv1(128, 64, 2, 2), deconv2(64, 1, 2, 2) {}
 
     std::vector<std::vector<std::vector<double>>> forward(const std::vector<std::vector<std::vector<double>>>& input) {
-        // Encoder
         auto x1 = conv1.forward(input);
-        x1 = relu1.forward(x1);
-        auto p1 = pool1.forward(x1);
+        x1 = relu.forward(x1);
+        auto x2 = pool1.forward(x1);
 
-        auto x2 = conv2.forward(p1);
-        x2 = relu2.forward(x2);
-        auto p2 = pool2.forward(x2);
+        auto x3 = conv2.forward(x2);
+        x3 = relu.forward(x3);
+        auto x4 = pool2.forward(x3);
 
-        // Decoder
-        auto d1 = deconv1.forward(p2);
-        d1 = relu3.forward(d1);
-        auto output = deconv2.forward(d1);
+        auto x5 = deconv1.forward(x4);
+        x5 = relu.forward(x5);
 
+        auto output = deconv2.forward(x5);
         return output;
     }
 
 private:
     ConvLayer conv1, conv2;
-    ReLU relu1, relu2, relu3;
+    ReLU relu;
     MaxPooling pool1, pool2;
     DeconvLayer deconv1, deconv2;
 };
 
-// проверка работы U-Net
-int main() {
-    UNet unet;
-
-    // загрузка изображений
-    vector<Mat> images = loadImages("/home/zigork/GitHub/carla_hd/train", ".png");
-
-    // предобработка изображений
-    vector<vector<vector<double>>> input_images;
-    for (const auto& img : images) {
-        Mat preprocessed = preprocess(img, 256, 256);
-        vector<vector<vector<double>>> input_image(3, vector<vector<double>>(256, vector<double>(256, 0.0)));
-        for (int c = 0; c < 3; ++c) {
-            for (int i = 0; i < 256; ++i) {
-                for (int j = 0; j < 256; ++j) {
-                    input_image[c][i][j] = preprocessed.at<Vec3d>(i, j)[c];
-                }
+// функция для нормализации изображения
+std::vector<std::vector<std::vector<double>>> normalize(const cv::Mat& image) {
+    std::vector<std::vector<std::vector<double>>> normalized_image(3, std::vector<std::vector<double>>(image.rows, std::vector<double>(image.cols)));
+    for (int c = 0; c < 3; ++c) {
+        for (int i = 0; i < image.rows; ++i) {
+            for (int j = 0; j < image.cols; ++j) {
+                normalized_image[c][i][j] = image.at<cv::Vec3b>(i, j)[c] / 255.0;
             }
         }
-        input_images.push_back(input_image);
+    }
+    return normalized_image;
+}
+
+int main() {
+    cv::Mat image = cv::imread("/home/zigork/GitHub/carla_hd/train/images/image_0.png", cv::IMREAD_COLOR);
+    if (image.empty()) {
+        std::cerr << "Could not open or find the image!" << std::endl;
+        return -1;
     }
 
-    // прямое распространение
-    auto output = unet.forward(input_images[0]);
+    std::vector<std::vector<std::vector<double>>> input_image = normalize(image);
 
-    // вывод размера выходного изображения
-    std::cout << "Output size: " << output.size() << " x " << output[0].size() << " x " << output[0][0].size() << std::endl;
+    UNet unet;
+
+    auto output = unet.forward(input_image);
+
+    // Вывод результатов
+    for (const auto& channel : output) {
+        for (const auto& row : channel) {
+            for (const auto& value : row) {
+                std::cout << value << " ";
+            }
+            std::cout << std::endl;
+        }
+        std::cout << std::endl;
+    }
 
     return 0;
 }
+
