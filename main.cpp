@@ -4,6 +4,19 @@
 #include <cmath>
 #include <cstdlib>
 #include <limits>
+#include <algorithm>
+#include <filesystem> // Добавьте эту библиотеку для работы с файловой системой
+
+namespace fs = std::filesystem;
+
+// Функция для получения всех файлов в директории
+std::vector<std::string> getFilesInDirectory(const std::string& directory) {
+    std::vector<std::string> files;
+    for (const auto& entry : fs::directory_iterator(directory)) {
+        files.push_back(entry.path().string());
+    }
+    return files;
+}
 
 // свёрточный слой
 class ConvLayer {
@@ -37,7 +50,15 @@ public:
                 }
             }
         }
+        std::cout << "ConvLayer Forward: Input shape [" << input.size() << "][" << input[0].size() << "][" << input[0][0].size() << "]" << std::endl;
+        std::cout << "ConvLayer Forward: Output shape [" << output.size() << "][" << output[0].size() << "][" << output[0][0].size() << "]" << std::endl;
         return output;
+    }
+
+    void backward(const std::vector<std::vector<std::vector<double>>>& input, const std::vector<std::vector<std::vector<double>>>& grad_output, double learning_rate) {
+        // Рассчитываем градиенты и обновляем веса
+        // Реализуем обратный проход для сверточного слоя
+        // Обновляем веса на основе градиентов и скорости обучения
     }
 
 private:
@@ -76,6 +97,18 @@ public:
         }
         return output;
     }
+
+    std::vector<std::vector<std::vector<double>>> backward(const std::vector<std::vector<std::vector<double>>>& input, const std::vector<std::vector<std::vector<double>>>& grad_output) {
+        std::vector<std::vector<std::vector<double>>> grad_input = input;
+        for (size_t i = 0; i < input.size(); ++i) {
+            for (size_t j = 0; j < input[i].size(); ++j) {
+                for (size_t k = 0; k < input[i][j].size(); ++k) {
+                    grad_input[i][j][k] = input[i][j][k] > 0 ? grad_output[i][j][k] : 0;
+                }
+            }
+        }
+        return grad_input;
+    }
 };
 
 // объединяющий слой MaxPooling
@@ -109,6 +142,12 @@ public:
             }
         }
         return output;
+    }
+
+    std::vector<std::vector<std::vector<double>>> backward(const std::vector<std::vector<std::vector<double>>>& input, const std::vector<std::vector<std::vector<double>>>& grad_output) {   
+        // Реализуем обратный проход для максимального слоя пула
+        // Рассчитываем градиенты для ввода на основе grad_output
+        return grad_output; // Возвращаемое значение заполнителя
     }
 
 private:
@@ -151,6 +190,12 @@ public:
         return output;
     }
 
+    void backward(const std::vector<std::vector<std::vector<double>>>& input, const std::vector<std::vector<std::vector<double>>>& grad_output, double learning_rate) {
+        // Рассчитываем градиенты и обновляем веса
+        // Реализуем обратный проход для сверточного слоя
+        // Обновляем веса на основе градиентов и скорости обучения
+    }
+
 private:
     int in_channels;
     int out_channels;
@@ -173,71 +218,216 @@ private:
     }
 };
 
-// U-Net архитектура
-class UNet {
+// слой объединения (конкатенации)
+class ConcatLayer {
 public:
-    UNet() : conv1(3, 64, 3), conv2(64, 128, 3), pool1(2, 2), pool2(2, 2), deconv1(128, 64, 2, 2), deconv2(64, 1, 2, 2) {}
-
-    std::vector<std::vector<std::vector<double>>> forward(const std::vector<std::vector<std::vector<double>>>& input) {
-        auto x1 = conv1.forward(input);
-        x1 = relu.forward(x1);
-        auto x2 = pool1.forward(x1);
-
-        auto x3 = conv2.forward(x2);
-        x3 = relu.forward(x3);
-        auto x4 = pool2.forward(x3);
-
-        auto x5 = deconv1.forward(x4);
-        x5 = relu.forward(x5);
-
-        auto output = deconv2.forward(x5);
+    std::vector<std::vector<std::vector<double>>> forward(const std::vector<std::vector<std::vector<double>>>& input1, const std::vector<std::vector<std::vector<double>>>& input2) {
+        std::vector<std::vector<std::vector<double>>> output = input1;
+        output.insert(output.end(), input2.begin(), input2.end());
         return output;
     }
 
-private:
-    ConvLayer conv1, conv2;
-    ReLU relu;
-    MaxPooling pool1, pool2;
-    DeconvLayer deconv1, deconv2;
+    std::vector<std::vector<std::vector<std::vector<double>>>> backward(const std::vector<std::vector<std::vector<double>>>& grad_output, size_t split_index) {
+        std::vector<std::vector<std::vector<double>>> grad_input1(grad_output.begin(), grad_output.begin() + split_index);
+        std::vector<std::vector<std::vector<double>>> grad_input2(grad_output.begin() + split_index, grad_output.end());
+        return {grad_input1, grad_input2};
+    }
 };
 
-// функция для нормализации изображения
-std::vector<std::vector<std::vector<double>>> normalize(const cv::Mat& image) {
-    std::vector<std::vector<std::vector<double>>> normalized_image(3, std::vector<std::vector<double>>(image.rows, std::vector<double>(image.cols)));
-    for (int c = 0; c < 3; ++c) {
-        for (int i = 0; i < image.rows; ++i) {
-            for (int j = 0; j < image.cols; ++j) {
-                normalized_image[c][i][j] = image.at<cv::Vec3b>(i, j)[c] / 255.0;
+// определение модели UNet
+class UNet {
+public:
+    UNet()
+        : conv1(3, 64, 3), conv2(64, 128, 3), conv3(128, 256, 3), conv4(256, 512, 3), conv5(512, 1024, 3),
+          deconv1(1024, 512, 2, 2), deconv2(1024, 256, 2, 2), deconv3(512, 128, 2, 2), deconv4(256, 64, 2, 2),
+          output_conv(128, 1, 1),
+          relu(), maxpool(2, 2), concat() {}
+
+    std::vector<std::vector<std::vector<double>>> forward(const std::vector<std::vector<std::vector<double>>>& input) {
+        auto x1 = relu.forward(conv1.forward(input));
+        auto x2 = maxpool.forward(x1);
+        auto x3 = relu.forward(conv2.forward(x2));
+        auto x4 = maxpool.forward(x3);
+        auto x5 = relu.forward(conv3.forward(x4));
+        auto x6 = maxpool.forward(x5);
+        auto x7 = relu.forward(conv4.forward(x6));
+        auto x8 = maxpool.forward(x7);
+        auto x9 = relu.forward(conv5.forward(x8));
+        auto x10 = relu.forward(deconv1.forward(x9));
+        auto x11 = concat.forward(x10, x7);
+        auto x12 = relu.forward(conv4.forward(x11));
+        auto x13 = relu.forward(deconv2.forward(x12));
+        auto x14 = concat.forward(x13, x5);
+        auto x15 = relu.forward(conv3.forward(x14));
+        auto x16 = relu.forward(deconv3.forward(x15));
+        auto x17 = concat.forward(x16, x3);
+        auto x18 = relu.forward(conv2.forward(x17));
+        auto x19 = relu.forward(deconv4.forward(x18));
+        auto x20 = concat.forward(x19, x1);
+        return output_conv.forward(x20);
+    }
+
+private:
+    ConvLayer conv1, conv2, conv3, conv4, conv5;
+    DeconvLayer deconv1, deconv2, deconv3, deconv4;
+    ConvLayer output_conv;
+    ReLU relu;
+    MaxPooling maxpool;
+    ConcatLayer concat;
+};
+
+// функция загрузки изображений
+std::vector<std::vector<std::vector<double>>> loadImage(const std::string& filename) {
+    cv::Mat image = cv::imread(filename);
+    image.convertTo(image, CV_64FC3, 1.0 / 255.0);
+    std::vector<std::vector<std::vector<double>>> data(3, std::vector<std::vector<double>>(image.rows, std::vector<double>(image.cols)));
+    for (int i = 0; i < image.rows; ++i) {
+        for (int j = 0; j < image.cols; ++j) {
+            data[0][i][j] = image.at<cv::Vec3d>(i, j)[0];
+            data[1][i][j] = image.at<cv::Vec3d>(i, j)[1];
+            data[2][i][j] = image.at<cv::Vec3d>(i, j)[2];
+        }
+    }
+    return data;
+}
+
+// функция загрузки масок
+std::vector<std::vector<std::vector<double>>> loadMask(const std::string& filename) {
+    cv::Mat image = cv::imread(filename, cv::IMREAD_COLOR); // Загружаем как цветное изображение
+    image.convertTo(image, CV_64FC3, 1.0 / 255.0);
+    std::vector<std::vector<std::vector<double>>> data(3, std::vector<std::vector<double>>(image.rows, std::vector<double>(image.cols)));
+    for (int i = 0; i < image.rows; ++i) {
+        for (int j = 0; j < image.cols; ++j) {
+            data[0][i][j] = image.at<cv::Vec3d>(i, j)[0]; // Канал Blue
+            data[1][i][j] = image.at<cv::Vec3d>(i, j)[1]; // Канал Green
+            data[2][i][j] = image.at<cv::Vec3d>(i, j)[2]; // Канал Red
+        }
+    }
+    return data;
+}
+
+
+// Функция бинарной кросс-энтропии с выводами для отладки
+double binaryCrossEntropy(const std::vector<std::vector<std::vector<double>>>& prediction, const std::vector<std::vector<std::vector<double>>>& target) {
+    double loss = 0.0;
+    for (size_t i = 0; i < prediction.size(); ++i) {
+        for (size_t j = 0; j < prediction[i].size(); ++j) {
+            for (size_t k = 0; k < prediction[i][j].size(); ++k) {
+                double pred = std::min(std::max(prediction[i][j][k], 1e-15), 1.0 - 1e-15);
+                double term1 = target[i][j][k] * std::log(pred);
+                double term2 = (1 - target[i][j][k]) * std::log(1 - pred);
+                loss -= term1 + term2;
+
+                // Вывод для отладки
+                std::cout << "Prediction[" << i << "][" << j << "][" << k << "]: " << pred << std::endl;
+                std::cout << "Target[" << i << "][" << j << "][" << k << "]: " << target[i][j][k] << std::endl;
+                std::cout << "Term1: " << term1 << std::endl;
+                std::cout << "Term2: " << term2 << std::endl;
             }
         }
     }
-    return normalized_image;
+    double total_loss = loss / (prediction.size() * prediction[0].size() * prediction[0][0].size());
+    std::cout << "Total Loss: " << total_loss << std::endl;
+
+    return total_loss;
 }
 
+
+// обучение модели
+void trainUNet(UNet& model, const std::vector<std::string>& image_files, const std::vector<std::string>& mask_files, int epochs, double learning_rate) {
+    for (int epoch = 0; epoch < epochs; ++epoch) {
+        double epoch_loss = 0.0;
+        std::cout << "Эпоха [" << (epoch + 1) << "/" << epochs << "]" << std::endl;
+        for (size_t i = 0; i < image_files.size(); ++i) {
+            std::cout << "Обработка изображения " << i + 1 << "/" << image_files.size() << std::endl;
+            auto input = loadImage(image_files[i]);
+            auto target = loadMask(mask_files[i]);
+            auto output = model.forward(input);
+            double loss = binaryCrossEntropy(output, target);
+            epoch_loss += loss;
+            std::cout << "Изображение " << i + 1 << " обработано. Потери: " << loss << std::endl;
+
+            // Обратное распространение ошибки и обновление весов
+            // TODO: Реализовать обратный проход и обновление весов
+        }
+        std::cout << "Эпоха [" << (epoch + 1) << "/" << epochs << "], Потери: " << epoch_loss / image_files.size() << std::endl;
+    }
+}
+
+
+
 int main() {
-    cv::Mat image = cv::imread("/home/zigork/GitHub/carla_hd/train/images/image_0.png", cv::IMREAD_COLOR);
-    if (image.empty()) {
-        std::cerr << "Could not open or find the image!" << std::endl;
-        return -1;
+    std::string images_path = "/home/zigork/GitHub/carla_hd/train/images";
+    std::string masks_path = "/home/zigork/GitHub/carla_hd/train/masks";
+
+    std::vector<std::string> image_files;
+    std::vector<std::string> mask_files;
+
+    for (const auto& entry : fs::directory_iterator(images_path)) {
+        image_files.push_back(entry.path().string());
+    }
+    for (const auto& entry : fs::directory_iterator(masks_path)) {
+        mask_files.push_back(entry.path().string());
     }
 
-    std::vector<std::vector<std::vector<double>>> input_image = normalize(image);
+    // Ограничим количество обрабатываемых изображений
+    size_t num_images = std::min(image_files.size(), mask_files.size());
+    num_images = std::min(num_images, static_cast<size_t>(10)); // Ограничим до 10 изображений для отладки
 
     UNet unet;
 
-    auto output = unet.forward(input_image);
+    std::cout << "Начало обучения модели UNet..." << std::endl;
+    
+    for (size_t epoch = 0; epoch < 10; ++epoch) {
+        double total_loss = 0.0;
+        std::cout << "Epoch [" << epoch + 1 << "/10]" << std::endl;
+        
+        for (size_t i = 0; i < num_images; ++i) {
+            std::cout << "Processing image " << i + 1 << "/" << num_images << std::endl;
 
-    // Вывод результатов
-    for (const auto& channel : output) {
-        for (const auto& row : channel) {
-            for (const auto& value : row) {
-                std::cout << value << " ";
+            // Загрузка изображения
+            cv::Mat image = cv::imread(image_files[i], cv::IMREAD_COLOR);
+            if (image.empty()) {
+                std::cerr << "Failed to load image: " << image_files[i] << std::endl;
+                continue;
             }
-            std::cout << std::endl;
+            image.convertTo(image, CV_64FC3, 1.0 / 255.0);
+            std::vector<std::vector<std::vector<double>>> image_data(3, std::vector<std::vector<double>>(image.rows, std::vector<double>(image.cols)));
+            for (int r = 0; r < image.rows; ++r) {
+                for (int c = 0; c < image.cols; ++c) {
+                    for (int ch = 0; ch < 3; ++ch) {
+                        image_data[ch][r][c] = image.at<cv::Vec3d>(r, c)[ch];
+                    }
+                }
+            }
+
+            // Загрузка маски
+            cv::Mat mask = cv::imread(mask_files[i], cv::IMREAD_GRAYSCALE);
+            if (mask.empty()) {
+                std::cerr << "Failed to load mask: " << mask_files[i] << std::endl;
+                continue;
+            }
+            mask.convertTo(mask, CV_64FC1, 1.0 / 255.0);
+            std::vector<std::vector<std::vector<double>>> mask_data(1, std::vector<std::vector<double>>(mask.rows, std::vector<double>(mask.cols)));
+            for (int r = 0; r < mask.rows; ++r) {
+                for (int c = 0; c < mask.cols; ++c) {
+                    mask_data[0][r][c] = mask.at<double>(r, c);
+                }
+            }
+
+            // Прямое распространение
+            auto prediction = unet.forward(image_data);
+
+            // Вычисление ошибки
+            double loss = binaryCrossEntropy(prediction, mask_data);
+            total_loss += loss;
+
+            std::cout << "Image " << i + 1 << " processed. Loss: " << loss << std::endl;
         }
-        std::cout << std::endl;
+        std::cout << "Epoch [" << epoch + 1 << "/10], Loss: " << total_loss / num_images << std::endl;
     }
+
+    std::cout << "Обучение завершено." << std::endl;
 
     return 0;
 }
-
