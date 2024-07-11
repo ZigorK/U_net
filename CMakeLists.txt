@@ -13,6 +13,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-# Усполняемый файл
+
 add_executable(unet main.cpp)
 target_link_libraries(unet ${OpenCV_LIBS})
