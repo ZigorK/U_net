@@ -357,8 +357,8 @@ void trainUNet(UNet& model, const std::vector<std::string>& image_files, const s
 
 
 int main() {
-    std::string images_path = "/home/zigork/GitHub/carla_hd/train/images";
-    std::string masks_path = "/home/zigork/GitHub/carla_hd/train/masks";
+    std::string images_path = "/home/zigork/GitHub/cifar10_images/0";
+    std::string masks_path = "/home/zigork/GitHub/cifar10_images/0";
 
     std::vector<std::string> image_files;
     std::vector<std::string> mask_files;
