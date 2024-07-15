@@ -4,8 +4,8 @@
 #include <cmath>
 #include <cstdlib>
 #include <limits>
-#include <algorithm>
-#include <filesystem> 
+#include <algorithm> 
+#include <filesystem>  
 
 namespace fs = std::filesystem;
 
@@ -27,6 +27,7 @@ public:
     }
 
     std::vector<std::vector<std::vector<double>>> forward(const std::vector<std::vector<std::vector<double>>>& input) {
+        this->input = input;
         int height = input[0].size();
         int width = input[0][0].size();
         int output_height = (height - kernel_size + 2 * padding) / stride + 1;
@@ -50,15 +51,47 @@ public:
                 }
             }
         }
-        std::cout << "ConvLayer Forward: Input shape [" << input.size() << "][" << input[0].size() << "][" << input[0][0].size() << "]" << std::endl;
-        std::cout << "ConvLayer Forward: Output shape [" << output.size() << "][" << output[0].size() << "][" << output[0][0].size() << "]" << std::endl;
         return output;
     }
 
-    void backward(const std::vector<std::vector<std::vector<double>>>& input, const std::vector<std::vector<std::vector<double>>>& grad_output, double learning_rate) {
-        // Рассчитываем градиенты и обновляем веса
-        // Реализуем обратный проход для сверточного слоя
-        // Обновляем веса на основе градиентов и скорости обучения
+    void backward(const std::vector<std::vector<std::vector<double>>>& grad_output, double learning_rate) {
+        int height = input[0].size();
+        int width = input[0][0].size();
+        int output_height = grad_output[0].size();
+        int output_width = grad_output[0][0].size();
+
+        std::vector<std::vector<std::vector<std::vector<double>>>> grad_weights(out_channels, std::vector<std::vector<std::vector<double>>>(in_channels, std::vector<std::vector<double>>(kernel_size, std::vector<double>(kernel_size, 0.0))));
+        std::vector<std::vector<std::vector<double>>> grad_input(in_channels, std::vector<std::vector<double>>(height, std::vector<double>(width, 0.0)));
+
+        for (int oc = 0; oc < out_channels; ++oc) {
+            for (int ic = 0; ic < in_channels; ++ic) {
+                for (int i = 0; i < output_height; ++i) {
+                    for (int j = 0; j < output_width; ++j) {
+                        for (int ki = 0; ki < kernel_size; ++ki) {
+                            for (int kj = 0; kj < kernel_size; ++kj) {
+                                int input_row = i * stride + ki - padding;
+                                int input_col = j * stride + kj - padding;
+                                if (input_row >= 0 && input_row < height && input_col >= 0 && input_col < width) {
+                                    grad_weights[oc][ic][ki][kj] += grad_output[oc][i][j] * input[ic][input_row][input_col];
+                                    grad_input[ic][input_row][input_col] += grad_output[oc][i][j] * weights[oc][ic][ki][kj];
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Обновление весов
+        for (int oc = 0; oc < out_channels; ++oc) {
+            for (int ic = 0; ic < in_channels; ++ic) {
+                for (int ki = 0; ki < kernel_size; ++ki) {
+                    for (int kj = 0; kj < kernel_size; ++kj) {
+                        weights[oc][ic][ki][kj] -= learning_rate * grad_weights[oc][ic][ki][kj];
+                    }
+                }
+            }
+        }
     }
 
 private:
@@ -68,6 +101,7 @@ private:
     int stride;
     int padding;
     std::vector<std::vector<std::vector<std::vector<double>>>> weights;
+    std::vector<std::vector<std::vector<double>>> input;
 
     void initializeWeights() {
         weights.resize(out_channels, std::vector<std::vector<std::vector<double>>>(in_channels, std::vector<std::vector<double>>(kernel_size, std::vector<double>(kernel_size))));
@@ -87,6 +121,7 @@ private:
 class ReLU {
 public:
     std::vector<std::vector<std::vector<double>>> forward(const std::vector<std::vector<std::vector<double>>>& input) {
+        this->input = input;
         std::vector<std::vector<std::vector<double>>> output = input;
         for (auto& channel : output) {
             for (auto& row : channel) {
@@ -98,17 +133,22 @@ public:
         return output;
     }
 
-    std::vector<std::vector<std::vector<double>>> backward(const std::vector<std::vector<std::vector<double>>>& input, const std::vector<std::vector<std::vector<double>>>& grad_output) {
-        std::vector<std::vector<std::vector<double>>> grad_input = input;
+    std::vector<std::vector<std::vector<double>>> backward(const std::vector<std::vector<std::vector<double>>>& grad_output) {
+        std::vector<std::vector<std::vector<double>>> grad_input = grad_output;
         for (size_t i = 0; i < input.size(); ++i) {
             for (size_t j = 0; j < input[i].size(); ++j) {
                 for (size_t k = 0; k < input[i][j].size(); ++k) {
-                    grad_input[i][j][k] = input[i][j][k] > 0 ? grad_output[i][j][k] : 0;
+                    if (input[i][j][k] <= 0) {
+                        grad_input[i][j][k] = 0;
+                    }
                 }
             }
         }
         return grad_input;
     }
+
+private:
+    std::vector<std::vector<std::vector<double>>> input;
 };
 
 // объединяющий слой MaxPooling
@@ -118,11 +158,14 @@ public:
         : pool_size(pool_size), stride(stride) {}
 
     std::vector<std::vector<std::vector<double>>> forward(const std::vector<std::vector<std::vector<double>>>& input) {
+        this->input = input;
         int height = input[0].size();
         int width = input[0][0].size();
         int output_height = (height - pool_size) / stride + 1;
         int output_width = (width - pool_size) / stride + 1;
         std::vector<std::vector<std::vector<double>>> output(input.size(), std::vector<std::vector<double>>(output_height, std::vector<double>(output_width, 0.0)));
+
+        max_indices.resize(input.size(), std::vector<std::vector<std::pair<int, int>>>(output_height, std::vector<std::pair<int, int>>(output_width)));
 
         for (int ic = 0; ic < input.size(); ++ic) {
             for (int i = 0; i < output_height; ++i) {
@@ -133,7 +176,10 @@ public:
                             int input_row = i * stride + ki;
                             int input_col = j * stride + kj;
                             if (input_row < height && input_col < width) {
-                                max_value = std::max(max_value, input[ic][input_row][input_col]);
+                                if (input[ic][input_row][input_col] > max_value) {
+                                    max_value = input[ic][input_row][input_col];
+                                    max_indices[ic][i][j] = {input_row, input_col};
+                                }
                             }
                         }
                     }
@@ -144,15 +190,25 @@ public:
         return output;
     }
 
-    std::vector<std::vector<std::vector<double>>> backward(const std::vector<std::vector<std::vector<double>>>& input, const std::vector<std::vector<std::vector<double>>>& grad_output) {   
-        // Реализуем обратный проход для максимального слоя пула
-        // Рассчитываем градиенты для ввода на основе grad_output
-        return grad_output; // Возвращаемое значение заполнителя
+    std::vector<std::vector<std::vector<double>>> backward(const std::vector<std::vector<std::vector<double>>>& grad_output) {
+        std::vector<std::vector<std::vector<double>>> grad_input(input.size(), std::vector<std::vector<double>>(input[0].size(), std::vector<double>(input[0][0].size(), 0.0)));
+
+        for (int ic = 0; ic < grad_output.size(); ++ic) {
+            for (int i = 0; i < grad_output[0].size(); ++i) {
+                for (int j = 0; j < grad_output[0][0].size(); ++j) {
+                    auto [input_row, input_col] = max_indices[ic][i][j];
+                    grad_input[ic][input_row][input_col] = grad_output[ic][i][j];
+                }
+            }
+        }
+        return grad_input;
     }
 
 private:
     int pool_size;
     int stride;
+    std::vector<std::vector<std::vector<double>>> input;
+    std::vector<std::vector<std::vector<std::pair<int, int>>>> max_indices;
 };
 
 // обратный свёрточный слой
