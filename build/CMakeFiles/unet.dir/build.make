@@ -73,24 +73,136 @@ CMakeFiles/unet.dir/main.cpp.o: CMakeFiles/unet.dir/flags.make
 CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp
 CMakeFiles/unet.dir/main.cpp.o: CMakeFiles/unet.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zigork/GitHub/U_net/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/unet.dir/main.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/unet.dir/main.cpp.o -MF CMakeFiles/unet.dir/main.cpp.o.d -o CMakeFiles/unet.dir/main.cpp.o -c /home/zigork/GitHub/U_net/main.cpp
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/unet.dir/main.cpp.o -MF CMakeFiles/unet.dir/main.cpp.o.d -o CMakeFiles/unet.dir/main.cpp.o -c /home/zigork/GitHub/U_net/main.cpp
 
 CMakeFiles/unet.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/unet.dir/main.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zigork/GitHub/U_net/main.cpp > CMakeFiles/unet.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zigork/GitHub/U_net/main.cpp > CMakeFiles/unet.dir/main.cpp.i
 
 CMakeFiles/unet.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/unet.dir/main.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zigork/GitHub/U_net/main.cpp -o CMakeFiles/unet.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zigork/GitHub/U_net/main.cpp -o CMakeFiles/unet.dir/main.cpp.s
+
+CMakeFiles/unet.dir/ConvolutionalLayer.cpp.o: CMakeFiles/unet.dir/flags.make
+CMakeFiles/unet.dir/ConvolutionalLayer.cpp.o: /home/zigork/GitHub/U_net/ConvolutionalLayer.cpp
+CMakeFiles/unet.dir/ConvolutionalLayer.cpp.o: CMakeFiles/unet.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zigork/GitHub/U_net/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/unet.dir/ConvolutionalLayer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/unet.dir/ConvolutionalLayer.cpp.o -MF CMakeFiles/unet.dir/ConvolutionalLayer.cpp.o.d -o CMakeFiles/unet.dir/ConvolutionalLayer.cpp.o -c /home/zigork/GitHub/U_net/ConvolutionalLayer.cpp
+
+CMakeFiles/unet.dir/ConvolutionalLayer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/unet.dir/ConvolutionalLayer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zigork/GitHub/U_net/ConvolutionalLayer.cpp > CMakeFiles/unet.dir/ConvolutionalLayer.cpp.i
+
+CMakeFiles/unet.dir/ConvolutionalLayer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/unet.dir/ConvolutionalLayer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zigork/GitHub/U_net/ConvolutionalLayer.cpp -o CMakeFiles/unet.dir/ConvolutionalLayer.cpp.s
+
+CMakeFiles/unet.dir/ReLULayer.cpp.o: CMakeFiles/unet.dir/flags.make
+CMakeFiles/unet.dir/ReLULayer.cpp.o: /home/zigork/GitHub/U_net/ReLULayer.cpp
+CMakeFiles/unet.dir/ReLULayer.cpp.o: CMakeFiles/unet.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zigork/GitHub/U_net/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/unet.dir/ReLULayer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/unet.dir/ReLULayer.cpp.o -MF CMakeFiles/unet.dir/ReLULayer.cpp.o.d -o CMakeFiles/unet.dir/ReLULayer.cpp.o -c /home/zigork/GitHub/U_net/ReLULayer.cpp
+
+CMakeFiles/unet.dir/ReLULayer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/unet.dir/ReLULayer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zigork/GitHub/U_net/ReLULayer.cpp > CMakeFiles/unet.dir/ReLULayer.cpp.i
+
+CMakeFiles/unet.dir/ReLULayer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/unet.dir/ReLULayer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zigork/GitHub/U_net/ReLULayer.cpp -o CMakeFiles/unet.dir/ReLULayer.cpp.s
+
+CMakeFiles/unet.dir/MaxPooling.cpp.o: CMakeFiles/unet.dir/flags.make
+CMakeFiles/unet.dir/MaxPooling.cpp.o: /home/zigork/GitHub/U_net/MaxPooling.cpp
+CMakeFiles/unet.dir/MaxPooling.cpp.o: CMakeFiles/unet.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zigork/GitHub/U_net/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/unet.dir/MaxPooling.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/unet.dir/MaxPooling.cpp.o -MF CMakeFiles/unet.dir/MaxPooling.cpp.o.d -o CMakeFiles/unet.dir/MaxPooling.cpp.o -c /home/zigork/GitHub/U_net/MaxPooling.cpp
+
+CMakeFiles/unet.dir/MaxPooling.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/unet.dir/MaxPooling.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zigork/GitHub/U_net/MaxPooling.cpp > CMakeFiles/unet.dir/MaxPooling.cpp.i
+
+CMakeFiles/unet.dir/MaxPooling.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/unet.dir/MaxPooling.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zigork/GitHub/U_net/MaxPooling.cpp -o CMakeFiles/unet.dir/MaxPooling.cpp.s
+
+CMakeFiles/unet.dir/DeconvLayer.cpp.o: CMakeFiles/unet.dir/flags.make
+CMakeFiles/unet.dir/DeconvLayer.cpp.o: /home/zigork/GitHub/U_net/DeconvLayer.cpp
+CMakeFiles/unet.dir/DeconvLayer.cpp.o: CMakeFiles/unet.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zigork/GitHub/U_net/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/unet.dir/DeconvLayer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/unet.dir/DeconvLayer.cpp.o -MF CMakeFiles/unet.dir/DeconvLayer.cpp.o.d -o CMakeFiles/unet.dir/DeconvLayer.cpp.o -c /home/zigork/GitHub/U_net/DeconvLayer.cpp
+
+CMakeFiles/unet.dir/DeconvLayer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/unet.dir/DeconvLayer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zigork/GitHub/U_net/DeconvLayer.cpp > CMakeFiles/unet.dir/DeconvLayer.cpp.i
+
+CMakeFiles/unet.dir/DeconvLayer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/unet.dir/DeconvLayer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zigork/GitHub/U_net/DeconvLayer.cpp -o CMakeFiles/unet.dir/DeconvLayer.cpp.s
+
+CMakeFiles/unet.dir/ConcatLayer.cpp.o: CMakeFiles/unet.dir/flags.make
+CMakeFiles/unet.dir/ConcatLayer.cpp.o: /home/zigork/GitHub/U_net/ConcatLayer.cpp
+CMakeFiles/unet.dir/ConcatLayer.cpp.o: CMakeFiles/unet.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zigork/GitHub/U_net/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/unet.dir/ConcatLayer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/unet.dir/ConcatLayer.cpp.o -MF CMakeFiles/unet.dir/ConcatLayer.cpp.o.d -o CMakeFiles/unet.dir/ConcatLayer.cpp.o -c /home/zigork/GitHub/U_net/ConcatLayer.cpp
+
+CMakeFiles/unet.dir/ConcatLayer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/unet.dir/ConcatLayer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zigork/GitHub/U_net/ConcatLayer.cpp > CMakeFiles/unet.dir/ConcatLayer.cpp.i
+
+CMakeFiles/unet.dir/ConcatLayer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/unet.dir/ConcatLayer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zigork/GitHub/U_net/ConcatLayer.cpp -o CMakeFiles/unet.dir/ConcatLayer.cpp.s
+
+CMakeFiles/unet.dir/UNet.cpp.o: CMakeFiles/unet.dir/flags.make
+CMakeFiles/unet.dir/UNet.cpp.o: /home/zigork/GitHub/U_net/UNet.cpp
+CMakeFiles/unet.dir/UNet.cpp.o: CMakeFiles/unet.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zigork/GitHub/U_net/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/unet.dir/UNet.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/unet.dir/UNet.cpp.o -MF CMakeFiles/unet.dir/UNet.cpp.o.d -o CMakeFiles/unet.dir/UNet.cpp.o -c /home/zigork/GitHub/U_net/UNet.cpp
+
+CMakeFiles/unet.dir/UNet.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/unet.dir/UNet.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zigork/GitHub/U_net/UNet.cpp > CMakeFiles/unet.dir/UNet.cpp.i
+
+CMakeFiles/unet.dir/UNet.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/unet.dir/UNet.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zigork/GitHub/U_net/UNet.cpp -o CMakeFiles/unet.dir/UNet.cpp.s
+
+CMakeFiles/unet.dir/Utils.cpp.o: CMakeFiles/unet.dir/flags.make
+CMakeFiles/unet.dir/Utils.cpp.o: /home/zigork/GitHub/U_net/Utils.cpp
+CMakeFiles/unet.dir/Utils.cpp.o: CMakeFiles/unet.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zigork/GitHub/U_net/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/unet.dir/Utils.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/unet.dir/Utils.cpp.o -MF CMakeFiles/unet.dir/Utils.cpp.o.d -o CMakeFiles/unet.dir/Utils.cpp.o -c /home/zigork/GitHub/U_net/Utils.cpp
+
+CMakeFiles/unet.dir/Utils.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/unet.dir/Utils.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zigork/GitHub/U_net/Utils.cpp > CMakeFiles/unet.dir/Utils.cpp.i
+
+CMakeFiles/unet.dir/Utils.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/unet.dir/Utils.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zigork/GitHub/U_net/Utils.cpp -o CMakeFiles/unet.dir/Utils.cpp.s
 
 # Object files for target unet
 unet_OBJECTS = \
-"CMakeFiles/unet.dir/main.cpp.o"
+"CMakeFiles/unet.dir/main.cpp.o" \
+"CMakeFiles/unet.dir/ConvolutionalLayer.cpp.o" \
+"CMakeFiles/unet.dir/ReLULayer.cpp.o" \
+"CMakeFiles/unet.dir/MaxPooling.cpp.o" \
+"CMakeFiles/unet.dir/DeconvLayer.cpp.o" \
+"CMakeFiles/unet.dir/ConcatLayer.cpp.o" \
+"CMakeFiles/unet.dir/UNet.cpp.o" \
+"CMakeFiles/unet.dir/Utils.cpp.o"
 
 # External object files for target unet
 unet_EXTERNAL_OBJECTS =
 
 unet: CMakeFiles/unet.dir/main.cpp.o
+unet: CMakeFiles/unet.dir/ConvolutionalLayer.cpp.o
+unet: CMakeFiles/unet.dir/ReLULayer.cpp.o
+unet: CMakeFiles/unet.dir/MaxPooling.cpp.o
+unet: CMakeFiles/unet.dir/DeconvLayer.cpp.o
+unet: CMakeFiles/unet.dir/ConcatLayer.cpp.o
+unet: CMakeFiles/unet.dir/UNet.cpp.o
+unet: CMakeFiles/unet.dir/Utils.cpp.o
 unet: CMakeFiles/unet.dir/build.make
 unet: /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.4.6.0
 unet: /usr/lib/x86_64-linux-gnu/libopencv_alphamat.so.4.6.0
@@ -148,7 +260,7 @@ unet: /usr/lib/x86_64-linux-gnu/libopencv_photo.so.4.6.0
 unet: /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.4.6.0
 unet: /usr/lib/x86_64-linux-gnu/libopencv_core.so.4.6.0
 unet: CMakeFiles/unet.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/zigork/GitHub/U_net/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable unet"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/zigork/GitHub/U_net/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable unet"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/unet.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

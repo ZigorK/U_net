@@ -1,21 +1,44 @@
 cmake_minimum_required(VERSION 3.10)
 
-
 project(unet)
 
+# Установка типа сборки на Debug
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
 
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
+# Установка стандарта C++
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-
+# Поиск пакета OpenCV
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
+# Добавление исходных файлов проекта
+set(SOURCES
+    main.cpp
+    ConvolutionalLayer.cpp
+    ReLULayer.cpp
+    MaxPooling.cpp
+    DeconvLayer.cpp
+    ConcatLayer.cpp
+    UNet.cpp
+    Utils.cpp
+)
 
-add_executable(unet main.cpp)
+# Добавление заголовочных файлов проекта (для IDE, не обязательно)
+set(HEADERS
+    ConvolutionalLayer.h
+    ReLULayer.h
+    MaxPooling.h
+    DeconvLayer.h
+    ConcatLayer.h
+    UNet.h
+    Utils.h
+)
+
+# Создание исполняемого файла
+add_executable(unet ${SOURCES} ${HEADERS})
+
+# Линковка с библиотекой OpenCV
 target_link_libraries(unet ${OpenCV_LIBS})

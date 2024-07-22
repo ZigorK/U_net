@@ -1,0 +1,76 @@
+#include "ConvolutionalLayer.h"
+#include <iostream>
+#include <cmath>
+#include <cstdlib>
+
+ConvLayer::ConvLayer(int in_channels, int out_channels, int kernel_size, int stride, int padding)
+    : in_channels(in_channels), out_channels(out_channels), kernel_size(kernel_size), stride(stride), padding(padding) {
+    initializeWeights();
+}
+
+void ConvLayer::initializeWeights() {
+    weights.resize(out_channels, std::vector<std::vector<std::vector<double>>>(in_channels, std::vector<std::vector<double>>(kernel_size, std::vector<double>(kernel_size))));
+    for (int i = 0; i < out_channels; ++i) {
+        for (int j = 0; j < in_channels; ++j) {
+            for (int k = 0; k < kernel_size; ++k) {
+                for (int l = 0; l < kernel_size; ++l) {
+                    weights[i][j][k][l] = ((double)rand() / (RAND_MAX));
+                }
+            }
+        }
+    }
+}
+
+std::vector<std::vector<std::vector<double>>> ConvLayer::forward(const std::vector<std::vector<std::vector<double>>>& input) {
+    this->input = input;
+    int height = input[0].size();
+    int width = input[0][0].size();
+
+    int output_height = (height - kernel_size + 2 * padding) / stride + 1;
+    int output_width = (width - kernel_size + 2 * padding) / stride + 1;
+
+    if (output_height <= 0 || output_width <= 0) {
+        std::cerr << "Ошибка: Размеры выходного тензора равны нулю или отрицательны. Проверьте параметры свертки." << std::endl;
+        std::cerr << "Параметры: height = " << height << ", width = " << width << ", kernel_size = " << kernel_size << ", stride = " << stride << ", padding = " << padding << std::endl;
+        return {};
+    }
+
+    std::vector<std::vector<std::vector<double>>> output(out_channels, std::vector<std::vector<double>>(output_height, std::vector<double>(output_width, 0.0)));
+
+    std::cout << "Начало операции свертки." << std::endl;
+    std::cout << "Размеры входа: [" << in_channels << ", " << height << ", " << width << "]" << std::endl;
+    std::cout << "Размеры выхода: [" << out_channels << ", " << output_height << ", " << output_width << "]" << std::endl;
+
+    for (int oc = 0; oc < out_channels; ++oc) {
+        for (int ic = 0; ic < in_channels; ++ic) {
+            for (int i = 0; i < output_height; ++i) {
+                for (int j = 0; j < output_width; ++j) {
+                    for (int ki = 0; ki < kernel_size; ++ki) {
+                        for (int kj = 0; kj < kernel_size; ++kj) {
+                            int input_row = i * stride + ki - padding;
+                            int input_col = j * stride + kj - padding;
+                            if (input_row >= 0 && input_row < height && input_col >= 0 && input_col < width) {
+                                output[oc][i][j] += input[ic][input_row][input_col] * weights[oc][ic][ki][kj];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        std::cout << "Обработка выходного канала " << oc + 1 << "/" << out_channels << " завершена." << std::endl;
+    }
+    std::cout << "Завершение операции свертки." << std::endl;
+
+    std::cout << "Проверка корректности выходных данных:" << std::endl;
+    for (const auto& oc : output) {
+        for (const auto& row : oc) {
+            for (double val : row) {
+                if (std::isnan(val) || std::isinf(val)) {
+                    std::cerr << "Обнаружено некорректное значение в выходном тензоре." << std::endl;
+                }
+            }
+        }
+    }
+
+    return output;
+}
