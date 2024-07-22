@@ -1,7 +1,7 @@
 [
 {
   "directory": "/home/zigork/GitHub/U_net/build",
-  "command": "/usr/bin/g++  -isystem /usr/include/opencv4 -g -std=gnu++17 -o CMakeFiles/unet.dir/main.cpp.o -c /home/zigork/GitHub/U_net/main.cpp",
+  "command": "/usr/bin/g++  -isystem /usr/include/opencv4 -g -g -std=gnu++17 -o CMakeFiles/unet.dir/main.cpp.o -c /home/zigork/GitHub/U_net/main.cpp",
   "file": "/home/zigork/GitHub/U_net/main.cpp",
   "output": "CMakeFiles/unet.dir/main.cpp.o"
 }

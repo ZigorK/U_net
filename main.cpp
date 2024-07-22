@@ -19,275 +19,296 @@ std::vector<std::string> getFilesInDirectory(const std::string& directory) {
 }
 
 // свёрточный слой
-class ConvLayer {
-public:
-    ConvLayer(int in_channels, int out_channels, int kernel_size, int stride = 1, int padding = 0)
-        : in_channels(in_channels), out_channels(out_channels), kernel_size(kernel_size), stride(stride), padding(padding) {
-        initializeWeights();
-    }
-
-    std::vector<std::vector<std::vector<double>>> forward(const std::vector<std::vector<std::vector<double>>>& input) {
-        this->input = input;
-        int height = input[0].size();
-        int width = input[0][0].size();
-        int output_height = (height - kernel_size + 2 * padding) / stride + 1;
-        int output_width = (width - kernel_size + 2 * padding) / stride + 1;
-        std::vector<std::vector<std::vector<double>>> output(out_channels, std::vector<std::vector<double>>(output_height, std::vector<double>(output_width, 0.0)));
-
-        for (int oc = 0; oc < out_channels; ++oc) {
-            for (int ic = 0; ic < in_channels; ++ic) {
-                for (int i = 0; i < output_height; ++i) {
-                    for (int j = 0; j < output_width; ++j) {
-                        for (int ki = 0; ki < kernel_size; ++ki) {
-                            for (int kj = 0; kj < kernel_size; ++kj) {
-                                int input_row = i * stride + ki - padding;
-                                int input_col = j * stride + kj - padding;
-                                if (input_row >= 0 && input_row < height && input_col >= 0 && input_col < width) {
-                                    output[oc][i][j] += input[ic][input_row][input_col] * weights[oc][ic][ki][kj];
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return output;
-    }
-
-    void backward(const std::vector<std::vector<std::vector<double>>>& grad_output, double learning_rate) {
-        int height = input[0].size();
-        int width = input[0][0].size();
-        int output_height = grad_output[0].size();
-        int output_width = grad_output[0][0].size();
-
-        std::vector<std::vector<std::vector<std::vector<double>>>> grad_weights(out_channels, std::vector<std::vector<std::vector<double>>>(in_channels, std::vector<std::vector<double>>(kernel_size, std::vector<double>(kernel_size, 0.0))));
-        std::vector<std::vector<std::vector<double>>> grad_input(in_channels, std::vector<std::vector<double>>(height, std::vector<double>(width, 0.0)));
-
-        for (int oc = 0; oc < out_channels; ++oc) {
-            for (int ic = 0; ic < in_channels; ++ic) {
-                for (int i = 0; i < output_height; ++i) {
-                    for (int j = 0; j < output_width; ++j) {
-                        for (int ki = 0; ki < kernel_size; ++ki) {
-                            for (int kj = 0; kj < kernel_size; ++kj) {
-                                int input_row = i * stride + ki - padding;
-                                int input_col = j * stride + kj - padding;
-                                if (input_row >= 0 && input_row < height && input_col >= 0 && input_col < width) {
-                                    grad_weights[oc][ic][ki][kj] += grad_output[oc][i][j] * input[ic][input_row][input_col];
-                                    grad_input[ic][input_row][input_col] += grad_output[oc][i][j] * weights[oc][ic][ki][kj];
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        // Обновление весов
-        for (int oc = 0; oc < out_channels; ++oc) {
-            for (int ic = 0; ic < in_channels; ++ic) {
-                for (int ki = 0; ki < kernel_size; ++ki) {
-                    for (int kj = 0; kj < kernel_size; ++kj) {
-                        weights[oc][ic][ki][kj] -= learning_rate * grad_weights[oc][ic][ki][kj];
-                    }
-                }
-            }
-        }
-    }
-
-private:
-    int in_channels;
-    int out_channels;
-    int kernel_size;
-    int stride;
-    int padding;
-    std::vector<std::vector<std::vector<std::vector<double>>>> weights;
-    std::vector<std::vector<std::vector<double>>> input;
-
-    void initializeWeights() {
-        weights.resize(out_channels, std::vector<std::vector<std::vector<double>>>(in_channels, std::vector<std::vector<double>>(kernel_size, std::vector<double>(kernel_size))));
-        for (int i = 0; i < out_channels; ++i) {
-            for (int j = 0; j < in_channels; ++j) {
-                for (int k = 0; k < kernel_size; ++k) {
-                    for (int l = 0; l < kernel_size; ++l) {
-                        weights[i][j][k][l] = ((double) rand() / (RAND_MAX));
-                    }
-                }
-            }
-        }
-    }
+class ConvLayer { 
+public: 
+    ConvLayer(int in_channels, int out_channels, int kernel_size, int stride = 1, int padding = 1) 
+        : in_channels(in_channels), out_channels(out_channels), kernel_size(kernel_size), stride(stride), padding(padding) { 
+        initializeWeights(); 
+    } 
+ 
+    std::vector<std::vector<std::vector<double>>> forward(const std::vector<std::vector<std::vector<double>>>& input) { 
+        this->input = input; 
+        int height = input[0].size(); 
+        int width = input[0][0].size(); 
+ 
+        int output_height = (height - kernel_size + 2 * padding) / stride + 1; 
+        int output_width = (width - kernel_size + 2 * padding) / stride + 1; 
+ 
+        if (output_height <= 0 || output_width <= 0) { 
+            std::cerr << "Ошибка: Размеры выходного тензора равны нулю или отрицательны. Проверьте параметры свертки." << std::endl; 
+            std::cerr << "Параметры: height = " << height << ", width = " << width << ", kernel_size = " << kernel_size << ", stride = " << stride << ", padding = " << padding << std::endl; 
+            return {}; 
+        } 
+ 
+        std::vector<std::vector<std::vector<double>>> output(out_channels, std::vector<std::vector<double>>(output_height, std::vector<double>(output_width, 0.0))); 
+ 
+        std::cout << "Начало операции свертки." << std::endl; 
+        std::cout << "Размеры входа: [" << in_channels << ", " << height << ", " << width << "]" << std::endl; 
+        std::cout << "Размеры выхода: [" << out_channels << ", " << output_height << ", " << output_width << "]" << std::endl; 
+ 
+        for (int oc = 0; oc < out_channels; ++oc) { 
+            for (int ic = 0; ic < in_channels; ++ic) { 
+                for (int i = 0; i < output_height; ++i) { 
+                    for (int j = 0; j < output_width; ++j) { 
+                        for (int ki = 0; ki < kernel_size; ++ki) { 
+                            for (int kj = 0; kj < kernel_size; ++kj) { 
+                                int input_row = i * stride + ki - padding; 
+                                int input_col = j * stride + kj - padding; 
+                                if (input_row >= 0 && input_row < height && input_col >= 0 && input_col < width) { 
+                                    output[oc][i][j] += input[ic][input_row][input_col] * weights[oc][ic][ki][kj]; 
+                                } 
+                            } 
+                        } 
+                    } 
+                } 
+            } 
+            std::cout << "Обработка выходного канала " << oc + 1 << "/" << out_channels << " завершена." << std::endl; 
+        } 
+        std::cout << "Завершение операции свертки." << std::endl; 
+ 
+        std::cout << "Проверка корректности выходных данных:" << std::endl; 
+        for (const auto& oc : output) { 
+            for (const auto& row : oc) { 
+                for (double val : row) { 
+                    if (std::isnan(val) || std::isinf(val)) { 
+                        std::cerr << "Обнаружено некорректное значение в выходном тензоре." << std::endl; 
+                    } 
+                } 
+            } 
+        } 
+ 
+        return output; 
+    } 
+ 
+private: 
+    int in_channels; 
+    int out_channels; 
+    int kernel_size; 
+    int stride; 
+    int padding; 
+    std::vector<std::vector<std::vector<std::vector<double>>>> weights; 
+    std::vector<std::vector<std::vector<double>>> input; 
+ 
+    void initializeWeights() { 
+        weights.resize(out_channels, std::vector<std::vector<std::vector<double>>>(in_channels, std::vector<std::vector<double>>(kernel_size, std::vector<double>(kernel_size)))); 
+        for (int i = 0; i < out_channels; ++i) { 
+            for (int j = 0; j < in_channels; ++j) { 
+                for (int k = 0; k < kernel_size; ++k) { 
+                    for (int l = 0; l < kernel_size; ++l) { 
+                        weights[i][j][k][l] = ((double) rand() / (RAND_MAX)); 
+                    } 
+                } 
+            } 
+        } 
+    } 
 };
 
+
+
+
 // функция ReLU
-class ReLU {
-public:
-    std::vector<std::vector<std::vector<double>>> forward(const std::vector<std::vector<std::vector<double>>>& input) {
-        this->input = input;
-        std::vector<std::vector<std::vector<double>>> output = input;
-        for (auto& channel : output) {
-            for (auto& row : channel) {
-                for (auto& value : row) {
-                    if (value < 0) value = 0;
-                }
-            }
-        }
-        return output;
-    }
-
-    std::vector<std::vector<std::vector<double>>> backward(const std::vector<std::vector<std::vector<double>>>& grad_output) {
-        std::vector<std::vector<std::vector<double>>> grad_input = grad_output;
-        for (size_t i = 0; i < input.size(); ++i) {
-            for (size_t j = 0; j < input[i].size(); ++j) {
-                for (size_t k = 0; k < input[i][j].size(); ++k) {
-                    if (input[i][j][k] <= 0) {
-                        grad_input[i][j][k] = 0;
-                    }
-                }
-            }
-        }
-        return grad_input;
-    }
-
-private:
-    std::vector<std::vector<std::vector<double>>> input;
+class ReLU { 
+public: 
+    std::vector<std::vector<std::vector<double>>> forward(const std::vector<std::vector<std::vector<double>>>& input) { 
+        this->input = input; 
+         
+        std::cout << "Начало операции ReLU." << std::endl; 
+        std::cout << "Размеры входа: [" << input.size() << ", " << (input.empty() ? 0 : input[0].size()) << ", " << (input.empty() || input[0].empty() ? 0 : input[0][0].size()) << "]" << std::endl; 
+ 
+        std::vector<std::vector<std::vector<double>>> output = input; 
+        for (auto& channel : output) { 
+            for (auto& row : channel) { 
+                for (auto& value : row) { 
+                    if (value < 0) value = 0; 
+                } 
+            } 
+        } 
+         
+        std::cout << "Размеры выхода: [" << output.size() << ", " << (output.empty() ? 0 : output[0].size()) << ", " << (output.empty() || output[0].empty() ? 0 : output[0][0].size()) << "]" << std::endl; 
+        std::cout << "Завершение операции ReLU." << std::endl; 
+ 
+        return output; 
+    } 
+ 
+    std::vector<std::vector<std::vector<double>>> backward(const std::vector<std::vector<std::vector<double>>>& grad_output) { 
+        std::cout << "Начало обратного прохода ReLU." << std::endl; 
+        std::cout << "Размеры градиента выхода: [" << grad_output.size() << ", " << (grad_output.empty() ? 0 : grad_output[0].size()) << ", " << (grad_output.empty() || grad_output[0].empty() ? 0 : grad_output[0][0].size()) << "]" << std::endl; 
+ 
+        std::vector<std::vector<std::vector<double>>> grad_input = grad_output; 
+        for (size_t i = 0; i < input.size(); ++i) { 
+            for (size_t j = 0; j < input[i].size(); ++j) { 
+                for (size_t k = 0; k < input[i][j].size(); ++k) { 
+                    if (input[i][j][k] <= 0) { 
+                        grad_input[i][j][k] = 0; 
+                    } 
+                } 
+            } 
+        } 
+         
+        std::cout << "Размеры градиента входа: [" << grad_input.size() << ", " << (grad_input.empty() ? 0 : grad_input[0].size()) << ", " << (grad_input.empty() || grad_input[0].empty() ? 0 : grad_input[0][0].size()) << "]" << std::endl; 
+        std::cout << "Завершение обратного прохода ReLU." << std::endl; 
+ 
+        return grad_input; 
+    } 
+ 
+private: 
+    std::vector<std::vector<std::vector<double>>> input; 
 };
 
 // объединяющий слой MaxPooling
 class MaxPooling {
 public:
-    MaxPooling(int pool_size, int stride)
-        : pool_size(pool_size), stride(stride) {}
+    MaxPooling(int kernel_size, int stride)
+        : kernel_size(kernel_size), stride(stride) {}
 
     std::vector<std::vector<std::vector<double>>> forward(const std::vector<std::vector<std::vector<double>>>& input) {
-        this->input = input;
-        int height = input[0].size();
-        int width = input[0][0].size();
-        int output_height = (height - pool_size) / stride + 1;
-        int output_width = (width - pool_size) / stride + 1;
-        std::vector<std::vector<std::vector<double>>> output(input.size(), std::vector<std::vector<double>>(output_height, std::vector<double>(output_width, 0.0)));
+        int num_channels = input.size();
+        int input_height = input[0].size();
+        int input_width = input[0][0].size();
 
-        max_indices.resize(input.size(), std::vector<std::vector<std::pair<int, int>>>(output_height, std::vector<std::pair<int, int>>(output_width)));
+        std::cout << "Начало операции MaxPooling." << std::endl;
+        std::cout << "Размеры входа: [" << num_channels << ", " << input_height << ", " << input_width << "]" << std::endl;
 
-        for (int ic = 0; ic < input.size(); ++ic) {
+        int output_height = (input_height - kernel_size) / stride + 1;
+        int output_width = (input_width - kernel_size) / stride + 1;
+
+        // Проверка корректности размеров
+        if (output_height <= 0 || output_width <= 0) {
+            throw std::runtime_error("Некорректные размеры выходного тензора в MaxPooling слое");
+        }
+
+        std::vector<std::vector<std::vector<double>>> output(num_channels, std::vector<std::vector<double>>(output_height, std::vector<double>(output_width, 0.0)));
+
+        for (int channel = 0; channel < num_channels; ++channel) {
             for (int i = 0; i < output_height; ++i) {
                 for (int j = 0; j < output_width; ++j) {
-                    double max_value = -std::numeric_limits<double>::infinity();
-                    for (int ki = 0; ki < pool_size; ++ki) {
-                        for (int kj = 0; kj < pool_size; ++kj) {
+                    double max_val = -std::numeric_limits<double>::infinity();
+                    for (int ki = 0; ki < kernel_size; ++ki) {
+                        for (int kj = 0; kj < kernel_size; ++kj) {
                             int input_row = i * stride + ki;
                             int input_col = j * stride + kj;
-                            if (input_row < height && input_col < width) {
-                                if (input[ic][input_row][input_col] > max_value) {
-                                    max_value = input[ic][input_row][input_col];
-                                    max_indices[ic][i][j] = {input_row, input_col};
-                                }
+                            if (input_row < input_height && input_col < input_width) {
+                                max_val = std::max(max_val, input[channel][input_row][input_col]);
                             }
                         }
                     }
-                    output[ic][i][j] = max_value;
+                    output[channel][i][j] = max_val;
                 }
             }
         }
+
+        std::cout << "Размеры выхода: [" << num_channels << ", " << output_height << ", " << output_width << "]" << std::endl;
+        std::cout << "Завершение операции MaxPooling." << std::endl;
         return output;
     }
 
-    std::vector<std::vector<std::vector<double>>> backward(const std::vector<std::vector<std::vector<double>>>& grad_output) {
-        std::vector<std::vector<std::vector<double>>> grad_input(input.size(), std::vector<std::vector<double>>(input[0].size(), std::vector<double>(input[0][0].size(), 0.0)));
-
-        for (int ic = 0; ic < grad_output.size(); ++ic) {
-            for (int i = 0; i < grad_output[0].size(); ++i) {
-                for (int j = 0; j < grad_output[0][0].size(); ++j) {
-                    auto [input_row, input_col] = max_indices[ic][i][j];
-                    grad_input[ic][input_row][input_col] = grad_output[ic][i][j];
-                }
-            }
-        }
-        return grad_input;
-    }
-
 private:
-    int pool_size;
-    int stride;
-    std::vector<std::vector<std::vector<double>>> input;
-    std::vector<std::vector<std::vector<std::pair<int, int>>>> max_indices;
-};
-
-// обратный свёрточный слой
-class DeconvLayer {
-public:
-    DeconvLayer(int in_channels, int out_channels, int kernel_size, int stride = 1, int padding = 0)
-        : in_channels(in_channels), out_channels(out_channels), kernel_size(kernel_size), stride(stride), padding(padding) {
-        initializeWeights();
-    }
-
-    std::vector<std::vector<std::vector<double>>> forward(const std::vector<std::vector<std::vector<double>>>& input) {
-        int height = input[0].size();
-        int width = input[0][0].size();
-        int output_height = (height - 1) * stride - 2 * padding + kernel_size;
-        int output_width = (width - 1) * stride - 2 * padding + kernel_size;
-        std::vector<std::vector<std::vector<double>>> output(out_channels, std::vector<std::vector<double>>(output_height, std::vector<double>(output_width, 0.0)));
-
-        for (int oc = 0; oc < out_channels; ++oc) {
-            for (int ic = 0; ic < in_channels; ++ic) {
-                for (int i = 0; i < height; ++i) {
-                    for (int j = 0; j < width; ++j) {
-                        for (int ki = 0; ki < kernel_size; ++ki) {
-                            for (int kj = 0; kj < kernel_size; ++kj) {
-                                int output_row = i * stride + ki - padding;
-                                int output_col = j * stride + kj - padding;
-                                if (output_row >= 0 && output_row < output_height && output_col >= 0 && output_col < output_width) {
-                                    output[oc][output_row][output_col] += input[ic][i][j] * weights[oc][ic][ki][kj];
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return output;
-    }
-
-    void backward(const std::vector<std::vector<std::vector<double>>>& input, const std::vector<std::vector<std::vector<double>>>& grad_output, double learning_rate) {
-        // Рассчитываем градиенты и обновляем веса
-        // Реализуем обратный проход для сверточного слоя
-        // Обновляем веса на основе градиентов и скорости обучения
-    }
-
-private:
-    int in_channels;
-    int out_channels;
     int kernel_size;
     int stride;
-    int padding;
-    std::vector<std::vector<std::vector<std::vector<double>>>> weights;
+};
 
-    void initializeWeights() {
-        weights.resize(out_channels, std::vector<std::vector<std::vector<double>>>(in_channels, std::vector<std::vector<double>>(kernel_size, std::vector<double>(kernel_size))));
-        for (int i = 0; i < out_channels; ++i) {
-            for (int j = 0; j < in_channels; ++j) {
-                for (int k = 0; k < kernel_size; ++k) {
-                    for (int l = 0; l < kernel_size; ++l) {
-                        weights[i][j][k][l] = ((double) rand() / (RAND_MAX));
-                    }
+
+
+
+// обратный свёрточный слой
+class DeconvLayer { 
+public: 
+    DeconvLayer(int in_channels, int out_channels, int kernel_size, int stride = 1, int padding = 0) 
+        : in_channels(in_channels), out_channels(out_channels), kernel_size(kernel_size), stride(stride), padding(padding) { 
+        initializeWeights(); 
+    } 
+ 
+    std::vector<std::vector<std::vector<double>>> forward(const std::vector<std::vector<std::vector<double>>>& input) { 
+        int height = input[0].size(); 
+        int width = input[0][0].size(); 
+        int output_height = (height - 1) * stride - 2 * padding + kernel_size; 
+        int output_width = (width - 1) * stride - 2 * padding + kernel_size; 
+ 
+        // Debugging output sizes 
+        std::cout << "Start of DeconvLayer forward operation" << std::endl; 
+        std::cout << "Input tensor size: [" << in_channels << ", " << height << ", " << width << "]" << std::endl; 
+        std::cout << "Kernel size: " << kernel_size << ", Stride: " << stride << ", Padding: " << padding << std::endl; 
+        std::cout << "Output tensor size: [" << out_channels << ", " << output_height << ", " << output_width << "]" << std::endl; 
+ 
+        std::vector<std::vector<std::vector<double>>> output(out_channels, std::vector<std::vector<double>>(output_height, std::vector<double>(output_width, 0.0))); 
+ 
+        // Debugging weights dimensions 
+        std::cout << "Weight tensor size: [" << out_channels << ", " << in_channels << ", " << kernel_size << ", " << kernel_size << "]" << std::endl; 
+ 
+        for (int oc = 0; oc < out_channels; ++oc) { 
+            std::cout << "Processing output channel " << oc + 1 << "/" << out_channels << std::endl; 
+            for (int ic = 0; ic < in_channels; ++ic) { 
+                for (int i = 0; i < height; ++i) { 
+                    for (int j = 0; j < width; ++j) { 
+                        for (int ki = 0; ki < kernel_size; ++ki) { 
+                            for (int kj = 0; kj < kernel_size; ++kj) { 
+                                int output_row = i * stride + ki - padding; 
+                                int output_col = j * stride + kj - padding; 
+                                if (output_row >= 0 && output_row < output_height && output_col >= 0 && output_col < output_width) { 
+                                    // Check weights initialization 
+                                    if (weights.size() <= oc || weights[oc].size() <= ic || weights[oc][ic].size() <= ki || weights[oc][ic][ki].size() <= kj) { 
+                                        std::cerr << "Error: Weights array is not correctly initialized at oc=" << oc << ", ic=" << ic << ", ki=" << ki << ", kj=" << kj << std::endl; 
+                                    } else { 
+                                        output[oc][output_row][output_col] += input[ic][i][j] * weights[oc][ic][ki][kj]; 
+                                    } 
+                                } else { 
+                                    std::cerr << "Warning: Index out of bounds. output_row: " << output_row << ", output_col: " << output_col << std::endl; 
+                                } 
+                            } 
+                        } 
+                    } 
+                } 
+            } 
+        } 
+ 
+        std::cout << "DeconvLayer forward operation completed" << std::endl; 
+        return output; 
+    } 
+ 
+private: 
+    int in_channels; 
+    int out_channels; 
+    int kernel_size; 
+    int stride; 
+    int padding; 
+    std::vector<std::vector<std::vector<std::vector<double>>>> weights; 
+ 
+    void initializeWeights() { 
+        weights.resize(out_channels, std::vector<std::vector<std::vector<double>>>(in_channels, std::vector<std::vector<double>>(kernel_size, std::vector<double>(kernel_size)))); 
+        for (int i = 0; i < out_channels; ++i) { 
+            for (int j = 0; j < in_channels; ++j) { 
+                for (int k = 0; k < kernel_size; ++k) { 
+                    for (int l = 0; l < kernel_size; ++l) { 
+                        weights[i][j][k][l] = static_cast<double>(rand()) / RAND_MAX; 
+                    } 
                 }
-            }
-        }
-    }
+            } 
+        } 
+    } 
 };
 
 // слой объединения (конкатенации)
-class ConcatLayer {
-public:
-    std::vector<std::vector<std::vector<double>>> forward(const std::vector<std::vector<std::vector<double>>>& input1, const std::vector<std::vector<std::vector<double>>>& input2) {
-        std::vector<std::vector<std::vector<double>>> output = input1;
-        output.insert(output.end(), input2.begin(), input2.end());
-        return output;
-    }
-
-    std::vector<std::vector<std::vector<std::vector<double>>>> backward(const std::vector<std::vector<std::vector<double>>>& grad_output, size_t split_index) {
-        std::vector<std::vector<std::vector<double>>> grad_input1(grad_output.begin(), grad_output.begin() + split_index);
-        std::vector<std::vector<std::vector<double>>> grad_input2(grad_output.begin() + split_index, grad_output.end());
-        return {grad_input1, grad_input2};
-    }
+class ConcatLayer { 
+public: 
+    std::vector<std::vector<std::vector<double>>> forward(const std::vector<std::vector<std::vector<double>>>& input1, const std::vector<std::vector<std::vector<double>>>& input2) { 
+        std::cout << "Начало операции объединения (конкатенации)." << std::endl; 
+        std::cout << "Размеры входа 1: [" << input1.size() << ", " << (input1.empty() ? 0 : input1[0].size()) << ", " << (input1.empty() || input1[0].empty() ? 0 : input1[0][0].size()) << "]" << std::endl; 
+        std::cout << "Размеры входа 2: [" << input2.size() << ", " << (input2.empty() ? 0 : input2[0].size()) << ", " << (input2.empty() || input2[0].empty() ? 0 : input2[0][0].size()) << "]" << std::endl; 
+ 
+        std::vector<std::vector<std::vector<double>>> output = input1; 
+        output.insert(output.end(), input2.begin(), input2.end()); 
+ 
+        std::cout << "Размеры выхода: [" << output.size() << ", " << (output.empty() ? 0 : output[0].size()) << ", " << (output.empty() || output[0].empty() ? 0 : output[0][0].size()) << "]" << std::endl; 
+        std::cout << "Завершение операции объединения." << std::endl; 
+ 
+        return output; 
+    } 
+ 
+    std::vector<std::vector<std::vector<std::vector<double>>>> backward(const std::vector<std::vector<std::vector<double>>>& grad_output, size_t split_index) { 
+        std::vector<std::vector<std::vector<double>>> grad_input1(grad_output.begin(), grad_output.begin() + split_index); 
+        std::vector<std::vector<std::vector<double>>> grad_input2(grad_output.begin() + split_index, grad_output.end()); 
+        return {grad_input1, grad_input2}; 
+    } 
 };
 
 // определение модели UNet
@@ -301,26 +322,44 @@ public:
 
     std::vector<std::vector<std::vector<double>>> forward(const std::vector<std::vector<std::vector<double>>>& input) {
         auto x1 = relu.forward(conv1.forward(input));
+        std::cout << "Размеры после conv1: [" << x1.size() << ", " << x1[0].size() << ", " << x1[0][0].size() << "]" << std::endl;
         auto x2 = maxpool.forward(x1);
         auto x3 = relu.forward(conv2.forward(x2));
+        std::cout << "Размеры после conv2: [" << x3.size() << ", " << x3[0].size() << ", " << x3[0][0].size() << "]" << std::endl;
         auto x4 = maxpool.forward(x3);
         auto x5 = relu.forward(conv3.forward(x4));
+        std::cout << "Размеры после conv3: [" << x5.size() << ", " << x5[0].size() << ", " << x5[0][0].size() << "]" << std::endl;
         auto x6 = maxpool.forward(x5);
         auto x7 = relu.forward(conv4.forward(x6));
+        std::cout << "Размеры после conv4: [" << x7.size() << ", " << x7[0].size() << ", " << x7[0][0].size() << "]" << std::endl;
         auto x8 = maxpool.forward(x7);
         auto x9 = relu.forward(conv5.forward(x8));
+        std::cout << "Размеры после conv5: [" << x9.size() << ", " << x9[0].size() << ", " << x9[0][0].size() << "]" << std::endl;
         auto x10 = relu.forward(deconv1.forward(x9));
+        std::cout << "Размеры после deconv1: [" << x10.size() << ", " << x10[0].size() << ", " << x10[0][0].size() << "]" << std::endl;
         auto x11 = concat.forward(x10, x7);
+        std::cout << "Размеры после concat1: [" << x11.size() << ", " << x11[0].size() << ", " << x11[0][0].size() << "]" << std::endl;
         auto x12 = relu.forward(conv4.forward(x11));
+        std::cout << "Размеры после conv4_1: [" << x12.size() << ", " << x12[0].size() << ", " << x12[0][0].size() << "]" << std::endl;
         auto x13 = relu.forward(deconv2.forward(x12));
+        std::cout << "Размеры после deconv2: [" << x13.size() << ", " << x13[0].size() << ", " << x13[0][0].size() << "]" << std::endl;
         auto x14 = concat.forward(x13, x5);
+        std::cout << "Размеры после concat2: [" << x14.size() << ", " << x14[0].size() << ", " << x14[0][0].size() << "]" << std::endl;
         auto x15 = relu.forward(conv3.forward(x14));
+        std::cout << "Размеры после conv3_1: [" << x15.size() << ", " << x15[0].size() << ", " << x15[0][0].size() << "]" << std::endl;
         auto x16 = relu.forward(deconv3.forward(x15));
+        std::cout << "Размеры после deconv3: [" << x16.size() << ", " << x16[0].size() << ", " << x16[0][0].size() << "]" << std::endl;
         auto x17 = concat.forward(x16, x3);
+        std::cout << "Размеры после concat3: [" << x17.size() << ", " << x17[0].size() << ", " << x17[0][0].size() << "]" << std::endl;
         auto x18 = relu.forward(conv2.forward(x17));
+        std::cout << "Размеры после conv2_1: [" << x18.size() << ", " << x18[0].size() << ", " << x18[0][0].size() << "]" << std::endl;
         auto x19 = relu.forward(deconv4.forward(x18));
+        std::cout << "Размеры после deconv4: [" << x19.size() << ", " << x19[0].size() << ", " << x19[0][0].size() << "]" << std::endl;
         auto x20 = concat.forward(x19, x1);
-        return output_conv.forward(x20);
+        std::cout << "Размеры после concat4: [" << x20.size() << ", " << x20[0].size() << ", " << x20[0][0].size() << "]" << std::endl;
+        auto output = output_conv.forward(x20);
+        std::cout << "Размеры выхода: [" << output.size() << ", " << output[0].size() << ", " << output[0][0].size() << "]" << std::endl;
+        return output;
     }
 
 private:
@@ -331,6 +370,11 @@ private:
     MaxPooling maxpool;
     ConcatLayer concat;
 };
+
+
+
+
+
 
 // функция загрузки изображений
 std::vector<std::vector<std::vector<double>>> loadImage(const std::string& filename) {
@@ -361,7 +405,6 @@ std::vector<std::vector<std::vector<double>>> loadMask(const std::string& filena
     }
     return data;
 }
-
 
 // Функция бинарной кросс-энтропии с выводами для отладки
 double binaryCrossEntropy(const std::vector<std::vector<std::vector<double>>>& prediction, const std::vector<std::vector<std::vector<double>>>& target) {
@@ -412,78 +455,82 @@ void trainUNet(UNet& model, const std::vector<std::string>& image_files, const s
 
 
 
-int main() {
-    std::string images_path = "/home/zigork/GitHub/cifar10_images/0";
-    std::string masks_path = "/home/zigork/GitHub/cifar10_images/0";
-
-    std::vector<std::string> image_files;
-    std::vector<std::string> mask_files;
-
-    for (const auto& entry : fs::directory_iterator(images_path)) {
-        image_files.push_back(entry.path().string());
-    }
-    for (const auto& entry : fs::directory_iterator(masks_path)) {
-        mask_files.push_back(entry.path().string());
-    }
-
-    // Ограничим количество обрабатываемых изображений
-    size_t num_images = std::min(image_files.size(), mask_files.size());
-    num_images = std::min(num_images, static_cast<size_t>(10)); // Ограничим до 10 изображений для отладки
-
-    UNet unet;
-
-    std::cout << "Начало обучения модели UNet..." << std::endl;
-    
-    for (size_t epoch = 0; epoch < 10; ++epoch) {
-        double total_loss = 0.0;
-        std::cout << "Epoch [" << epoch + 1 << "/10]" << std::endl;
-        
-        for (size_t i = 0; i < num_images; ++i) {
-            std::cout << "Processing image " << i + 1 << "/" << num_images << std::endl;
-
-            // Загрузка изображения
-            cv::Mat image = cv::imread(image_files[i], cv::IMREAD_COLOR);
-            if (image.empty()) {
-                std::cerr << "Failed to load image: " << image_files[i] << std::endl;
-                continue;
-            }
-            image.convertTo(image, CV_64FC3, 1.0 / 255.0);
-            std::vector<std::vector<std::vector<double>>> image_data(3, std::vector<std::vector<double>>(image.rows, std::vector<double>(image.cols)));
-            for (int r = 0; r < image.rows; ++r) {
-                for (int c = 0; c < image.cols; ++c) {
-                    for (int ch = 0; ch < 3; ++ch) {
-                        image_data[ch][r][c] = image.at<cv::Vec3d>(r, c)[ch];
-                    }
-                }
-            }
-
-            // Загрузка маски
-            cv::Mat mask = cv::imread(mask_files[i], cv::IMREAD_GRAYSCALE);
-            if (mask.empty()) {
-                std::cerr << "Failed to load mask: " << mask_files[i] << std::endl;
-                continue;
-            }
-            mask.convertTo(mask, CV_64FC1, 1.0 / 255.0);
-            std::vector<std::vector<std::vector<double>>> mask_data(1, std::vector<std::vector<double>>(mask.rows, std::vector<double>(mask.cols)));
-            for (int r = 0; r < mask.rows; ++r) {
-                for (int c = 0; c < mask.cols; ++c) {
-                    mask_data[0][r][c] = mask.at<double>(r, c);
-                }
-            }
-
-            // Прямое распространение
-            auto prediction = unet.forward(image_data);
-
-            // Вычисление ошибки
-            double loss = binaryCrossEntropy(prediction, mask_data);
-            total_loss += loss;
-
-            std::cout << "Image " << i + 1 << " processed. Loss: " << loss << std::endl;
-        }
-        std::cout << "Epoch [" << epoch + 1 << "/10], Loss: " << total_loss / num_images << std::endl;
-    }
-
-    std::cout << "Обучение завершено." << std::endl;
-
-    return 0;
+int main() { 
+    std::string images_path = "/home/zigork/GitHub/cifar10_images/0"; 
+    std::string masks_path = "/home/zigork/GitHub/cifar10_images/1"; 
+ 
+    std::vector<std::string> image_files; 
+    std::vector<std::string> mask_files; 
+ 
+    for (const auto& entry : fs::directory_iterator(images_path)) { 
+        image_files.push_back(entry.path().string()); 
+    } 
+    for (const auto& entry : fs::directory_iterator(masks_path)) { 
+        mask_files.push_back(entry.path().string()); 
+    } 
+ 
+    size_t num_images = std::min(image_files.size(), mask_files.size()); 
+    num_images = std::min(num_images, static_cast<size_t>(10)); 
+ 
+    UNet unet; 
+ 
+    std::cout << "Начало обучения модели UNet..." << std::endl; 
+ 
+    for (size_t epoch = 0; epoch < 10; ++epoch) { 
+        double total_loss = 0.0; 
+        std::cout << "Epoch [" << epoch + 1 << "/10]" << std::endl; 
+ 
+        for (size_t i = 0; i < num_images; ++i) { 
+            std::cout << "Processing image " << i + 1 << "/" << num_images << std::endl; 
+ 
+            cv::Mat image = cv::imread(image_files[i], cv::IMREAD_COLOR); 
+            if (image.empty()) { 
+                std::cerr << "Failed to load image: " << image_files[i] << std::endl; 
+                continue; 
+            } 
+            image.convertTo(image, CV_64FC3, 1.0 / 255.0); 
+ 
+            std::vector<std::vector<std::vector<double>>> image_data(3, std::vector<std::vector<double>>(image.rows, std::vector<double>(image.cols))); 
+            for (int r = 0; r < image.rows; ++r) { 
+                for (int c = 0; c < image.cols; ++c) { 
+                    for (int ch = 0; ch < 3; ++ch) { 
+                        image_data[ch][r][c] = image.at<cv::Vec3d>(r, c)[ch]; 
+                    } 
+                } 
+            } 
+ 
+            cv::Mat mask = cv::imread(mask_files[i], cv::IMREAD_GRAYSCALE); 
+            if (mask.empty()) { 
+                std::cerr << "Failed to load mask: " << mask_files[i] << std::endl; 
+                continue; 
+            } 
+            mask.convertTo(mask, CV_64FC1, 1.0 / 255.0); 
+ 
+            std::vector<std::vector<std::vector<double>>> mask_data(1, std::vector<std::vector<double>>(mask.rows, std::vector<double>(mask.cols))); 
+            for (int r = 0; r < mask.rows; ++r) { 
+                for (int c = 0; c < mask.cols; ++c) { 
+                    mask_data[0][r][c] = mask.at<double>(r, c); 
+                } 
+            } 
+ 
+            // Проверка размеров перед вызовом forward 
+            std::cout << "Input tensor size: [" << image_data.size() << ", " << image_data[0].size() << ", " << image_data[0][0].size() << "]" << std::endl; 
+            std::cout << "Mask tensor size: [" << mask_data.size() << ", " << mask_data[0].size() << ", " << mask_data[0][0].size() << "]" << std::endl; 
+ 
+            auto prediction = unet.forward(image_data); 
+ 
+            // Проверка размеров после forward 
+            std::cout << "Prediction tensor size: [" << prediction.size() << ", " << prediction[0].size() << ", " << prediction[0][0].size() << "]" << std::endl; 
+ 
+            double loss = binaryCrossEntropy(prediction, mask_data); 
+            total_loss += loss; 
+ 
+            std::cout << "Image " << i + 1 << " processed. Loss: " << loss << std::endl; 
+        } 
+        std::cout << "Epoch [" << epoch + 1 << "/10], Loss: " << total_loss / num_images << std::endl; 
+    } 
+ 
+    std::cout << "Обучение завершено." << std::endl; 
+ 
+    return 0; 
 }
