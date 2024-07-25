@@ -19,6 +19,7 @@ void ConvLayer::initializeWeights() {
             }
         }
     }
+    grad_weights = weights; // Инициализируем градиенты весов такими же размерами, как и веса
 }
 
 std::vector<std::vector<std::vector<double>>> ConvLayer::forward(const std::vector<std::vector<std::vector<double>>>& input) {
@@ -37,10 +38,6 @@ std::vector<std::vector<std::vector<double>>> ConvLayer::forward(const std::vect
 
     std::vector<std::vector<std::vector<double>>> output(out_channels, std::vector<std::vector<double>>(output_height, std::vector<double>(output_width, 0.0)));
 
-    std::cout << "Начало операции свертки." << std::endl;
-    std::cout << "Размеры входа: [" << in_channels << ", " << height << ", " << width << "]" << std::endl;
-    std::cout << "Размеры выхода: [" << out_channels << ", " << output_height << ", " << output_width << "]" << std::endl;
-
     for (int oc = 0; oc < out_channels; ++oc) {
         for (int ic = 0; ic < in_channels; ++ic) {
             for (int i = 0; i < output_height; ++i) {
@@ -57,20 +54,50 @@ std::vector<std::vector<std::vector<double>>> ConvLayer::forward(const std::vect
                 }
             }
         }
-        std::cout << "Обработка выходного канала " << oc + 1 << "/" << out_channels << " завершена." << std::endl;
     }
-    std::cout << "Завершение операции свертки." << std::endl;
 
-    std::cout << "Проверка корректности выходных данных:" << std::endl;
-    for (const auto& oc : output) {
-        for (const auto& row : oc) {
-            for (double val : row) {
-                if (std::isnan(val) || std::isinf(val)) {
-                    std::cerr << "Обнаружено некорректное значение в выходном тензоре." << std::endl;
+    return output;
+}
+
+std::vector<std::vector<std::vector<double>>> ConvLayer::backward(const std::vector<std::vector<std::vector<double>>>& grad_output) {
+    int height = input[0].size();
+    int width = input[0][0].size();
+    int output_height = grad_output[0].size();
+    int output_width = grad_output[0][0].size();
+
+    std::vector<std::vector<std::vector<double>>> grad_input(in_channels, std::vector<std::vector<double>>(height, std::vector<double>(width, 0.0)));
+    grad_weights = weights; // Обнуляем градиенты весов
+
+    for (int oc = 0; oc < out_channels; ++oc) {
+        for (int ic = 0; ic < in_channels; ++ic) {
+            for (int i = 0; i < output_height; ++i) {
+                for (int j = 0; j < output_width; ++j) {
+                    for (int ki = 0; ki < kernel_size; ++ki) {
+                        for (int kj = 0; kj < kernel_size; ++kj) {
+                            int input_row = i * stride + ki - padding;
+                            int input_col = j * stride + kj - padding;
+                            if (input_row >= 0 && input_row < height && input_col >= 0 && input_col < width) {
+                                grad_input[ic][input_row][input_col] += grad_output[oc][i][j] * weights[oc][ic][ki][kj];
+                                grad_weights[oc][ic][ki][kj] += grad_output[oc][i][j] * input[ic][input_row][input_col];
+                            }
+                        }
+                    }
                 }
             }
         }
     }
 
-    return output;
+    return grad_input;
+}
+
+void ConvLayer::updateWeights(double learning_rate) {
+    for (int i = 0; i < out_channels; ++i) {
+        for (int j = 0; j < in_channels; ++j) {
+            for (int k = 0; k < kernel_size; ++k) {
+                for (int l = 0; l < kernel_size; ++l) {
+                    weights[i][j][k][l] -= learning_rate * grad_weights[i][j][k][l];
+                }
+            }
+        }
+    }
 }

@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/unet.dir/MaxPooling.cpp.o.d"
   "CMakeFiles/unet.dir/ReLULayer.cpp.o"
   "CMakeFiles/unet.dir/ReLULayer.cpp.o.d"
+  "CMakeFiles/unet.dir/SGDOptimizer.cpp.o"
+  "CMakeFiles/unet.dir/SGDOptimizer.cpp.o.d"
   "CMakeFiles/unet.dir/UNet.cpp.o"
   "CMakeFiles/unet.dir/UNet.cpp.o.d"
   "CMakeFiles/unet.dir/Utils.cpp.o"

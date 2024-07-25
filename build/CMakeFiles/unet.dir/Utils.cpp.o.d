@@ -357,4 +357,5 @@ CMakeFiles/unet.dir/Utils.cpp.o: /home/zigork/GitHub/U_net/Utils.cpp \
  /home/zigork/GitHub/U_net/DeconvLayer.h \
  /home/zigork/GitHub/U_net/ReLULayer.h \
  /home/zigork/GitHub/U_net/MaxPooling.h \
- /home/zigork/GitHub/U_net/ConcatLayer.h
+ /home/zigork/GitHub/U_net/ConcatLayer.h \
+ /home/zigork/GitHub/U_net/Optimizer.h

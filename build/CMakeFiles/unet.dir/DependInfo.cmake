@@ -13,6 +13,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/zigork/GitHub/U_net/DeconvLayer.cpp" "CMakeFiles/unet.dir/DeconvLayer.cpp.o" "gcc" "CMakeFiles/unet.dir/DeconvLayer.cpp.o.d"
   "/home/zigork/GitHub/U_net/MaxPooling.cpp" "CMakeFiles/unet.dir/MaxPooling.cpp.o" "gcc" "CMakeFiles/unet.dir/MaxPooling.cpp.o.d"
   "/home/zigork/GitHub/U_net/ReLULayer.cpp" "CMakeFiles/unet.dir/ReLULayer.cpp.o" "gcc" "CMakeFiles/unet.dir/ReLULayer.cpp.o.d"
+  "/home/zigork/GitHub/U_net/SGDOptimizer.cpp" "CMakeFiles/unet.dir/SGDOptimizer.cpp.o" "gcc" "CMakeFiles/unet.dir/SGDOptimizer.cpp.o.d"
   "/home/zigork/GitHub/U_net/UNet.cpp" "CMakeFiles/unet.dir/UNet.cpp.o" "gcc" "CMakeFiles/unet.dir/UNet.cpp.o.d"
   "/home/zigork/GitHub/U_net/Utils.cpp" "CMakeFiles/unet.dir/Utils.cpp.o" "gcc" "CMakeFiles/unet.dir/Utils.cpp.o.d"
   "/home/zigork/GitHub/U_net/main.cpp" "CMakeFiles/unet.dir/main.cpp.o" "gcc" "CMakeFiles/unet.dir/main.cpp.o.d"

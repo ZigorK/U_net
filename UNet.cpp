@@ -11,43 +11,26 @@ UNet::UNet()
 
 std::vector<std::vector<std::vector<double>>> UNet::forward(const std::vector<std::vector<std::vector<double>>>& input) {
     auto x1 = relu.forward(conv1.forward(input));
-    std::cout << "Размеры после conv1: [" << x1.size() << ", " << x1[0].size() << ", " << x1[0][0].size() << "]" << std::endl;
     auto x2 = maxpool.forward(x1);
     auto x3 = relu.forward(conv2.forward(x2));
-    std::cout << "Размеры после conv2: [" << x3.size() << ", " << x3[0].size() << ", " << x3[0][0].size() << "]" << std::endl;
     auto x4 = maxpool.forward(x3);
     auto x5 = relu.forward(conv3.forward(x4));
-    std::cout << "Размеры после conv3: [" << x5.size() << ", " << x5[0].size() << ", " << x5[0][0].size() << "]" << std::endl;
     auto x6 = maxpool.forward(x5);
     auto x7 = relu.forward(conv4.forward(x6));
-    std::cout << "Размеры после conv4: [" << x7.size() << ", " << x7[0].size() << ", " << x7[0][0].size() << "]" << std::endl;
     auto x8 = maxpool.forward(x7);
     auto x9 = relu.forward(conv5.forward(x8));
-    std::cout << "Размеры после conv5: [" << x9.size() << ", " << x9[0].size() << ", " << x9[0][0].size() << "]" << std::endl;
     auto x10 = relu.forward(deconv1.forward(x9));
-    std::cout << "Размеры после deconv1: [" << x10.size() << ", " << x10[0].size() << ", " << x10[0][0].size() << "]" << std::endl;
     auto x11 = concat.forward(x10, x7);
-    std::cout << "Размеры после concat1: [" << x11.size() << ", " << x11[0].size() << ", " << x11[0][0].size() << "]" << std::endl;
     auto x12 = relu.forward(conv4.forward(x11));
-    std::cout << "Размеры после conv4_1: [" << x12.size() << ", " << x12[0].size() << ", " << x12[0][0].size() << "]" << std::endl;
     auto x13 = relu.forward(deconv2.forward(x12));
-    std::cout << "Размеры после deconv2: [" << x13.size() << ", " << x13[0].size() << ", " << x13[0][0].size() << "]" << std::endl;
     auto x14 = concat.forward(x13, x5);
-    std::cout << "Размеры после concat2: [" << x14.size() << ", " << x14[0].size() << ", " << x14[0][0].size() << "]" << std::endl;
     auto x15 = relu.forward(conv3.forward(x14));
-    std::cout << "Размеры после conv3_1: [" << x15.size() << ", " << x15[0].size() << ", " << x15[0][0].size() << "]" << std::endl;
     auto x16 = relu.forward(deconv3.forward(x15));
-    std::cout << "Размеры после deconv3: [" << x16.size() << ", " << x16[0].size() << ", " << x16[0][0].size() << "]" << std::endl;
     auto x17 = concat.forward(x16, x3);
-    std::cout << "Размеры после concat3: [" << x17.size() << ", " << x17[0].size() << ", " << x17[0][0].size() << "]" << std::endl;
     auto x18 = relu.forward(conv2.forward(x17));
-    std::cout << "Размеры после conv2_1: [" << x18.size() << ", " << x18[0].size() << ", " << x18[0][0].size() << "]" << std::endl;
     auto x19 = relu.forward(deconv4.forward(x18));
-    std::cout << "Размеры после deconv4: [" << x19.size() << ", " << x19[0].size() << ", " << x19[0][0].size() << "]" << std::endl;
     auto x20 = concat.forward(x19, x1);
-    std::cout << "Размеры после concat4: [" << x20.size() << ", " << x20[0].size() << ", " << x20[0][0].size() << "]" << std::endl;
     auto output = output_conv.forward(x20);
-    std::cout << "Размеры выхода: [" << output.size() << ", " << output[0].size() << ", " << output[0][0].size() << "]" << std::endl;
 
     for (size_t i = 0; i < output.size(); ++i) {
         for (size_t j = 0; j < output[i].size(); ++j) {
@@ -56,6 +39,57 @@ std::vector<std::vector<std::vector<double>>> UNet::forward(const std::vector<st
             }
         }
     }
-    
+
     return output;
+}
+
+void UNet::backward(const std::vector<std::vector<std::vector<double>>>& grad_output) {
+    auto grad_output_conv = output_conv.backward(grad_output); 
+
+    auto grad_deconv4 = deconv4.backward(grad_output_conv); 
+    auto [grad_x19, grad_x1] = concat.backward(grad_deconv4); 
+    auto grad_conv2_deconv3 = conv2.backward(grad_x19); 
+    auto grad_deconv3 = deconv3.backward(grad_conv2_deconv3); 
+    auto [grad_x18, grad_x3] = concat.backward(grad_deconv3); 
+    auto grad_conv3_deconv2 = conv3.backward(grad_x18); 
+    auto grad_deconv2 = deconv2.backward(grad_conv3_deconv2); 
+    auto [grad_x17, grad_x5] = concat.backward(grad_deconv2); 
+    auto grad_conv4_deconv1 = conv4.backward(grad_x17); 
+    auto grad_deconv1 = deconv1.backward(grad_conv4_deconv1); 
+    auto [grad_x16, grad_x7] = concat.backward(grad_deconv1); 
+    auto grad_conv5 = conv5.backward(grad_x16); 
+    auto grad_maxpool4 = maxpool.backward(grad_conv5); 
+    auto grad_conv4 = conv4.backward(grad_maxpool4);
+    auto grad_maxpool3 = maxpool.backward(grad_conv4);
+    auto grad_conv3 = conv3.backward(grad_maxpool3);
+    auto grad_maxpool2 = maxpool.backward(grad_conv3);
+    auto grad_conv2 = conv2.backward(grad_maxpool2);
+    auto grad_maxpool1 = maxpool.backward(grad_conv2);
+    auto grad_conv1 = conv1.backward(grad_maxpool1);
+
+    setGradients(grad_conv1); 
+}
+
+
+void UNet::updateWeights(Optimizer& optimizer) {
+    optimizer.updateWeights(conv1.getWeights(), conv1.getGradients());
+    optimizer.updateWeights(conv2.getWeights(), conv2.getGradients());
+    optimizer.updateWeights(conv3.getWeights(), conv3.getGradients());
+    optimizer.updateWeights(conv4.getWeights(), conv4.getGradients());
+    optimizer.updateWeights(conv5.getWeights(), conv5.getGradients());
+    optimizer.updateWeights(deconv1.getWeights(), deconv1.getGradients());
+    optimizer.updateWeights(deconv2.getWeights(), deconv2.getGradients());
+    optimizer.updateWeights(deconv3.getWeights(), deconv3.getGradients());
+    optimizer.updateWeights(deconv4.getWeights(), deconv4.getGradients());
+    optimizer.updateWeights(output_conv.getWeights(), output_conv.getGradients());
+}
+
+
+
+std::vector<std::vector<std::vector<double>>> UNet::getGradients() const {
+    return gradients;
+}
+
+void UNet::setGradients(const std::vector<std::vector<std::vector<double>>>& gradients) {
+    this->gradients = gradients;
 }

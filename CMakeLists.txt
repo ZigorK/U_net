@@ -24,6 +24,7 @@ set(SOURCES
     ConcatLayer.cpp
     UNet.cpp
     Utils.cpp
+    SGDOptimizer.cpp
 )
 
 # Добавление заголовочных файлов проекта (для IDE, не обязательно)
@@ -35,6 +36,8 @@ set(HEADERS
     ConcatLayer.h
     UNet.h
     Utils.h
+    Optimizer.h
+    SGDOptimizer.h
 )
 
 # Создание исполняемого файла

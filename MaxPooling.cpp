@@ -21,7 +21,8 @@ std::vector<std::vector<std::vector<double>>> MaxPooling::forward(const std::vec
         for (int i = 0; i < output_height; ++i) {
             for (int j = 0; j < output_width; ++j) {
                 double max_val = input[c][i * stride][j * stride];
-                int max_idx = i * stride * width + j * stride;
+                int max_row = i * stride;
+                int max_col = j * stride;
 
                 for (int ki = 0; ki < kernel_size; ++ki) {
                     for (int kj = 0; kj < kernel_size; ++kj) {
@@ -30,13 +31,14 @@ std::vector<std::vector<std::vector<double>>> MaxPooling::forward(const std::vec
 
                         if (input[c][input_row][input_col] > max_val) {
                             max_val = input[c][input_row][input_col];
-                            max_idx = input_row * width + input_col;
+                            max_row = input_row;
+                            max_col = input_col;
                         }
                     }
                 }
 
                 output[c][i][j] = max_val;
-                mask[c][max_idx / width][max_idx % width] = 1;
+                mask[c][max_row][max_col] = 1;
             }
         }
     }
@@ -48,17 +50,18 @@ std::vector<std::vector<std::vector<double>>> MaxPooling::forward(const std::vec
 }
 
 std::vector<std::vector<std::vector<double>>> MaxPooling::backward(const std::vector<std::vector<std::vector<double>>>& grad_output) {
-    std::vector<std::vector<std::vector<double>>> grad_input = input;
+    std::vector<std::vector<std::vector<double>>> grad_input(input.size(), std::vector<std::vector<double>>(input[0].size(), std::vector<double>(input[0][0].size(), 0.0)));
 
     for (size_t c = 0; c < grad_output.size(); ++c) {
-        for (size_t i = 0; i < grad_output[c].size(); ++i) {
-            for (size_t j = 0; j < grad_output[c][i].size(); ++j) {
-                for (size_t m = 0; m < input[c].size(); ++m) {
-                    for (size_t n = 0; n < input[c][m].size(); ++n) {
-                        if (mask[c][m][n] == 1) {
-                            grad_input[c][m][n] = grad_output[c][i][j];
-                        } else {
-                            grad_input[c][m][n] = 0;
+        for (int i = 0; i < grad_output[c].size(); ++i) {
+            for (int j = 0; j < grad_output[c][i].size(); ++j) {
+                for (int ki = 0; ki < kernel_size; ++ki) {
+                    for (int kj = 0; kj < kernel_size; ++kj) {
+                        int input_row = i * stride + ki;
+                        int input_col = j * stride + kj;
+                        
+                        if (input_row < input[c].size() && input_col < input[c][0].size() && mask[c][input_row][input_col] == 1) {
+                            grad_input[c][input_row][input_col] = grad_output[c][i][j];
                         }
                     }
                 }

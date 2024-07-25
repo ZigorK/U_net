@@ -862,11 +862,77 @@ CMakeFiles/unet.dir/ReLULayer.cpp.o: /home/zigork/GitHub/U_net/ReLULayer.cpp \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
 
+CMakeFiles/unet.dir/SGDOptimizer.cpp.o: /home/zigork/GitHub/U_net/SGDOptimizer.cpp \
+  /home/zigork/GitHub/U_net/Optimizer.h \
+  /home/zigork/GitHub/U_net/SGDOptimizer.h \
+  /usr/include/c++/13/backward/binders.h \
+  /usr/include/c++/13/bit \
+  /usr/include/c++/13/bits/alloc_traits.h \
+  /usr/include/c++/13/bits/allocator.h \
+  /usr/include/c++/13/bits/concept_check.h \
+  /usr/include/c++/13/bits/cpp_type_traits.h \
+  /usr/include/c++/13/bits/exception.h \
+  /usr/include/c++/13/bits/exception_defines.h \
+  /usr/include/c++/13/bits/functexcept.h \
+  /usr/include/c++/13/bits/functional_hash.h \
+  /usr/include/c++/13/bits/hash_bytes.h \
+  /usr/include/c++/13/bits/invoke.h \
+  /usr/include/c++/13/bits/memory_resource.h \
+  /usr/include/c++/13/bits/memoryfwd.h \
+  /usr/include/c++/13/bits/move.h \
+  /usr/include/c++/13/bits/new_allocator.h \
+  /usr/include/c++/13/bits/predefined_ops.h \
+  /usr/include/c++/13/bits/ptr_traits.h \
+  /usr/include/c++/13/bits/range_access.h \
+  /usr/include/c++/13/bits/refwrap.h \
+  /usr/include/c++/13/bits/requires_hosted.h \
+  /usr/include/c++/13/bits/stl_algobase.h \
+  /usr/include/c++/13/bits/stl_bvector.h \
+  /usr/include/c++/13/bits/stl_construct.h \
+  /usr/include/c++/13/bits/stl_function.h \
+  /usr/include/c++/13/bits/stl_iterator.h \
+  /usr/include/c++/13/bits/stl_iterator_base_funcs.h \
+  /usr/include/c++/13/bits/stl_iterator_base_types.h \
+  /usr/include/c++/13/bits/stl_pair.h \
+  /usr/include/c++/13/bits/stl_uninitialized.h \
+  /usr/include/c++/13/bits/stl_vector.h \
+  /usr/include/c++/13/bits/uses_allocator.h \
+  /usr/include/c++/13/bits/uses_allocator_args.h \
+  /usr/include/c++/13/bits/utility.h \
+  /usr/include/c++/13/bits/vector.tcc \
+  /usr/include/c++/13/cstddef \
+  /usr/include/c++/13/debug/assertions.h \
+  /usr/include/c++/13/debug/debug.h \
+  /usr/include/c++/13/ext/alloc_traits.h \
+  /usr/include/c++/13/ext/numeric_traits.h \
+  /usr/include/c++/13/ext/type_traits.h \
+  /usr/include/c++/13/initializer_list \
+  /usr/include/c++/13/new \
+  /usr/include/c++/13/pstl/pstl_config.h \
+  /usr/include/c++/13/tuple \
+  /usr/include/c++/13/type_traits \
+  /usr/include/c++/13/vector \
+  /usr/include/features-time64.h \
+  /usr/include/features.h \
+  /usr/include/stdc-predef.h \
+  /usr/include/x86_64-linux-gnu/bits/long-double.h \
+  /usr/include/x86_64-linux-gnu/bits/timesize.h \
+  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
+  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
+  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
+  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
+
 CMakeFiles/unet.dir/UNet.cpp.o: /home/zigork/GitHub/U_net/UNet.cpp \
   /home/zigork/GitHub/U_net/ConcatLayer.h \
   /home/zigork/GitHub/U_net/ConvolutionalLayer.h \
   /home/zigork/GitHub/U_net/DeconvLayer.h \
   /home/zigork/GitHub/U_net/MaxPooling.h \
+  /home/zigork/GitHub/U_net/Optimizer.h \
   /home/zigork/GitHub/U_net/ReLULayer.h \
   /home/zigork/GitHub/U_net/UNet.h \
   /usr/include/alloca.h \
@@ -1090,6 +1156,7 @@ CMakeFiles/unet.dir/Utils.cpp.o: /home/zigork/GitHub/U_net/Utils.cpp \
   /home/zigork/GitHub/U_net/ConvolutionalLayer.h \
   /home/zigork/GitHub/U_net/DeconvLayer.h \
   /home/zigork/GitHub/U_net/MaxPooling.h \
+  /home/zigork/GitHub/U_net/Optimizer.h \
   /home/zigork/GitHub/U_net/ReLULayer.h \
   /home/zigork/GitHub/U_net/UNet.h \
   /home/zigork/GitHub/U_net/Utils.h \
@@ -1511,6 +1578,7 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
   /home/zigork/GitHub/U_net/ConvolutionalLayer.h \
   /home/zigork/GitHub/U_net/DeconvLayer.h \
   /home/zigork/GitHub/U_net/MaxPooling.h \
+  /home/zigork/GitHub/U_net/Optimizer.h \
   /home/zigork/GitHub/U_net/ReLULayer.h \
   /home/zigork/GitHub/U_net/UNet.h \
   /home/zigork/GitHub/U_net/Utils.h \
@@ -1946,8 +2014,6 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 
 /home/zigork/GitHub/U_net/main.cpp:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/include/xmmintrin.h:
-
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/mm_malloc.h:
@@ -2154,6 +2220,8 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 
 /usr/include/c++/13/bits/std_mutex.h:
 
+/usr/include/c++/13/bits/sstream.tcc:
+
 /usr/include/opencv4/opencv2/core/cuda_types.hpp:
 
 /usr/include/c++/13/ostream:
@@ -2347,8 +2415,6 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
 
 /usr/include/c++/13/cwctype:
-
-/usr/include/c++/13/bits/sstream.tcc:
 
 /usr/include/c++/13/bits/stl_uninitialized.h:
 
@@ -2578,6 +2644,8 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 
 /usr/include/c++/13/bits/atomic_lockfree_defines.h:
 
+/home/zigork/GitHub/U_net/Optimizer.h:
+
 /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
 
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
@@ -2637,8 +2705,6 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 /usr/include/x86_64-linux-gnu/bits/timex.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/FILE.h:
 
 /usr/include/opencv4/opencv2/stitching/detail/warpers.hpp:
 
@@ -2733,6 +2799,14 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h:
 
 /home/zigork/GitHub/U_net/ReLULayer.cpp:
+
+/usr/lib/gcc/x86_64-linux-gnu/13/include/xmmintrin.h:
+
+/home/zigork/GitHub/U_net/SGDOptimizer.cpp:
+
+/usr/include/x86_64-linux-gnu/bits/types/FILE.h:
+
+/home/zigork/GitHub/U_net/SGDOptimizer.h:
 
 /usr/include/c++/13/climits:
 

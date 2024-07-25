@@ -249,6 +249,30 @@ ReLULayer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/unet.dir/build.make CMakeFiles/unet.dir/ReLULayer.cpp.s
 .PHONY : ReLULayer.cpp.s
 
+SGDOptimizer.o: SGDOptimizer.cpp.o
+.PHONY : SGDOptimizer.o
+
+# target to build an object file
+SGDOptimizer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unet.dir/build.make CMakeFiles/unet.dir/SGDOptimizer.cpp.o
+.PHONY : SGDOptimizer.cpp.o
+
+SGDOptimizer.i: SGDOptimizer.cpp.i
+.PHONY : SGDOptimizer.i
+
+# target to preprocess a source file
+SGDOptimizer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unet.dir/build.make CMakeFiles/unet.dir/SGDOptimizer.cpp.i
+.PHONY : SGDOptimizer.cpp.i
+
+SGDOptimizer.s: SGDOptimizer.cpp.s
+.PHONY : SGDOptimizer.s
+
+# target to generate assembly for a file
+SGDOptimizer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unet.dir/build.make CMakeFiles/unet.dir/SGDOptimizer.cpp.s
+.PHONY : SGDOptimizer.cpp.s
+
 UNet.o: UNet.cpp.o
 .PHONY : UNet.o
 
@@ -345,6 +369,9 @@ help:
 	@echo "... ReLULayer.o"
 	@echo "... ReLULayer.i"
 	@echo "... ReLULayer.s"
+	@echo "... SGDOptimizer.o"
+	@echo "... SGDOptimizer.i"
+	@echo "... SGDOptimizer.s"
 	@echo "... UNet.o"
 	@echo "... UNet.i"
 	@echo "... UNet.s"

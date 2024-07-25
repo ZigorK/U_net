@@ -8,10 +8,12 @@ std::vector<std::vector<std::vector<double>>> ReLU::forward(const std::vector<st
     std::cout << "Размеры входа: [" << input.size() << ", " << (input.empty() ? 0 : input[0].size()) << ", " << (input.empty() || input[0].empty() ? 0 : input[0][0].size()) << "]" << std::endl;
 
     std::vector<std::vector<std::vector<double>>> output = input;
-    for (auto& channel : output) {
-        for (auto& row : channel) {
-            for (auto& value : row) {
-                if (value < 0) value = 0;
+    for (size_t c = 0; c < output.size(); ++c) {
+        for (size_t h = 0; h < output[c].size(); ++h) {
+            for (size_t w = 0; w < output[c][h].size(); ++w) {
+                if (output[c][h][w] < 0) {
+                    output[c][h][w] = 0;
+                }
             }
         }
     }
@@ -27,10 +29,12 @@ std::vector<std::vector<std::vector<double>>> ReLU::backward(const std::vector<s
     std::cout << "Размеры градиента выхода: [" << grad_output.size() << ", " << (grad_output.empty() ? 0 : grad_output[0].size()) << ", " << (grad_output.empty() || grad_output[0].empty() ? 0 : grad_output[0][0].size()) << "]" << std::endl;
 
     std::vector<std::vector<std::vector<double>>> grad_input = grad_output;
-    for (size_t i = 0; i < input.size(); ++i) {
-        for (size_t j = 0; j < input[i].size(); ++j) {
-            for (size_t k = 0; k < input[i][j].size(); ++k) {
-                if (input[i][j][k] <= 0) grad_input[i][j][k] = 0;
+    for (size_t c = 0; c < grad_input.size(); ++c) {
+        for (size_t h = 0; h < grad_input[c].size(); ++h) {
+            for (size_t w = 0; w < grad_input[c][h].size(); ++w) {
+                if (input[c][h][w] <= 0) {
+                    grad_input[c][h][w] = 0;
+                }
             }
         }
     }

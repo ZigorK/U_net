@@ -1,0 +1,56 @@
+[
+{
+  "directory": "/home/zigork/GitHub/U_net/build",
+  "command": "/usr/bin/g++  -isystem /usr/include/opencv4 -g -g -std=gnu++17 -o CMakeFiles/unet.dir/main.cpp.o -c /home/zigork/GitHub/U_net/main.cpp",
+  "file": "/home/zigork/GitHub/U_net/main.cpp",
+  "output": "CMakeFiles/unet.dir/main.cpp.o"
+},
+{
+  "directory": "/home/zigork/GitHub/U_net/build",
+  "command": "/usr/bin/g++  -isystem /usr/include/opencv4 -g -g -std=gnu++17 -o CMakeFiles/unet.dir/ConvolutionalLayer.cpp.o -c /home/zigork/GitHub/U_net/ConvolutionalLayer.cpp",
+  "file": "/home/zigork/GitHub/U_net/ConvolutionalLayer.cpp",
+  "output": "CMakeFiles/unet.dir/ConvolutionalLayer.cpp.o"
+},
+{
+  "directory": "/home/zigork/GitHub/U_net/build",
+  "command": "/usr/bin/g++  -isystem /usr/include/opencv4 -g -g -std=gnu++17 -o CMakeFiles/unet.dir/ReLULayer.cpp.o -c /home/zigork/GitHub/U_net/ReLULayer.cpp",
+  "file": "/home/zigork/GitHub/U_net/ReLULayer.cpp",
+  "output": "CMakeFiles/unet.dir/ReLULayer.cpp.o"
+},
+{
+  "directory": "/home/zigork/GitHub/U_net/build",
+  "command": "/usr/bin/g++  -isystem /usr/include/opencv4 -g -g -std=gnu++17 -o CMakeFiles/unet.dir/MaxPooling.cpp.o -c /home/zigork/GitHub/U_net/MaxPooling.cpp",
+  "file": "/home/zigork/GitHub/U_net/MaxPooling.cpp",
+  "output": "CMakeFiles/unet.dir/MaxPooling.cpp.o"
+},
+{
+  "directory": "/home/zigork/GitHub/U_net/build",
+  "command": "/usr/bin/g++  -isystem /usr/include/opencv4 -g -g -std=gnu++17 -o CMakeFiles/unet.dir/DeconvLayer.cpp.o -c /home/zigork/GitHub/U_net/DeconvLayer.cpp",
+  "file": "/home/zigork/GitHub/U_net/DeconvLayer.cpp",
+  "output": "CMakeFiles/unet.dir/DeconvLayer.cpp.o"
+},
+{
+  "directory": "/home/zigork/GitHub/U_net/build",
+  "command": "/usr/bin/g++  -isystem /usr/include/opencv4 -g -g -std=gnu++17 -o CMakeFiles/unet.dir/ConcatLayer.cpp.o -c /home/zigork/GitHub/U_net/ConcatLayer.cpp",
+  "file": "/home/zigork/GitHub/U_net/ConcatLayer.cpp",
+  "output": "CMakeFiles/unet.dir/ConcatLayer.cpp.o"
+},
+{
+  "directory": "/home/zigork/GitHub/U_net/build",
+  "command": "/usr/bin/g++  -isystem /usr/include/opencv4 -g -g -std=gnu++17 -o CMakeFiles/unet.dir/UNet.cpp.o -c /home/zigork/GitHub/U_net/UNet.cpp",
+  "file": "/home/zigork/GitHub/U_net/UNet.cpp",
+  "output": "CMakeFiles/unet.dir/UNet.cpp.o"
+},
+{
+  "directory": "/home/zigork/GitHub/U_net/build",
+  "command": "/usr/bin/g++  -isystem /usr/include/opencv4 -g -g -std=gnu++17 -o CMakeFiles/unet.dir/Utils.cpp.o -c /home/zigork/GitHub/U_net/Utils.cpp",
+  "file": "/home/zigork/GitHub/U_net/Utils.cpp",
+  "output": "CMakeFiles/unet.dir/Utils.cpp.o"
+},
+{
+  "directory": "/home/zigork/GitHub/U_net/build",
+  "command": "/usr/bin/g++  -isystem /usr/include/opencv4 -g -g -std=gnu++17 -o CMakeFiles/unet.dir/SGDOptimizer.cpp.o -c /home/zigork/GitHub/U_net/SGDOptimizer.cpp",
+  "file": "/home/zigork/GitHub/U_net/SGDOptimizer.cpp",
+  "output": "CMakeFiles/unet.dir/SGDOptimizer.cpp.o"
+}
+]
