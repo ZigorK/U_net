@@ -3,9 +3,12 @@
 
 std::vector<std::vector<std::vector<double>>> ReLU::forward(const std::vector<std::vector<std::vector<double>>>& input) {
     this->input = input;
-    
-    std::cout << "Начало операции ReLU." << std::endl;
-    std::cout << "Размеры входа: [" << input.size() << ", " << (input.empty() ? 0 : input[0].size()) << ", " << (input.empty() || input[0].empty() ? 0 : input[0][0].size()) << "]" << std::endl;
+
+    // Проверка на пустоту входного тензора
+    if (input.empty() || input[0].empty() || input[0][0].empty()) {
+        std::cerr << "Ошибка: Входной тензор пуст." << std::endl;
+        return {};
+    }
 
     std::vector<std::vector<std::vector<double>>> output = input;
     for (size_t c = 0; c < output.size(); ++c) {
@@ -17,12 +20,10 @@ std::vector<std::vector<std::vector<double>>> ReLU::forward(const std::vector<st
             }
         }
     }
-    
-    std::cout << "Размеры выхода: [" << output.size() << ", " << (output.empty() ? 0 : output[0].size()) << ", " << (output.empty() || output[0].empty() ? 0 : output[0][0].size()) << "]" << std::endl;
-    std::cout << "Завершение операции ReLU." << std::endl;
 
     return output;
 }
+
 
 std::vector<std::vector<std::vector<double>>> ReLU::backward(const std::vector<std::vector<std::vector<double>>>& grad_output) {
     std::cout << "Начало обратного прохода ReLU." << std::endl;

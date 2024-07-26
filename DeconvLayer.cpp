@@ -35,25 +35,21 @@ std::vector<std::vector<std::vector<double>>> DeconvLayer::forward(const std::ve
 
     for (int oc = 0; oc < out_channels; ++oc) {
         if (oc >= output.size()) {
-            std::cerr << "Error: Output channel index out of range: " << oc << std::endl;
             continue;
         }
 
         for (int ic = 0; ic < in_channels; ++ic) {
             if (ic >= input.size()) {
-                std::cerr << "Error: Input channel index out of range: " << ic << std::endl;
                 continue;
             }
 
             for (int i = 0; i < height; ++i) {
                 if (i >= input[ic].size()) {
-                    std::cerr << "Error: Input height index out of range: " << i << std::endl;
                     continue;
                 }
 
                 for (int j = 0; j < width; ++j) {
                     if (j >= input[ic][i].size()) {
-                        std::cerr << "Error: Input width index out of range: " << j << std::endl;
                         continue;
                     }
 
@@ -64,7 +60,6 @@ std::vector<std::vector<std::vector<double>>> DeconvLayer::forward(const std::ve
 
                             if (output_row >= 0 && output_row < output_height && output_col >= 0 && output_col < output_width) {
                                 if (oc >= weights.size() || ic >= weights[oc].size() || ki >= weights[oc][ic].size() || kj >= weights[oc][ic][ki].size()) {
-                                    std::cerr << "Error: Weights index out of range. oc: " << oc << ", ic: " << ic << ", ki: " << ki << ", kj: " << kj << std::endl;
                                     continue;
                                 }
 

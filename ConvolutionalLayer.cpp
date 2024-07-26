@@ -31,8 +31,6 @@ std::vector<std::vector<std::vector<double>>> ConvLayer::forward(const std::vect
     int output_width = (width - kernel_size + 2 * padding) / stride + 1;
 
     if (output_height <= 0 || output_width <= 0) {
-        std::cerr << "Ошибка: Размеры выходного тензора равны нулю или отрицательны. Проверьте параметры свертки." << std::endl;
-        std::cerr << "Параметры: height = " << height << ", width = " << width << ", kernel_size = " << kernel_size << ", stride = " << stride << ", padding = " << padding << std::endl;
         return {};
     }
 
@@ -58,6 +56,8 @@ std::vector<std::vector<std::vector<double>>> ConvLayer::forward(const std::vect
 
     return output;
 }
+
+
 
 std::vector<std::vector<std::vector<double>>> ConvLayer::backward(const std::vector<std::vector<std::vector<double>>>& grad_output) {
     int height = input[0].size();

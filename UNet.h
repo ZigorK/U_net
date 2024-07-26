@@ -10,6 +10,7 @@
 #include "MaxPooling.h"
 #include "ConcatLayer.h"
 #include "Optimizer.h"
+#include "SGDOptimizer.h"
 
 double sigmoid(double x);
 
