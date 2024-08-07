@@ -71,3 +71,48 @@ std::vector<std::vector<std::vector<double>>> MaxPooling::backward(const std::ve
 
     return grad_input;
 }
+
+void MaxPooling::save(std::ofstream& file) const {
+    size_t channels = input.size();
+    size_t height = channels ? input[0].size() : 0;
+    size_t width = height ? input[0][0].size() : 0;
+
+    file.write(reinterpret_cast<const char*>(&channels), sizeof(channels));
+    file.write(reinterpret_cast<const char*>(&height), sizeof(height));
+    file.write(reinterpret_cast<const char*>(&width), sizeof(width));
+
+    for (const auto& channel : input) {
+        for (const auto& row : channel) {
+            file.write(reinterpret_cast<const char*>(row.data()), row.size() * sizeof(double));
+        }
+    }
+
+    for (const auto& channel : mask) {
+        for (const auto& row : channel) {
+            file.write(reinterpret_cast<const char*>(row.data()), row.size() * sizeof(int));
+        }
+    }
+}
+
+void MaxPooling::load(std::ifstream& file) {
+    size_t channels, height, width;
+
+    file.read(reinterpret_cast<char*>(&channels), sizeof(channels));
+    file.read(reinterpret_cast<char*>(&height), sizeof(height));
+    file.read(reinterpret_cast<char*>(&width), sizeof(width));
+
+    input.resize(channels, std::vector<std::vector<double>>(height, std::vector<double>(width)));
+    mask.resize(channels, std::vector<std::vector<int>>(height, std::vector<int>(width)));
+
+    for (auto& channel : input) {
+        for (auto& row : channel) {
+            file.read(reinterpret_cast<char*>(row.data()), row.size() * sizeof(double));
+        }
+    }
+
+    for (auto& channel : mask) {
+        for (auto& row : channel) {
+            file.read(reinterpret_cast<char*>(row.data()), row.size() * sizeof(int));
+        }
+    }
+}

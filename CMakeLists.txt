@@ -38,6 +38,7 @@ set(HEADERS
     Utils.h
     Optimizer.h
     SGDOptimizer.h
+    Layer.h
 )
 
 # Создание исполняемого файла

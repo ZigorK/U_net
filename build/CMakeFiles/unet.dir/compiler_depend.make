@@ -67,6 +67,7 @@ CMakeFiles/unet.dir/ConcatLayer.cpp.o: /home/zigork/GitHub/U_net/ConcatLayer.cpp
 
 CMakeFiles/unet.dir/ConvolutionalLayer.cpp.o: /home/zigork/GitHub/U_net/ConvolutionalLayer.cpp \
   /home/zigork/GitHub/U_net/ConvolutionalLayer.h \
+  /home/zigork/GitHub/U_net/Layer.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
@@ -80,6 +81,7 @@ CMakeFiles/unet.dir/ConvolutionalLayer.cpp.o: /home/zigork/GitHub/U_net/Convolut
   /usr/include/c++/13/bits/basic_string.tcc \
   /usr/include/c++/13/bits/char_traits.h \
   /usr/include/c++/13/bits/charconv.h \
+  /usr/include/c++/13/bits/codecvt.h \
   /usr/include/c++/13/bits/concept_check.h \
   /usr/include/c++/13/bits/cpp_type_traits.h \
   /usr/include/c++/13/bits/cxxabi_forced.h \
@@ -87,6 +89,7 @@ CMakeFiles/unet.dir/ConvolutionalLayer.cpp.o: /home/zigork/GitHub/U_net/Convolut
   /usr/include/c++/13/bits/exception.h \
   /usr/include/c++/13/bits/exception_defines.h \
   /usr/include/c++/13/bits/exception_ptr.h \
+  /usr/include/c++/13/bits/fstream.tcc \
   /usr/include/c++/13/bits/functexcept.h \
   /usr/include/c++/13/bits/functional_hash.h \
   /usr/include/c++/13/bits/hash_bytes.h \
@@ -148,6 +151,7 @@ CMakeFiles/unet.dir/ConvolutionalLayer.cpp.o: /home/zigork/GitHub/U_net/Convolut
   /usr/include/c++/13/ext/numeric_traits.h \
   /usr/include/c++/13/ext/string_conversions.h \
   /usr/include/c++/13/ext/type_traits.h \
+  /usr/include/c++/13/fstream \
   /usr/include/c++/13/initializer_list \
   /usr/include/c++/13/ios \
   /usr/include/c++/13/iosfwd \
@@ -264,8 +268,10 @@ CMakeFiles/unet.dir/ConvolutionalLayer.cpp.o: /home/zigork/GitHub/U_net/Convolut
   /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h \
@@ -285,6 +291,7 @@ CMakeFiles/unet.dir/ConvolutionalLayer.cpp.o: /home/zigork/GitHub/U_net/Convolut
 
 CMakeFiles/unet.dir/DeconvLayer.cpp.o: /home/zigork/GitHub/U_net/DeconvLayer.cpp \
   /home/zigork/GitHub/U_net/DeconvLayer.h \
+  /home/zigork/GitHub/U_net/Layer.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
@@ -298,6 +305,7 @@ CMakeFiles/unet.dir/DeconvLayer.cpp.o: /home/zigork/GitHub/U_net/DeconvLayer.cpp
   /usr/include/c++/13/bits/basic_string.tcc \
   /usr/include/c++/13/bits/char_traits.h \
   /usr/include/c++/13/bits/charconv.h \
+  /usr/include/c++/13/bits/codecvt.h \
   /usr/include/c++/13/bits/concept_check.h \
   /usr/include/c++/13/bits/cpp_type_traits.h \
   /usr/include/c++/13/bits/cxxabi_forced.h \
@@ -305,6 +313,7 @@ CMakeFiles/unet.dir/DeconvLayer.cpp.o: /home/zigork/GitHub/U_net/DeconvLayer.cpp
   /usr/include/c++/13/bits/exception.h \
   /usr/include/c++/13/bits/exception_defines.h \
   /usr/include/c++/13/bits/exception_ptr.h \
+  /usr/include/c++/13/bits/fstream.tcc \
   /usr/include/c++/13/bits/functexcept.h \
   /usr/include/c++/13/bits/functional_hash.h \
   /usr/include/c++/13/bits/hash_bytes.h \
@@ -329,6 +338,7 @@ CMakeFiles/unet.dir/DeconvLayer.cpp.o: /home/zigork/GitHub/U_net/DeconvLayer.cpp
   /usr/include/c++/13/bits/range_access.h \
   /usr/include/c++/13/bits/refwrap.h \
   /usr/include/c++/13/bits/requires_hosted.h \
+  /usr/include/c++/13/bits/specfun.h \
   /usr/include/c++/13/bits/std_abs.h \
   /usr/include/c++/13/bits/stl_algobase.h \
   /usr/include/c++/13/bits/stl_bvector.h \
@@ -351,6 +361,7 @@ CMakeFiles/unet.dir/DeconvLayer.cpp.o: /home/zigork/GitHub/U_net/DeconvLayer.cpp
   /usr/include/c++/13/cctype \
   /usr/include/c++/13/cerrno \
   /usr/include/c++/13/clocale \
+  /usr/include/c++/13/cmath \
   /usr/include/c++/13/cstddef \
   /usr/include/c++/13/cstdio \
   /usr/include/c++/13/cstdlib \
@@ -364,11 +375,13 @@ CMakeFiles/unet.dir/DeconvLayer.cpp.o: /home/zigork/GitHub/U_net/DeconvLayer.cpp
   /usr/include/c++/13/ext/numeric_traits.h \
   /usr/include/c++/13/ext/string_conversions.h \
   /usr/include/c++/13/ext/type_traits.h \
+  /usr/include/c++/13/fstream \
   /usr/include/c++/13/initializer_list \
   /usr/include/c++/13/ios \
   /usr/include/c++/13/iosfwd \
   /usr/include/c++/13/iostream \
   /usr/include/c++/13/istream \
+  /usr/include/c++/13/limits \
   /usr/include/c++/13/new \
   /usr/include/c++/13/ostream \
   /usr/include/c++/13/pstl/pstl_config.h \
@@ -377,6 +390,18 @@ CMakeFiles/unet.dir/DeconvLayer.cpp.o: /home/zigork/GitHub/U_net/DeconvLayer.cpp
   /usr/include/c++/13/string \
   /usr/include/c++/13/string_view \
   /usr/include/c++/13/system_error \
+  /usr/include/c++/13/tr1/bessel_function.tcc \
+  /usr/include/c++/13/tr1/beta_function.tcc \
+  /usr/include/c++/13/tr1/ell_integral.tcc \
+  /usr/include/c++/13/tr1/exp_integral.tcc \
+  /usr/include/c++/13/tr1/gamma.tcc \
+  /usr/include/c++/13/tr1/hypergeometric.tcc \
+  /usr/include/c++/13/tr1/legendre_function.tcc \
+  /usr/include/c++/13/tr1/modified_bessel_func.tcc \
+  /usr/include/c++/13/tr1/poly_hermite.tcc \
+  /usr/include/c++/13/tr1/poly_laguerre.tcc \
+  /usr/include/c++/13/tr1/riemann_zeta.tcc \
+  /usr/include/c++/13/tr1/special_function_util.h \
   /usr/include/c++/13/tuple \
   /usr/include/c++/13/type_traits \
   /usr/include/c++/13/typeinfo \
@@ -388,6 +413,7 @@ CMakeFiles/unet.dir/DeconvLayer.cpp.o: /home/zigork/GitHub/U_net/DeconvLayer.cpp
   /usr/include/features.h \
   /usr/include/linux/errno.h \
   /usr/include/locale.h \
+  /usr/include/math.h \
   /usr/include/pthread.h \
   /usr/include/sched.h \
   /usr/include/stdc-predef.h \
@@ -405,9 +431,18 @@ CMakeFiles/unet.dir/DeconvLayer.cpp.o: /home/zigork/GitHub/U_net/DeconvLayer.cpp
   /usr/include/x86_64-linux-gnu/bits/errno.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
+  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
+  /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
+  /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
+  /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
+  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
   /usr/include/x86_64-linux-gnu/bits/locale.h \
   /usr/include/x86_64-linux-gnu/bits/long-double.h \
+  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
   /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
@@ -457,8 +492,10 @@ CMakeFiles/unet.dir/DeconvLayer.cpp.o: /home/zigork/GitHub/U_net/DeconvLayer.cpp
   /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h \
@@ -491,6 +528,7 @@ CMakeFiles/unet.dir/MaxPooling.cpp.o: /home/zigork/GitHub/U_net/MaxPooling.cpp \
   /usr/include/c++/13/bits/basic_string.tcc \
   /usr/include/c++/13/bits/char_traits.h \
   /usr/include/c++/13/bits/charconv.h \
+  /usr/include/c++/13/bits/codecvt.h \
   /usr/include/c++/13/bits/concept_check.h \
   /usr/include/c++/13/bits/cpp_type_traits.h \
   /usr/include/c++/13/bits/cxxabi_forced.h \
@@ -498,6 +536,7 @@ CMakeFiles/unet.dir/MaxPooling.cpp.o: /home/zigork/GitHub/U_net/MaxPooling.cpp \
   /usr/include/c++/13/bits/exception.h \
   /usr/include/c++/13/bits/exception_defines.h \
   /usr/include/c++/13/bits/exception_ptr.h \
+  /usr/include/c++/13/bits/fstream.tcc \
   /usr/include/c++/13/bits/functexcept.h \
   /usr/include/c++/13/bits/functional_hash.h \
   /usr/include/c++/13/bits/hash_bytes.h \
@@ -557,6 +596,7 @@ CMakeFiles/unet.dir/MaxPooling.cpp.o: /home/zigork/GitHub/U_net/MaxPooling.cpp \
   /usr/include/c++/13/ext/numeric_traits.h \
   /usr/include/c++/13/ext/string_conversions.h \
   /usr/include/c++/13/ext/type_traits.h \
+  /usr/include/c++/13/fstream \
   /usr/include/c++/13/initializer_list \
   /usr/include/c++/13/ios \
   /usr/include/c++/13/iosfwd \
@@ -650,8 +690,10 @@ CMakeFiles/unet.dir/MaxPooling.cpp.o: /home/zigork/GitHub/U_net/MaxPooling.cpp \
   /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h \
@@ -684,6 +726,7 @@ CMakeFiles/unet.dir/ReLULayer.cpp.o: /home/zigork/GitHub/U_net/ReLULayer.cpp \
   /usr/include/c++/13/bits/basic_string.tcc \
   /usr/include/c++/13/bits/char_traits.h \
   /usr/include/c++/13/bits/charconv.h \
+  /usr/include/c++/13/bits/codecvt.h \
   /usr/include/c++/13/bits/concept_check.h \
   /usr/include/c++/13/bits/cpp_type_traits.h \
   /usr/include/c++/13/bits/cxxabi_forced.h \
@@ -691,6 +734,7 @@ CMakeFiles/unet.dir/ReLULayer.cpp.o: /home/zigork/GitHub/U_net/ReLULayer.cpp \
   /usr/include/c++/13/bits/exception.h \
   /usr/include/c++/13/bits/exception_defines.h \
   /usr/include/c++/13/bits/exception_ptr.h \
+  /usr/include/c++/13/bits/fstream.tcc \
   /usr/include/c++/13/bits/functexcept.h \
   /usr/include/c++/13/bits/functional_hash.h \
   /usr/include/c++/13/bits/hash_bytes.h \
@@ -750,6 +794,7 @@ CMakeFiles/unet.dir/ReLULayer.cpp.o: /home/zigork/GitHub/U_net/ReLULayer.cpp \
   /usr/include/c++/13/ext/numeric_traits.h \
   /usr/include/c++/13/ext/string_conversions.h \
   /usr/include/c++/13/ext/type_traits.h \
+  /usr/include/c++/13/fstream \
   /usr/include/c++/13/initializer_list \
   /usr/include/c++/13/ios \
   /usr/include/c++/13/iosfwd \
@@ -843,8 +888,10 @@ CMakeFiles/unet.dir/ReLULayer.cpp.o: /home/zigork/GitHub/U_net/ReLULayer.cpp \
   /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h \
@@ -931,6 +978,7 @@ CMakeFiles/unet.dir/UNet.cpp.o: /home/zigork/GitHub/U_net/UNet.cpp \
   /home/zigork/GitHub/U_net/ConcatLayer.h \
   /home/zigork/GitHub/U_net/ConvolutionalLayer.h \
   /home/zigork/GitHub/U_net/DeconvLayer.h \
+  /home/zigork/GitHub/U_net/Layer.h \
   /home/zigork/GitHub/U_net/MaxPooling.h \
   /home/zigork/GitHub/U_net/Optimizer.h \
   /home/zigork/GitHub/U_net/ReLULayer.h \
@@ -939,16 +987,22 @@ CMakeFiles/unet.dir/UNet.cpp.o: /home/zigork/GitHub/U_net/UNet.cpp \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
+  /usr/include/c++/13/backward/auto_ptr.h \
   /usr/include/c++/13/backward/binders.h \
   /usr/include/c++/13/bit \
+  /usr/include/c++/13/bits/align.h \
   /usr/include/c++/13/bits/alloc_traits.h \
+  /usr/include/c++/13/bits/allocated_ptr.h \
   /usr/include/c++/13/bits/allocator.h \
+  /usr/include/c++/13/bits/atomic_base.h \
+  /usr/include/c++/13/bits/atomic_lockfree_defines.h \
   /usr/include/c++/13/bits/basic_ios.h \
   /usr/include/c++/13/bits/basic_ios.tcc \
   /usr/include/c++/13/bits/basic_string.h \
   /usr/include/c++/13/bits/basic_string.tcc \
   /usr/include/c++/13/bits/char_traits.h \
   /usr/include/c++/13/bits/charconv.h \
+  /usr/include/c++/13/bits/codecvt.h \
   /usr/include/c++/13/bits/concept_check.h \
   /usr/include/c++/13/bits/cpp_type_traits.h \
   /usr/include/c++/13/bits/cxxabi_forced.h \
@@ -956,6 +1010,7 @@ CMakeFiles/unet.dir/UNet.cpp.o: /home/zigork/GitHub/U_net/UNet.cpp \
   /usr/include/c++/13/bits/exception.h \
   /usr/include/c++/13/bits/exception_defines.h \
   /usr/include/c++/13/bits/exception_ptr.h \
+  /usr/include/c++/13/bits/fstream.tcc \
   /usr/include/c++/13/bits/functexcept.h \
   /usr/include/c++/13/bits/functional_hash.h \
   /usr/include/c++/13/bits/hash_bytes.h \
@@ -980,6 +1035,9 @@ CMakeFiles/unet.dir/UNet.cpp.o: /home/zigork/GitHub/U_net/UNet.cpp \
   /usr/include/c++/13/bits/range_access.h \
   /usr/include/c++/13/bits/refwrap.h \
   /usr/include/c++/13/bits/requires_hosted.h \
+  /usr/include/c++/13/bits/shared_ptr.h \
+  /usr/include/c++/13/bits/shared_ptr_atomic.h \
+  /usr/include/c++/13/bits/shared_ptr_base.h \
   /usr/include/c++/13/bits/specfun.h \
   /usr/include/c++/13/bits/std_abs.h \
   /usr/include/c++/13/bits/stl_algobase.h \
@@ -990,12 +1048,15 @@ CMakeFiles/unet.dir/UNet.cpp.o: /home/zigork/GitHub/U_net/UNet.cpp \
   /usr/include/c++/13/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/13/bits/stl_iterator_base_types.h \
   /usr/include/c++/13/bits/stl_pair.h \
+  /usr/include/c++/13/bits/stl_raw_storage_iter.h \
+  /usr/include/c++/13/bits/stl_tempbuf.h \
   /usr/include/c++/13/bits/stl_uninitialized.h \
   /usr/include/c++/13/bits/stl_vector.h \
   /usr/include/c++/13/bits/streambuf.tcc \
   /usr/include/c++/13/bits/streambuf_iterator.h \
   /usr/include/c++/13/bits/string_view.tcc \
   /usr/include/c++/13/bits/stringfwd.h \
+  /usr/include/c++/13/bits/unique_ptr.h \
   /usr/include/c++/13/bits/uses_allocator.h \
   /usr/include/c++/13/bits/uses_allocator_args.h \
   /usr/include/c++/13/bits/utility.h \
@@ -1012,19 +1073,25 @@ CMakeFiles/unet.dir/UNet.cpp.o: /home/zigork/GitHub/U_net/UNet.cpp \
   /usr/include/c++/13/debug/assertions.h \
   /usr/include/c++/13/debug/debug.h \
   /usr/include/c++/13/exception \
+  /usr/include/c++/13/ext/aligned_buffer.h \
   /usr/include/c++/13/ext/alloc_traits.h \
   /usr/include/c++/13/ext/atomicity.h \
+  /usr/include/c++/13/ext/concurrence.h \
   /usr/include/c++/13/ext/numeric_traits.h \
   /usr/include/c++/13/ext/string_conversions.h \
   /usr/include/c++/13/ext/type_traits.h \
+  /usr/include/c++/13/fstream \
   /usr/include/c++/13/initializer_list \
   /usr/include/c++/13/ios \
   /usr/include/c++/13/iosfwd \
   /usr/include/c++/13/iostream \
   /usr/include/c++/13/istream \
   /usr/include/c++/13/limits \
+  /usr/include/c++/13/memory \
   /usr/include/c++/13/new \
   /usr/include/c++/13/ostream \
+  /usr/include/c++/13/pstl/execution_defs.h \
+  /usr/include/c++/13/pstl/glue_memory_defs.h \
   /usr/include/c++/13/pstl/pstl_config.h \
   /usr/include/c++/13/stdexcept \
   /usr/include/c++/13/streambuf \
@@ -1058,6 +1125,7 @@ CMakeFiles/unet.dir/UNet.cpp.o: /home/zigork/GitHub/U_net/UNet.cpp \
   /usr/include/pthread.h \
   /usr/include/sched.h \
   /usr/include/stdc-predef.h \
+  /usr/include/stdint.h \
   /usr/include/stdio.h \
   /usr/include/stdlib.h \
   /usr/include/time.h \
@@ -1091,6 +1159,8 @@ CMakeFiles/unet.dir/UNet.cpp.o: /home/zigork/GitHub/U_net/UNet.cpp \
   /usr/include/x86_64-linux-gnu/bits/select.h \
   /usr/include/x86_64-linux-gnu/bits/setjmp.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
   /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
   /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
@@ -1133,8 +1203,10 @@ CMakeFiles/unet.dir/UNet.cpp.o: /home/zigork/GitHub/U_net/UNet.cpp \
   /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h \
@@ -1150,12 +1222,14 @@ CMakeFiles/unet.dir/UNet.cpp.o: /home/zigork/GitHub/U_net/UNet.cpp \
   /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
   /usr/include/x86_64-linux-gnu/sys/types.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
 
 CMakeFiles/unet.dir/Utils.cpp.o: /home/zigork/GitHub/U_net/Utils.cpp \
   /home/zigork/GitHub/U_net/ConcatLayer.h \
   /home/zigork/GitHub/U_net/ConvolutionalLayer.h \
   /home/zigork/GitHub/U_net/DeconvLayer.h \
+  /home/zigork/GitHub/U_net/Layer.h \
   /home/zigork/GitHub/U_net/MaxPooling.h \
   /home/zigork/GitHub/U_net/Optimizer.h \
   /home/zigork/GitHub/U_net/ReLULayer.h \
@@ -1196,6 +1270,7 @@ CMakeFiles/unet.dir/Utils.cpp.o: /home/zigork/GitHub/U_net/Utils.cpp \
   /usr/include/c++/13/bits/exception.h \
   /usr/include/c++/13/bits/exception_defines.h \
   /usr/include/c++/13/bits/exception_ptr.h \
+  /usr/include/c++/13/bits/fstream.tcc \
   /usr/include/c++/13/bits/functexcept.h \
   /usr/include/c++/13/bits/functional_hash.h \
   /usr/include/c++/13/bits/hash_bytes.h \
@@ -1300,6 +1375,7 @@ CMakeFiles/unet.dir/Utils.cpp.o: /home/zigork/GitHub/U_net/Utils.cpp \
   /usr/include/c++/13/ext/numeric_traits.h \
   /usr/include/c++/13/ext/string_conversions.h \
   /usr/include/c++/13/ext/type_traits.h \
+  /usr/include/c++/13/fstream \
   /usr/include/c++/13/functional \
   /usr/include/c++/13/initializer_list \
   /usr/include/c++/13/iomanip \
@@ -1546,8 +1622,10 @@ CMakeFiles/unet.dir/Utils.cpp.o: /home/zigork/GitHub/U_net/Utils.cpp \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
   /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h \
@@ -1579,6 +1657,7 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
   /home/zigork/GitHub/U_net/ConcatLayer.h \
   /home/zigork/GitHub/U_net/ConvolutionalLayer.h \
   /home/zigork/GitHub/U_net/DeconvLayer.h \
+  /home/zigork/GitHub/U_net/Layer.h \
   /home/zigork/GitHub/U_net/MaxPooling.h \
   /home/zigork/GitHub/U_net/Optimizer.h \
   /home/zigork/GitHub/U_net/ReLULayer.h \
@@ -1623,6 +1702,7 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
   /usr/include/c++/13/bits/fs_fwd.h \
   /usr/include/c++/13/bits/fs_ops.h \
   /usr/include/c++/13/bits/fs_path.h \
+  /usr/include/c++/13/bits/fstream.tcc \
   /usr/include/c++/13/bits/functexcept.h \
   /usr/include/c++/13/bits/functional_hash.h \
   /usr/include/c++/13/bits/hash_bytes.h \
@@ -1729,6 +1809,7 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
   /usr/include/c++/13/ext/string_conversions.h \
   /usr/include/c++/13/ext/type_traits.h \
   /usr/include/c++/13/filesystem \
+  /usr/include/c++/13/fstream \
   /usr/include/c++/13/functional \
   /usr/include/c++/13/initializer_list \
   /usr/include/c++/13/iomanip \
@@ -1975,8 +2056,10 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
   /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h \
@@ -2017,8 +2100,6 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 
 /home/zigork/GitHub/U_net/main.cpp:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h:
-
 /usr/lib/gcc/x86_64-linux-gnu/13/include/mm_malloc.h:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h:
@@ -2028,8 +2109,6 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 /usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
 
 /usr/include/x86_64-linux-gnu/bits/uio_lim.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdint-least.h:
 
 /usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
 
@@ -2107,8 +2186,6 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 
 /usr/include/opencv4/opencv2/dnn/version.hpp:
 
-/usr/include/opencv4/opencv2/dnn/dnn.inl.hpp:
-
 /usr/include/opencv4/opencv2/dnn.hpp:
 
 /usr/include/opencv4/opencv2/core/version.hpp:
@@ -2163,11 +2240,7 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 
 /usr/include/c++/13/pstl/glue_algorithm_defs.h:
 
-/usr/include/c++/13/pstl/execution_defs.h:
-
 /usr/include/c++/13/mutex:
-
-/usr/include/c++/13/memory:
 
 /usr/include/c++/13/locale:
 
@@ -2178,10 +2251,6 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 /usr/include/c++/13/iomanip:
 
 /usr/include/c++/13/functional:
-
-/usr/include/c++/13/ext/concurrence.h:
-
-/usr/include/c++/13/ext/aligned_buffer.h:
 
 /usr/include/c++/13/deque:
 
@@ -2200,10 +2269,6 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 /usr/include/c++/13/math.h:
 
 /usr/include/c++/13/bits/unique_lock.h:
-
-/usr/include/c++/13/bits/stl_tempbuf.h:
-
-/usr/include/c++/13/bits/stl_raw_storage_iter.h:
 
 /usr/include/c++/13/bits/stl_queue.h:
 
@@ -2225,13 +2290,33 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 
 /usr/include/c++/13/bits/sstream.tcc:
 
-/usr/include/opencv4/opencv2/core/cuda_types.hpp:
+/usr/include/c++/13/bits/quoted_string.h:
 
-/usr/include/c++/13/ostream:
+/usr/include/c++/13/bits/locale_facets_nonio.tcc:
 
-/usr/include/opencv4/opencv2/flann/allocator.h:
+/usr/include/c++/13/bits/locale_facets_nonio.h:
 
-/usr/include/c++/13/tr1/poly_hermite.tcc:
+/usr/include/c++/13/bits/hashtable_policy.h:
+
+/usr/include/c++/13/bits/stl_list.h:
+
+/usr/include/c++/13/bits/erase_if.h:
+
+/usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
+
+/usr/include/c++/13/bits/enable_special_members.h:
+
+/usr/include/opencv4/opencv2/core/vsx_utils.hpp:
+
+/usr/include/c++/13/bits/deque.tcc:
+
+/usr/include/c++/13/array:
+
+/usr/lib/gcc/x86_64-linux-gnu/13/include/mmintrin.h:
+
+/usr/include/c++/13/algorithm:
+
+/usr/include/assert.h:
 
 /usr/include/c++/13/tr1/legendre_function.tcc:
 
@@ -2265,6 +2350,10 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 
 /usr/include/c++/13/cstdio:
 
+/usr/include/opencv4/opencv2/core/cuda_types.hpp:
+
+/usr/include/c++/13/ostream:
+
 /usr/include/c++/13/cmath:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h:
@@ -2273,23 +2362,19 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 
 /usr/include/c++/13/clocale:
 
+/home/zigork/GitHub/U_net/Utils.h:
+
+/home/zigork/GitHub/U_net/MaxPooling.h:
+
 /usr/include/opencv4/opencv2/video.hpp:
 
 /usr/include/c++/13/cerrno:
 
-/usr/include/c++/13/bits/unique_ptr.h:
+/usr/include/x86_64-linux-gnu/bits/stdint-least.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
+/usr/include/c++/13/bits/parse_numbers.h:
 
-/usr/include/stdint.h:
-
-/usr/include/opencv4/opencv2/photo.hpp:
-
-/usr/include/endian.h:
-
-/usr/include/c++/13/tr1/poly_laguerre.tcc:
-
-/usr/include/c++/13/bits/basic_string.h:
+/usr/include/c++/13/bits/std_abs.h:
 
 /usr/include/c++/13/bits/postypes.h:
 
@@ -2335,19 +2420,23 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 
 /usr/include/c++/13/bits/exception_ptr.h:
 
+/usr/include/c++/13/bits/locale_conv.h:
+
+/usr/include/c++/13/bits/istream.tcc:
+
 /usr/include/c++/13/bits/cxxabi_forced.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
 
-/usr/include/c++/13/bits/hashtable_policy.h:
-
 /usr/include/c++/13/bits/basic_ios.tcc:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/emmintrin.h:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h:
+
+/usr/include/c++/13/pstl/execution_defs.h:
 
 /usr/include/c++/13/bits/basic_ios.h:
 
@@ -2364,6 +2453,14 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 /home/zigork/GitHub/U_net/DeconvLayer.h:
 
 /usr/include/alloca.h:
+
+/usr/include/opencv4/opencv2/dnn/dnn.inl.hpp:
+
+/home/zigork/GitHub/U_net/Layer.h:
+
+/usr/include/c++/13/bits/locale_classes.h:
+
+/usr/include/x86_64-linux-gnu/bits/timesize.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:
 
@@ -2387,9 +2484,9 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/endian.h:
 
-/usr/include/opencv4/opencv2/core/vsx_utils.hpp:
+/usr/include/c++/13/bits/node_handle.h:
 
-/usr/include/c++/13/bits/deque.tcc:
+/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
 
 /usr/include/c++/13/bits/functexcept.h:
 
@@ -2403,10 +2500,6 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 
 /usr/include/c++/13/iosfwd:
 
-/usr/include/c++/13/pstl/glue_memory_defs.h:
-
-/usr/include/c++/13/exception:
-
 /usr/include/c++/13/bits/stl_pair.h:
 
 /usr/include/x86_64-linux-gnu/bits/errno.h:
@@ -2417,11 +2510,17 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
 
+/usr/include/c++/13/memory:
+
 /usr/include/c++/13/cwctype:
 
 /usr/include/c++/13/bits/stl_uninitialized.h:
 
 /usr/include/c++/13/bits/new_allocator.h:
+
+/usr/include/c++/13/bits/algorithmfwd.h:
+
+/usr/include/x86_64-linux-gnu/bits/long-double.h:
 
 /usr/include/opencv4/opencv2/core.hpp:
 
@@ -2432,10 +2531,6 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 /usr/include/c++/13/bits/atomic_base.h:
 
 /usr/include/c++/13/pstl/pstl_config.h:
-
-/home/zigork/GitHub/U_net/MaxPooling.h:
-
-/home/zigork/GitHub/U_net/Utils.h:
 
 /home/zigork/GitHub/U_net/ConvolutionalLayer.h:
 
@@ -2454,6 +2549,12 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 /usr/include/c++/13/bits/stringfwd.h:
 
 /usr/include/c++/13/backward/binders.h:
+
+/usr/include/c++/13/bits/fstream.tcc:
+
+/usr/include/c++/13/climits:
+
+/home/zigork/GitHub/U_net/UNet.h:
 
 /usr/include/c++/13/bits/refwrap.h:
 
@@ -2529,6 +2630,10 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/math-vector.h:
 
+/usr/include/c++/13/bits/stl_tree.h:
+
+/usr/include/c++/13/bits/codecvt.h:
+
 /usr/include/c++/13/bits/stl_vector.h:
 
 /usr/include/c++/13/bits/uniform_int_dist.h:
@@ -2538,8 +2643,6 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 /usr/include/c++/13/bits/memoryfwd.h:
 
 /usr/include/c++/13/bits/cxxabi_init_exception.h:
-
-/usr/include/c++/13/typeinfo:
 
 /usr/include/c++/13/bits/functional_hash.h:
 
@@ -2577,16 +2680,6 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 
 /usr/include/c++/13/debug/assertions.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h:
-
-/usr/include/c++/13/tr1/modified_bessel_func.tcc:
-
-/usr/include/opencv4/opencv2/core/mat.hpp:
-
-/usr/include/c++/13/bits/exception_defines.h:
-
-/usr/include/x86_64-linux-gnu/bits/waitstatus.h:
-
 /usr/include/opencv4/opencv2/core/affine.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
@@ -2599,15 +2692,35 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 
 /usr/include/c++/13/bits/specfun.h:
 
+/usr/include/c++/13/bits/basic_string.h:
+
+/usr/include/c++/13/tr1/poly_laguerre.tcc:
+
+/usr/include/opencv4/opencv2/dnn/utils/inference_engine.hpp:
+
+/usr/include/c++/13/bits/chrono.h:
+
+/usr/include/x86_64-linux-gnu/bits/endianness.h:
+
 /usr/include/stdc-predef.h:
 
 /usr/include/c++/13/tr1/special_function_util.h:
 
 /usr/include/c++/13/bits/ostream.tcc:
 
-/usr/include/c++/13/bits/locale_classes.h:
+/usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h:
 
-/usr/include/x86_64-linux-gnu/bits/timesize.h:
+/usr/include/c++/13/tr1/modified_bessel_func.tcc:
+
+/usr/include/opencv4/opencv2/core/mat.hpp:
+
+/usr/include/c++/13/bits/exception_defines.h:
+
+/usr/include/x86_64-linux-gnu/bits/waitstatus.h:
+
+/usr/include/opencv4/opencv2/flann/allocator.h:
+
+/usr/include/c++/13/tr1/poly_hermite.tcc:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h:
 
@@ -2624,6 +2737,8 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 /usr/include/c++/13/bits/utility.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
+
+/usr/include/c++/13/ext/aligned_buffer.h:
 
 /usr/include/pthread.h:
 
@@ -2669,10 +2784,6 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/fp-logb.h:
 
-/usr/include/x86_64-linux-gnu/bits/long-double.h:
-
-/usr/include/c++/13/bits/algorithmfwd.h:
-
 /usr/include/opencv4/opencv2/flann/saving.h:
 
 /usr/include/c++/13/map:
@@ -2688,6 +2799,12 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 /usr/include/opencv4/opencv2/core/utility.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
+
+/usr/include/c++/13/bits/hashtable.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/error_t.h:
+
+/usr/include/c++/13/bits/stl_raw_storage_iter.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
 
@@ -2718,6 +2835,10 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
 
 /home/zigork/GitHub/U_net/MaxPooling.cpp:
+
+/usr/include/c++/13/exception:
+
+/usr/include/c++/13/pstl/glue_memory_defs.h:
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
 
@@ -2755,6 +2876,8 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h:
 
+/usr/include/c++/13/bits/stl_tempbuf.h:
+
 /usr/include/asm-generic/errno.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
@@ -2777,9 +2900,19 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 
 /usr/include/c++/13/bits/align.h:
 
+/usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
+
+/usr/include/c++/13/bits/unique_ptr.h:
+
 /usr/include/x86_64-linux-gnu/bits/wordsize.h:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h:
+
+/usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h:
+
+/usr/include/c++/13/typeinfo:
+
+/usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h:
 
@@ -2789,15 +2922,15 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h:
 
-/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
+/usr/include/c++/13/cwchar:
+
+/usr/include/x86_64-linux-gnu/sys/select.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h:
 
-/usr/include/c++/13/cwchar:
-
-/usr/include/x86_64-linux-gnu/sys/select.h:
+/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h:
 
@@ -2805,74 +2938,34 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/xmmintrin.h:
 
+/usr/include/c++/13/fstream:
+
 /home/zigork/GitHub/U_net/SGDOptimizer.cpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/FILE.h:
 
 /home/zigork/GitHub/U_net/SGDOptimizer.h:
 
-/usr/include/c++/13/climits:
+/usr/include/opencv4/opencv2/core/optim.hpp:
 
-/home/zigork/GitHub/U_net/UNet.h:
+/usr/include/c++/13/backward/auto_ptr.h:
+
+/usr/include/c++/13/set:
+
+/usr/include/c++/13/bits/shared_ptr_atomic.h:
+
+/usr/include/c++/13/ext/concurrence.h:
+
+/usr/include/opencv4/opencv2/photo.hpp:
+
+/usr/include/endian.h:
+
+/usr/include/stdint.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h:
 
 /usr/include/opencv4/opencv2/flann/linear_index.h:
 
 /usr/include/c++/13/tr1/riemann_zeta.tcc:
 
 /home/zigork/GitHub/U_net/Utils.cpp:
-
-/usr/include/assert.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/13/include/mmintrin.h:
-
-/usr/include/c++/13/algorithm:
-
-/usr/include/c++/13/array:
-
-/usr/include/opencv4/opencv2/core/optim.hpp:
-
-/usr/include/c++/13/backward/auto_ptr.h:
-
-/usr/include/opencv4/opencv2/dnn/utils/inference_engine.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/endianness.h:
-
-/usr/include/c++/13/bits/chrono.h:
-
-/usr/include/c++/13/bits/stl_tree.h:
-
-/usr/include/c++/13/bits/codecvt.h:
-
-/usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
-
-/usr/include/c++/13/bits/enable_special_members.h:
-
-/usr/include/c++/13/bits/stl_list.h:
-
-/usr/include/c++/13/bits/erase_if.h:
-
-/usr/include/c++/13/set:
-
-/usr/include/c++/13/bits/shared_ptr_atomic.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/error_t.h:
-
-/usr/include/c++/13/bits/hashtable.h:
-
-/usr/include/c++/13/bits/istream.tcc:
-
-/usr/include/c++/13/bits/locale_conv.h:
-
-/usr/include/c++/13/bits/locale_facets_nonio.h:
-
-/usr/include/c++/13/bits/locale_facets_nonio.tcc:
-
-/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
-
-/usr/include/c++/13/bits/node_handle.h:
-
-/usr/include/c++/13/bits/std_abs.h:
-
-/usr/include/c++/13/bits/parse_numbers.h:
-
-/usr/include/c++/13/bits/quoted_string.h:

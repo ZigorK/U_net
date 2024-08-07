@@ -1,4 +1,8 @@
 #include "DeconvLayer.h"
+#include <iostream>
+#include <cmath>
+#include <cstdlib>
+#include <fstream> 
 
 DeconvLayer::DeconvLayer(int in_channels, int out_channels, int kernel_size, int stride, int padding)
     : in_channels(in_channels), out_channels(out_channels), kernel_size(kernel_size), stride(stride), padding(padding) {
@@ -75,10 +79,6 @@ std::vector<std::vector<std::vector<double>>> DeconvLayer::forward(const std::ve
     return output;
 }
 
-
-
-
-
 std::vector<std::vector<std::vector<double>>> DeconvLayer::backward(const std::vector<std::vector<std::vector<double>>>& grad_output) {
     // Проверка и вывод размеров input
     if (input.empty() || input[0].empty() || input[0][0].empty()) {
@@ -111,7 +111,6 @@ std::vector<std::vector<std::vector<double>>> DeconvLayer::backward(const std::v
     std::cerr << "grad_output dimensions: (" << grad_output.size() << ", " << output_height << ", " << output_width << ")" << std::endl;
     std::cerr << "Weights dimensions: (" << weights.size() << ", " << weights[0].size() << ", " << weights[0][0].size() << ", " << weights[0][0][0].size() << ")" << std::endl;
 
-    // Проверьте соответствие размеров input и grad_output
     if (in_channels != input.size()) {
         std::cerr << "Mismatch in_channels: expected " << in_channels << ", but got " << input.size() << std::endl;
         return {};
@@ -122,22 +121,14 @@ std::vector<std::vector<std::vector<double>>> DeconvLayer::backward(const std::v
         return {};
     }
 
-    // Инициализация grad_input и grad_weights
     std::vector<std::vector<std::vector<double>>> grad_input(in_channels, std::vector<std::vector<double>>(height, std::vector<double>(width, 0.0)));
     grad_weights = std::vector<std::vector<std::vector<std::vector<double>>>>(
         out_channels, std::vector<std::vector<std::vector<double>>>(
             in_channels, std::vector<std::vector<double>>(
                 kernel_size, std::vector<double>(kernel_size, 0.0))));
 
-    std::cerr << "grad_weights dimensions: (" << grad_weights.size() << ", " << grad_weights[0].size() << ", " << grad_weights[0][0].size() << ", " << grad_weights[0][0][0].size() << ")" << std::endl;
-
     for (int oc = 0; oc < out_channels; ++oc) {
         for (int ic = 0; ic < in_channels; ++ic) {
-            if (ic >= input.size() || oc >= grad_weights.size() || ic >= grad_weights[oc].size()) {
-                std::cerr << "Index out of range: oc=" << oc << ", ic=" << ic << std::endl;
-                continue;
-            }
-
             for (int i = 0; i < height; ++i) {
                 for (int j = 0; j < width; ++j) {
                     for (int ki = 0; ki < kernel_size; ++ki) {
@@ -149,8 +140,6 @@ std::vector<std::vector<std::vector<double>>> DeconvLayer::backward(const std::v
                                 if (output_row < grad_output[oc].size() && output_col < grad_output[oc][0].size()) {
                                     grad_input[ic][i][j] += grad_output[oc][output_row][output_col] * weights[oc][ic][ki][kj];
                                     grad_weights[oc][ic][ki][kj] += grad_output[oc][output_row][output_col] * input[ic][i][j];
-                                } else {
-                                    std::cerr << "Index out of range inside nested loops: output_row=" << output_row << ", output_col=" << output_col << std::endl;
                                 }
                             }
                         }
@@ -163,12 +152,6 @@ std::vector<std::vector<std::vector<double>>> DeconvLayer::backward(const std::v
     return grad_input;
 }
 
-
-
-
-
-
-
 void DeconvLayer::updateWeights(double learning_rate) {
     for (int i = 0; i < out_channels; ++i) {
         for (int j = 0; j < in_channels; ++j) {
@@ -176,6 +159,45 @@ void DeconvLayer::updateWeights(double learning_rate) {
                 for (int l = 0; l < kernel_size; ++l) {
                     weights[i][j][k][l] -= learning_rate * grad_weights[i][j][k][l];
                 }
+            }
+        }
+    }
+}
+
+std::vector<std::vector<std::vector<std::vector<double>>>>& DeconvLayer::getWeights() {
+    return weights;
+}
+
+std::vector<std::vector<std::vector<std::vector<double>>>>& DeconvLayer::getGradients() {
+    return grad_weights;
+}
+
+void DeconvLayer::save(std::ofstream& file) const {
+    file.write(reinterpret_cast<const char*>(&in_channels), sizeof(in_channels));
+    file.write(reinterpret_cast<const char*>(&out_channels), sizeof(out_channels));
+    file.write(reinterpret_cast<const char*>(&kernel_size), sizeof(kernel_size));
+    file.write(reinterpret_cast<const char*>(&stride), sizeof(stride));
+    file.write(reinterpret_cast<const char*>(&padding), sizeof(padding));
+    for (const auto& out_channel_weights : weights) {
+        for (const auto& in_channel_weights : out_channel_weights) {
+            for (const auto& row : in_channel_weights) {
+                file.write(reinterpret_cast<const char*>(row.data()), row.size() * sizeof(double));
+            }
+        }
+    }
+}
+
+void DeconvLayer::load(std::ifstream& file) {
+    file.read(reinterpret_cast<char*>(&in_channels), sizeof(in_channels));
+    file.read(reinterpret_cast<char*>(&out_channels), sizeof(out_channels));
+    file.read(reinterpret_cast<char*>(&kernel_size), sizeof(kernel_size));
+    file.read(reinterpret_cast<char*>(&stride), sizeof(stride));
+    file.read(reinterpret_cast<char*>(&padding), sizeof(padding));
+    weights.resize(out_channels, std::vector<std::vector<std::vector<double>>>(in_channels, std::vector<std::vector<double>>(kernel_size, std::vector<double>(kernel_size))));
+    for (auto& out_channel_weights : weights) {
+        for (auto& in_channel_weights : out_channel_weights) {
+            for (auto& row : in_channel_weights) {
+                file.read(reinterpret_cast<char*>(row.data()), row.size() * sizeof(double));
             }
         }
     }

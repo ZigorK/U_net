@@ -1,22 +1,22 @@
 #ifndef CONVLAYER_H
 #define CONVLAYER_H
 
+#include "Layer.h"
 #include <vector>
+#include <fstream>
 
-class ConvLayer {
+class ConvLayer : public Layer {
 public:
     ConvLayer(int in_channels, int out_channels, int kernel_size, int stride = 1, int padding = 1);
     std::vector<std::vector<std::vector<double>>> forward(const std::vector<std::vector<std::vector<double>>>& input);
     std::vector<std::vector<std::vector<double>>> backward(const std::vector<std::vector<std::vector<double>>>& grad_output);
     void updateWeights(double learning_rate);
 
-    std::vector<std::vector<std::vector<std::vector<double>>>>& getWeights() {
-        return weights;
-    }
+    std::vector<std::vector<std::vector<std::vector<double>>>>& getWeights();
+    std::vector<std::vector<std::vector<std::vector<double>>>>& getGradients();
 
-    std::vector<std::vector<std::vector<std::vector<double>>>>& getGradients() {
-        return grad_weights;
-    }
+    void save(std::ofstream& file) const;
+    void load(std::ifstream& file);
 
 private:
     int in_channels;

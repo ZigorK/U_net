@@ -6,7 +6,7 @@ double sigmoid(double x) {
 
 UNet::UNet()
     : conv1(3, 64, 3), conv2(64, 128, 3), conv3(128, 256, 3), conv4(256, 512, 3), conv5(512, 1024, 3),
-      deconv1(1024, 512, 2, 2), deconv2(1024, 256, 2, 2), deconv3(512, 128, 2, 2), deconv4(256, 64, 2, 2),
+      deconv1(1024, 512, 2, 2), deconv2(1024, 256, 2, 2), deconv3(512, 128, 2, 2), deconv4(256, 64, 2, 2), deconv5(128, 64, 2, 2),
       output_conv(128, 1, 1), relu(), maxpool(2, 2), concat() {}
 
 std::vector<std::vector<std::vector<double>>> UNet::forward(const std::vector<std::vector<std::vector<double>>>& input) {
@@ -44,21 +44,21 @@ std::vector<std::vector<std::vector<double>>> UNet::forward(const std::vector<st
 }
 
 void UNet::backward(const std::vector<std::vector<std::vector<double>>>& grad_output) {
-    auto grad_output_conv = output_conv.backward(grad_output); 
+    auto grad_output_conv = output_conv.backward(grad_output);
 
-    auto grad_deconv4 = deconv4.backward(grad_output_conv); 
-    auto [grad_x19, grad_x1] = concat.backward(grad_deconv4); 
-    auto grad_conv2_deconv3 = conv2.backward(grad_x19); 
-    auto grad_deconv3 = deconv3.backward(grad_conv2_deconv3); 
-    auto [grad_x18, grad_x3] = concat.backward(grad_deconv3); 
-    auto grad_conv3_deconv2 = conv3.backward(grad_x18); 
-    auto grad_deconv2 = deconv2.backward(grad_conv3_deconv2); 
-    auto [grad_x17, grad_x5] = concat.backward(grad_deconv2); 
-    auto grad_conv4_deconv1 = conv4.backward(grad_x17); 
-    auto grad_deconv1 = deconv1.backward(grad_conv4_deconv1); 
-    auto [grad_x16, grad_x7] = concat.backward(grad_deconv1); 
-    auto grad_conv5 = conv5.backward(grad_x16); 
-    auto grad_maxpool4 = maxpool.backward(grad_conv5); 
+    auto grad_deconv4 = deconv4.backward(grad_output_conv);
+    auto [grad_x19, grad_x1] = concat.backward(grad_deconv4);
+    auto grad_conv2_deconv3 = conv2.backward(grad_x19);
+    auto grad_deconv3 = deconv3.backward(grad_conv2_deconv3);
+    auto [grad_x18, grad_x3] = concat.backward(grad_deconv3);
+    auto grad_conv3_deconv2 = conv3.backward(grad_x18);
+    auto grad_deconv2 = deconv2.backward(grad_conv3_deconv2);
+    auto [grad_x17, grad_x5] = concat.backward(grad_deconv2);
+    auto grad_conv4_deconv1 = conv4.backward(grad_x17);
+    auto grad_deconv1 = deconv1.backward(grad_conv4_deconv1);
+    auto [grad_x16, grad_x7] = concat.backward(grad_deconv1);
+    auto grad_conv5 = conv5.backward(grad_x16);
+    auto grad_maxpool4 = maxpool.backward(grad_conv5);
     auto grad_conv4 = conv4.backward(grad_maxpool4);
     auto grad_maxpool3 = maxpool.backward(grad_conv4);
     auto grad_conv3 = conv3.backward(grad_maxpool3);
@@ -67,9 +67,8 @@ void UNet::backward(const std::vector<std::vector<std::vector<double>>>& grad_ou
     auto grad_maxpool1 = maxpool.backward(grad_conv2);
     auto grad_conv1 = conv1.backward(grad_maxpool1);
 
-    setGradients(grad_conv1); 
+    setGradients(grad_conv1);
 }
-
 
 void UNet::updateWeights(Optimizer& optimizer) {
     optimizer.updateWeights(conv1.getWeights(), conv1.getGradients());
@@ -81,10 +80,9 @@ void UNet::updateWeights(Optimizer& optimizer) {
     optimizer.updateWeights(deconv2.getWeights(), deconv2.getGradients());
     optimizer.updateWeights(deconv3.getWeights(), deconv3.getGradients());
     optimizer.updateWeights(deconv4.getWeights(), deconv4.getGradients());
+    optimizer.updateWeights(deconv5.getWeights(), deconv5.getGradients());
     optimizer.updateWeights(output_conv.getWeights(), output_conv.getGradients());
 }
-
-
 
 std::vector<std::vector<std::vector<double>>> UNet::getGradients() const {
     return gradients;
@@ -92,4 +90,21 @@ std::vector<std::vector<std::vector<double>>> UNet::getGradients() const {
 
 void UNet::setGradients(const std::vector<std::vector<std::vector<double>>>& gradients) {
     this->gradients = gradients;
+}
+
+std::vector<std::shared_ptr<Layer>> UNet::getLayers() const {
+    std::vector<std::shared_ptr<Layer>> layers;
+
+    layers.push_back(std::make_shared<ConvLayer>(conv1));
+    layers.push_back(std::make_shared<ConvLayer>(conv2));
+    layers.push_back(std::make_shared<ConvLayer>(conv3));
+    layers.push_back(std::make_shared<ConvLayer>(conv4));
+    layers.push_back(std::make_shared<ConvLayer>(conv5));
+    layers.push_back(std::make_shared<DeconvLayer>(deconv1));
+    layers.push_back(std::make_shared<DeconvLayer>(deconv2));
+    layers.push_back(std::make_shared<DeconvLayer>(deconv3));
+    layers.push_back(std::make_shared<DeconvLayer>(deconv4));
+    layers.push_back(std::make_shared<DeconvLayer>(deconv5));
+
+    return layers;
 }

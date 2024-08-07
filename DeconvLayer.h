@@ -1,25 +1,22 @@
 #ifndef DECONVLAYER_H
 #define DECONVLAYER_H
 
+#include "Layer.h"
 #include <vector>
-#include<iostream>
+#include <fstream>
 
-class DeconvLayer {
+class DeconvLayer : public Layer {
 public:
-    DeconvLayer(int in_channels, int out_channels, int kernel_size, int stride = 1, int padding = 0);
-
+    DeconvLayer(int in_channels, int out_channels, int kernel_size, int stride = 1, int padding = 1);
     std::vector<std::vector<std::vector<double>>> forward(const std::vector<std::vector<std::vector<double>>>& input);
     std::vector<std::vector<std::vector<double>>> backward(const std::vector<std::vector<std::vector<double>>>& grad_output);
     void updateWeights(double learning_rate);
 
-    // Измененные методы
-    std::vector<std::vector<std::vector<std::vector<double>>>>& getWeights() {
-        return weights;
-    }
+    std::vector<std::vector<std::vector<std::vector<double>>>>& getWeights();
+    std::vector<std::vector<std::vector<std::vector<double>>>>& getGradients();
 
-    std::vector<std::vector<std::vector<std::vector<double>>>>& getGradients() {
-        return grad_weights;
-    }
+    void save(std::ofstream& file) const;
+    void load(std::ifstream& file);
 
 private:
     int in_channels;

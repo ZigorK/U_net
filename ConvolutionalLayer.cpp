@@ -57,8 +57,6 @@ std::vector<std::vector<std::vector<double>>> ConvLayer::forward(const std::vect
     return output;
 }
 
-
-
 std::vector<std::vector<std::vector<double>>> ConvLayer::backward(const std::vector<std::vector<std::vector<double>>>& grad_output) {
     // Проверка и вывод размеров grad_output
     if (grad_output.empty() || grad_output[0].empty() || grad_output[0][0].empty()) {
@@ -131,7 +129,6 @@ std::vector<std::vector<std::vector<double>>> ConvLayer::backward(const std::vec
     return grad_input;
 }
 
-
 void ConvLayer::updateWeights(double learning_rate) {
     for (int i = 0; i < out_channels; ++i) {
         for (int j = 0; j < in_channels; ++j) {
@@ -139,6 +136,45 @@ void ConvLayer::updateWeights(double learning_rate) {
                 for (int l = 0; l < kernel_size; ++l) {
                     weights[i][j][k][l] -= learning_rate * grad_weights[i][j][k][l];
                 }
+            }
+        }
+    }
+}
+
+std::vector<std::vector<std::vector<std::vector<double>>>>& ConvLayer::getWeights() {
+    return weights;
+}
+
+std::vector<std::vector<std::vector<std::vector<double>>>>& ConvLayer::getGradients() {
+    return grad_weights;
+}
+
+void ConvLayer::save(std::ofstream& file) const {
+    file.write(reinterpret_cast<const char*>(&in_channels), sizeof(in_channels));
+    file.write(reinterpret_cast<const char*>(&out_channels), sizeof(out_channels));
+    file.write(reinterpret_cast<const char*>(&kernel_size), sizeof(kernel_size));
+    file.write(reinterpret_cast<const char*>(&stride), sizeof(stride));
+    file.write(reinterpret_cast<const char*>(&padding), sizeof(padding));
+    for (const auto& out_channel_weights : weights) {
+        for (const auto& in_channel_weights : out_channel_weights) {
+            for (const auto& row : in_channel_weights) {
+                file.write(reinterpret_cast<const char*>(row.data()), row.size() * sizeof(double));
+            }
+        }
+    }
+}
+
+void ConvLayer::load(std::ifstream& file) {
+    file.read(reinterpret_cast<char*>(&in_channels), sizeof(in_channels));
+    file.read(reinterpret_cast<char*>(&out_channels), sizeof(out_channels));
+    file.read(reinterpret_cast<char*>(&kernel_size), sizeof(kernel_size));
+    file.read(reinterpret_cast<char*>(&stride), sizeof(stride));
+    file.read(reinterpret_cast<char*>(&padding), sizeof(padding));
+    weights.resize(out_channels, std::vector<std::vector<std::vector<double>>>(in_channels, std::vector<std::vector<double>>(kernel_size, std::vector<double>(kernel_size))));
+    for (auto& out_channel_weights : weights) {
+        for (auto& in_channel_weights : out_channel_weights) {
+            for (auto& row : in_channel_weights) {
+                file.read(reinterpret_cast<char*>(row.data()), row.size() * sizeof(double));
             }
         }
     }

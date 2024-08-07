@@ -33,58 +33,9 @@ int main() {
     SGDOptimizer optimizer(0.01);  // Создаем объект SGDOptimizer с выбранной скоростью обучения
 
     std::cout << "Начало обучения модели UNet..." << std::endl; 
- 
-    for (size_t epoch = 0; epoch < 10; ++epoch) { 
-        double total_loss = 0.0; 
-        std::cout << "Epoch [" << epoch + 1 << "/10]" << std::endl; 
- 
-        for (size_t i = 0; i < num_images; ++i) { 
-            std::cout << "Processing image " << i + 1 << "/" << num_images << std::endl; 
- 
-            auto input = loadImage(image_files[i]);
-            auto target = loadMask(mask_files[i]);
 
-            // Преобразуем маски в один канал, если необходимо
-            if (target.size() > 1) {
-                target = convertToSingleChannel(target);
-            }
-
-            // Проверка размеров перед вызовом forward 
-            std::cout << "Input tensor size: [" << input.size() << ", " << input[0].size() << ", " << input[0][0].size() << "]" << std::endl; 
-            std::cout << "Mask tensor size: [" << target.size() << ", " << target[0].size() << ", " << target[0][0].size() << "]" << std::endl; 
- 
-            auto prediction = unet.forward(input);
- 
-            // Проверка размеров после forward 
-            std::cout << "Prediction tensor size: [" << prediction.size() << ", " << prediction[0].size() << ", " << prediction[0][0].size() << "]" << std::endl;
-
-            if (prediction.size() != target.size() || 
-                prediction[0].size() != target[0].size() || 
-                prediction[0][0].size() != target[0][0].size()) {
-                std::cerr << "Ошибка: Размеры предсказаний и целевых данных не совпадают." << std::endl;
-                std::cerr << "Размеры предсказаний: [" << prediction.size() << ", " << prediction[0].size() << ", " << prediction[0][0].size() << "]" << std::endl;
-                std::cerr << "Размеры целевых данных: [" << target.size() << ", " << target[0].size() << ", " << target[0][0].size() << "]" << std::endl;
-
-                prediction = trimToMatchSize(prediction, target);
-                std::cout << "Размеры предсказаний после обрезки: [" << prediction.size() << ", " << prediction[0].size() << ", " << prediction[0][0].size() << "]" << std::endl;
-            }
- 
-            double loss = binaryCrossEntropy(prediction, target); 
-            if (loss < 0) {
-                std::cerr << "Произошла ошибка при вычислении binaryCrossEntropy." << std::endl;
-            }
-            total_loss += loss; 
- 
-            std::cout << "Image " << i + 1 << " processed. Loss: " << loss << std::endl; 
-
-            // Вычисление градиентов
-            unet.backward(target);
-            
-            // Обновление весов
-            unet.updateWeights(optimizer);
-        } 
-        std::cout << "Epoch [" << epoch + 1 << "/10], Loss: " << total_loss / num_images << std::endl; 
-    } 
+    // Вызов функции trainUNet вместо ручного цикла обучения
+    trainUNet(unet, image_files, mask_files, 10, optimizer);
  
     std::cout << "Обучение завершено." << std::endl; 
  
