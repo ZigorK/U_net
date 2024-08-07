@@ -179,4 +179,5 @@ CMakeFiles/unet.dir/UNet.cpp.o: /home/zigork/GitHub/U_net/UNet.cpp \
  /home/zigork/GitHub/U_net/ReLULayer.h \
  /home/zigork/GitHub/U_net/MaxPooling.h \
  /home/zigork/GitHub/U_net/ConcatLayer.h \
- /home/zigork/GitHub/U_net/Optimizer.h
+ /home/zigork/GitHub/U_net/Optimizer.h \
+ /home/zigork/GitHub/U_net/SGDOptimizer.h

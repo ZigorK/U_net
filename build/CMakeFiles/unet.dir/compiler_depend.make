@@ -934,6 +934,7 @@ CMakeFiles/unet.dir/UNet.cpp.o: /home/zigork/GitHub/U_net/UNet.cpp \
   /home/zigork/GitHub/U_net/MaxPooling.h \
   /home/zigork/GitHub/U_net/Optimizer.h \
   /home/zigork/GitHub/U_net/ReLULayer.h \
+  /home/zigork/GitHub/U_net/SGDOptimizer.h \
   /home/zigork/GitHub/U_net/UNet.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
@@ -1158,6 +1159,7 @@ CMakeFiles/unet.dir/Utils.cpp.o: /home/zigork/GitHub/U_net/Utils.cpp \
   /home/zigork/GitHub/U_net/MaxPooling.h \
   /home/zigork/GitHub/U_net/Optimizer.h \
   /home/zigork/GitHub/U_net/ReLULayer.h \
+  /home/zigork/GitHub/U_net/SGDOptimizer.h \
   /home/zigork/GitHub/U_net/UNet.h \
   /home/zigork/GitHub/U_net/Utils.h \
   /usr/include/alloca.h \
@@ -1580,6 +1582,7 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
   /home/zigork/GitHub/U_net/MaxPooling.h \
   /home/zigork/GitHub/U_net/Optimizer.h \
   /home/zigork/GitHub/U_net/ReLULayer.h \
+  /home/zigork/GitHub/U_net/SGDOptimizer.h \
   /home/zigork/GitHub/U_net/UNet.h \
   /home/zigork/GitHub/U_net/Utils.h \
   /usr/include/alloca.h \

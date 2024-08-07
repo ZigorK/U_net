@@ -8,6 +8,7 @@
 #include "ConcatLayer.h"
 #include "UNet.h"
 #include "Utils.h"
+#include "SGDOptimizer.h"  // Подключаем заголовочный файл SGDOptimizer
 
 namespace fs = std::filesystem;  // Удобный алиас для namespace filesystem
 
@@ -29,7 +30,8 @@ int main() {
     num_images = std::min(num_images, static_cast<size_t>(10)); 
  
     UNet unet; 
- 
+    SGDOptimizer optimizer(0.01);  // Создаем объект SGDOptimizer с выбранной скоростью обучения
+
     std::cout << "Начало обучения модели UNet..." << std::endl; 
  
     for (size_t epoch = 0; epoch < 10; ++epoch) { 
@@ -70,10 +72,16 @@ int main() {
             double loss = binaryCrossEntropy(prediction, target); 
             if (loss < 0) {
                 std::cerr << "Произошла ошибка при вычислении binaryCrossEntropy." << std::endl;
-                }
+            }
             total_loss += loss; 
  
             std::cout << "Image " << i + 1 << " processed. Loss: " << loss << std::endl; 
+
+            // Вычисление градиентов
+            unet.backward(target);
+            
+            // Обновление весов
+            unet.updateWeights(optimizer);
         } 
         std::cout << "Epoch [" << epoch + 1 << "/10], Loss: " << total_loss / num_images << std::endl; 
     } 

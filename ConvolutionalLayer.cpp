@@ -60,11 +60,52 @@ std::vector<std::vector<std::vector<double>>> ConvLayer::forward(const std::vect
 
 
 std::vector<std::vector<std::vector<double>>> ConvLayer::backward(const std::vector<std::vector<std::vector<double>>>& grad_output) {
+    // Проверка и вывод размеров grad_output
+    if (grad_output.empty() || grad_output[0].empty() || grad_output[0][0].empty()) {
+        std::cerr << "grad_output is empty or has incorrect dimensions." << std::endl;
+        std::cerr << "grad_output size: " << grad_output.size() << std::endl;
+        return {};
+    }
+
+    // Проверка и вывод размеров input
+    if (input.empty() || input[0].empty() || input[0][0].empty()) {
+        std::cerr << "Input is empty or has incorrect dimensions." << std::endl;
+        std::cerr << "Input size: " << input.size() << std::endl;
+        return {};
+    }
+
+    // Проверка и вывод размеров weights
+    if (weights.empty() || weights[0].empty() || weights[0][0].empty() || weights[0][0][0].empty()) {
+        std::cerr << "Weights are empty or have incorrect dimensions." << std::endl;
+        std::cerr << "Weights size: " << weights.size() << std::endl;
+        return {};
+    }
+
+    // Вывод значений in_channels и out_channels
+    std::cerr << "in_channels: " << in_channels << std::endl;
+    std::cerr << "out_channels: " << out_channels << std::endl;
+
     int height = input[0].size();
     int width = input[0][0].size();
     int output_height = grad_output[0].size();
     int output_width = grad_output[0][0].size();
 
+    std::cerr << "Input dimensions: (" << input.size() << ", " << height << ", " << width << ")" << std::endl;
+    std::cerr << "grad_output dimensions: (" << grad_output.size() << ", " << output_height << ", " << output_width << ")" << std::endl;
+    std::cerr << "Weights dimensions: (" << weights.size() << ", " << weights[0].size() << ", " << weights[0][0].size() << ", " << weights[0][0][0].size() << ")" << std::endl;
+
+    // Проверка соответствия размеров input и grad_output
+    if (in_channels != input.size()) {
+        std::cerr << "Mismatch in_channels: expected " << in_channels << ", but got " << input.size() << std::endl;
+        return {};
+    }
+
+    if (out_channels != grad_output.size()) {
+        std::cerr << "Mismatch out_channels: expected " << out_channels << ", but got " << grad_output.size() << std::endl;
+        return {};
+    }
+
+    // Инициализация grad_input и grad_weights
     std::vector<std::vector<std::vector<double>>> grad_input(in_channels, std::vector<std::vector<double>>(height, std::vector<double>(width, 0.0)));
     grad_weights = weights; // Обнуляем градиенты весов
 
@@ -89,6 +130,7 @@ std::vector<std::vector<std::vector<double>>> ConvLayer::backward(const std::vec
 
     return grad_input;
 }
+
 
 void ConvLayer::updateWeights(double learning_rate) {
     for (int i = 0; i < out_channels; ++i) {
