@@ -119,7 +119,7 @@ void trainUNet(UNet& model, const std::vector<std::string>& image_files, const s
         std::cout << "Эпоха: " << epoch + 1 << ", Средние потери: " << total_loss / image_files.size() << std::endl;
 
         // Сохранение модели после каждой эпохи
-        saveModel(model, "unet_model_epoch_" + std::to_string(epoch + 1) + ".bin");
+        saveModel(model, "/home/zigork/GitHub/U_net/save/unet_model_epoch_" + std::to_string(epoch + 1) + ".bin");
     }
 }
 

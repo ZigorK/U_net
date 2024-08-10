@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <filesystem>  // Для работы с файловой системой
+#include <filesystem>  
 #include "ConvolutionalLayer.h"
 #include "ReLULayer.h"
 #include "MaxPooling.h"
@@ -8,13 +8,13 @@
 #include "ConcatLayer.h"
 #include "UNet.h"
 #include "Utils.h"
-#include "SGDOptimizer.h"  // Подключаем заголовочный файл SGDOptimizer
+#include "SGDOptimizer.h" 
 
-namespace fs = std::filesystem;  // Удобный алиас для namespace filesystem
+namespace fs = std::filesystem;  
 
 int main() { 
-    std::string images_path = "/home/zigork/GitHub/cifar10_images/0"; 
-    std::string masks_path = "/home/zigork/GitHub/cifar10_images/1"; 
+    std::string images_path = "/media/zigork/146C-CBA8/train"; 
+    std::string masks_path = "/media/zigork/146C-CBA8/train1"; 
  
     std::vector<std::string> image_files; 
     std::vector<std::string> mask_files; 
@@ -34,7 +34,7 @@ int main() {
 
     std::cout << "Начало обучения модели UNet..." << std::endl; 
 
-    // Вызов функции trainUNet вместо ручного цикла обучения
+    
     trainUNet(unet, image_files, mask_files, 10, optimizer);
  
     std::cout << "Обучение завершено." << std::endl; 
