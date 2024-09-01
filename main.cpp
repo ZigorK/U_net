@@ -13,8 +13,8 @@
 namespace fs = std::filesystem;  
 
 int main() { 
-    std::string images_path = "/media/zigork/146C-CBA8/train"; 
-    std::string masks_path = "/media/zigork/146C-CBA8/train1"; 
+    std::string images_path = "/home/ziigork/Project/U_net/VOCdevkit/VOCdevkit/VOC2012/JPEGImages"; 
+    std::string masks_path = "/home/ziigork/Project/U_net/VOCdevkit/VOCdevkit/VOC2012/SegmentationObject"; 
  
     std::vector<std::string> image_files; 
     std::vector<std::string> mask_files; 

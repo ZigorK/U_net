@@ -1,4 +1,4 @@
-# Install script for directory: /home/zigork/GitHub/U_net
+# Install script for directory: /home/ziigork/Project/U_net
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/zigork/GitHub/U_net/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/ziigork/Project/U_net/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

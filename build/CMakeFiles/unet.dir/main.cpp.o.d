@@ -1,4 +1,4 @@
-CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
+CMakeFiles/unet.dir/main.cpp.o: /home/ziigork/Project/U_net/main.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/13/iostream \
  /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
@@ -176,17 +176,17 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
  /usr/include/c++/13/bits/unique_ptr.h \
  /usr/include/c++/13/ext/aligned_buffer.h \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
- /home/zigork/GitHub/U_net/ConvolutionalLayer.h \
- /home/zigork/GitHub/U_net/Layer.h /usr/include/c++/13/fstream \
+ /home/ziigork/Project/U_net/ConvolutionalLayer.h \
+ /home/ziigork/Project/U_net/Layer.h /usr/include/c++/13/fstream \
  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
  /usr/include/c++/13/bits/fstream.tcc \
- /home/zigork/GitHub/U_net/ReLULayer.h \
- /home/zigork/GitHub/U_net/MaxPooling.h \
- /home/zigork/GitHub/U_net/DeconvLayer.h \
- /home/zigork/GitHub/U_net/ConcatLayer.h /home/zigork/GitHub/U_net/UNet.h \
- /usr/include/c++/13/cmath /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+ /home/ziigork/Project/U_net/ReLULayer.h \
+ /home/ziigork/Project/U_net/MaxPooling.h \
+ /home/ziigork/Project/U_net/DeconvLayer.h \
+ /home/ziigork/Project/U_net/ConcatLayer.h \
+ /home/ziigork/Project/U_net/UNet.h /usr/include/c++/13/cmath \
+ /usr/include/math.h /usr/include/x86_64-linux-gnu/bits/math-vector.h \
  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
  /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
@@ -216,9 +216,9 @@ CMakeFiles/unet.dir/main.cpp.o: /home/zigork/GitHub/U_net/main.cpp \
  /usr/include/c++/13/backward/auto_ptr.h \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
  /usr/include/c++/13/pstl/execution_defs.h \
- /home/zigork/GitHub/U_net/Optimizer.h \
- /home/zigork/GitHub/U_net/SGDOptimizer.h \
- /home/zigork/GitHub/U_net/Utils.h \
+ /home/ziigork/Project/U_net/Optimizer.h \
+ /home/ziigork/Project/U_net/SGDOptimizer.h \
+ /home/ziigork/Project/U_net/Utils.h \
  /usr/include/opencv4/opencv2/opencv.hpp \
  /usr/include/opencv4/opencv2/opencv_modules.hpp \
  /usr/include/opencv4/opencv2/core.hpp \

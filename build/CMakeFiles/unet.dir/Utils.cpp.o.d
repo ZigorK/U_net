@@ -1,5 +1,5 @@
-CMakeFiles/unet.dir/Utils.cpp.o: /home/zigork/GitHub/U_net/Utils.cpp \
- /usr/include/stdc-predef.h /home/zigork/GitHub/U_net/Utils.h \
+CMakeFiles/unet.dir/Utils.cpp.o: /home/ziigork/Project/U_net/Utils.cpp \
+ /usr/include/stdc-predef.h /home/ziigork/Project/U_net/Utils.h \
  /usr/include/c++/13/vector /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -352,15 +352,15 @@ CMakeFiles/unet.dir/Utils.cpp.o: /home/zigork/GitHub/U_net/Utils.cpp \
  /usr/include/opencv4/opencv2/video.hpp \
  /usr/include/opencv4/opencv2/video/tracking.hpp \
  /usr/include/opencv4/opencv2/video/background_segm.hpp \
- /home/zigork/GitHub/U_net/UNet.h /home/zigork/GitHub/U_net/Layer.h \
+ /home/ziigork/Project/U_net/UNet.h /home/ziigork/Project/U_net/Layer.h \
  /usr/include/c++/13/fstream \
  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
  /usr/include/c++/13/bits/fstream.tcc \
- /home/zigork/GitHub/U_net/ConvolutionalLayer.h \
- /home/zigork/GitHub/U_net/DeconvLayer.h \
- /home/zigork/GitHub/U_net/ReLULayer.h \
- /home/zigork/GitHub/U_net/MaxPooling.h \
- /home/zigork/GitHub/U_net/ConcatLayer.h \
- /home/zigork/GitHub/U_net/Optimizer.h \
- /home/zigork/GitHub/U_net/SGDOptimizer.h
+ /home/ziigork/Project/U_net/ConvolutionalLayer.h \
+ /home/ziigork/Project/U_net/DeconvLayer.h \
+ /home/ziigork/Project/U_net/ReLULayer.h \
+ /home/ziigork/Project/U_net/MaxPooling.h \
+ /home/ziigork/Project/U_net/ConcatLayer.h \
+ /home/ziigork/Project/U_net/Optimizer.h \
+ /home/ziigork/Project/U_net/SGDOptimizer.h

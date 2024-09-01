@@ -1,7 +1,7 @@
 CMakeFiles/unet.dir/SGDOptimizer.cpp.o: \
- /home/zigork/GitHub/U_net/SGDOptimizer.cpp /usr/include/stdc-predef.h \
- /home/zigork/GitHub/U_net/SGDOptimizer.h \
- /home/zigork/GitHub/U_net/Optimizer.h /usr/include/c++/13/vector \
+ /home/ziigork/Project/U_net/SGDOptimizer.cpp /usr/include/stdc-predef.h \
+ /home/ziigork/Project/U_net/SGDOptimizer.h \
+ /home/ziigork/Project/U_net/Optimizer.h /usr/include/c++/13/vector \
  /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \

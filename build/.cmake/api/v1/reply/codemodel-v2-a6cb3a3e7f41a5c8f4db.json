@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/zigork/GitHub/U_net/build",
-		"source" : "/home/zigork/GitHub/U_net"
+		"build" : "/home/ziigork/Project/U_net/build",
+		"source" : "/home/ziigork/Project/U_net"
 	},
 	"version" : 
 	{

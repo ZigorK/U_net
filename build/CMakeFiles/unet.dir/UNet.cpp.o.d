@@ -1,5 +1,5 @@
-CMakeFiles/unet.dir/UNet.cpp.o: /home/zigork/GitHub/U_net/UNet.cpp \
- /usr/include/stdc-predef.h /home/zigork/GitHub/U_net/UNet.h \
+CMakeFiles/unet.dir/UNet.cpp.o: /home/ziigork/Project/U_net/UNet.cpp \
+ /usr/include/stdc-predef.h /home/ziigork/Project/U_net/UNet.h \
  /usr/include/c++/13/vector /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -192,15 +192,15 @@ CMakeFiles/unet.dir/UNet.cpp.o: /home/zigork/GitHub/U_net/UNet.cpp \
  /usr/include/c++/13/backward/auto_ptr.h \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
  /usr/include/c++/13/pstl/execution_defs.h \
- /home/zigork/GitHub/U_net/Layer.h /usr/include/c++/13/fstream \
+ /home/ziigork/Project/U_net/Layer.h /usr/include/c++/13/fstream \
  /usr/include/c++/13/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
  /usr/include/c++/13/bits/fstream.tcc \
- /home/zigork/GitHub/U_net/ConvolutionalLayer.h \
- /home/zigork/GitHub/U_net/DeconvLayer.h \
- /home/zigork/GitHub/U_net/ReLULayer.h \
- /home/zigork/GitHub/U_net/MaxPooling.h \
- /home/zigork/GitHub/U_net/ConcatLayer.h \
- /home/zigork/GitHub/U_net/Optimizer.h \
- /home/zigork/GitHub/U_net/SGDOptimizer.h
+ /home/ziigork/Project/U_net/ConvolutionalLayer.h \
+ /home/ziigork/Project/U_net/DeconvLayer.h \
+ /home/ziigork/Project/U_net/ReLULayer.h \
+ /home/ziigork/Project/U_net/MaxPooling.h \
+ /home/ziigork/Project/U_net/ConcatLayer.h \
+ /home/ziigork/Project/U_net/Optimizer.h \
+ /home/ziigork/Project/U_net/SGDOptimizer.h

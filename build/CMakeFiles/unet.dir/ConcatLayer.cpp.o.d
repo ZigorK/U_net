@@ -1,6 +1,6 @@
 CMakeFiles/unet.dir/ConcatLayer.cpp.o: \
- /home/zigork/GitHub/U_net/ConcatLayer.cpp /usr/include/stdc-predef.h \
- /home/zigork/GitHub/U_net/ConcatLayer.h /usr/include/c++/13/vector \
+ /home/ziigork/Project/U_net/ConcatLayer.cpp /usr/include/stdc-predef.h \
+ /home/ziigork/Project/U_net/ConcatLayer.h /usr/include/c++/13/vector \
  /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
