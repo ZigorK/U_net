@@ -529,3 +529,205 @@ events:
       
       
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckLibraryExists.cmake:69 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindX11.cmake:682 (check_library_exists)"
+      - "/usr/share/cmake-3.28/Modules/FindFLTK.cmake:102 (include)"
+      - "CMakeLists.txt:18 (find_package)"
+    checks:
+      - "Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so"
+    directories:
+      source: "/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-SLwWaL"
+      binary: "/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-SLwWaL"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "X11_LIB_X11_SOLO"
+      cached: true
+      stdout: |
+        Change Dir: '/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-SLwWaL'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_599da/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_599da.dir/build.make CMakeFiles/cmTC_599da.dir/build
+        gmake[1]: вход в каталог «/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-SLwWaL»
+        Building C object CMakeFiles/cmTC_599da.dir/CheckFunctionExists.c.o
+        /usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=XOpenDisplay -o CMakeFiles/cmTC_599da.dir/CheckFunctionExists.c.o -c /home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-SLwWaL/CheckFunctionExists.c
+        Linking C executable cmTC_599da
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_599da.dir/link.txt --verbose=1
+        /usr/bin/gcc  -DCHECK_FUNCTION_EXISTS=XOpenDisplay CMakeFiles/cmTC_599da.dir/CheckFunctionExists.c.o -o cmTC_599da  /usr/lib/x86_64-linux-gnu/libX11.so /usr/lib/x86_64-linux-gnu/libXext.so 
+        gmake[1]: выход из каталога «/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-SLwWaL»
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindX11.cmake:697 (check_function_exists)"
+      - "/usr/share/cmake-3.28/Modules/FindFLTK.cmake:102 (include)"
+      - "CMakeLists.txt:18 (find_package)"
+    checks:
+      - "Looking for gethostbyname"
+    directories:
+      source: "/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-fnzziJ"
+      binary: "/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-fnzziJ"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_HAVE_GETHOSTBYNAME"
+      cached: true
+      stdout: |
+        Change Dir: '/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-fnzziJ'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_ea38c/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_ea38c.dir/build.make CMakeFiles/cmTC_ea38c.dir/build
+        gmake[1]: вход в каталог «/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-fnzziJ»
+        Building C object CMakeFiles/cmTC_ea38c.dir/CheckFunctionExists.c.o
+        /usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=gethostbyname -o CMakeFiles/cmTC_ea38c.dir/CheckFunctionExists.c.o -c /home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-fnzziJ/CheckFunctionExists.c
+        Linking C executable cmTC_ea38c
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ea38c.dir/link.txt --verbose=1
+        /usr/bin/gcc  -DCHECK_FUNCTION_EXISTS=gethostbyname CMakeFiles/cmTC_ea38c.dir/CheckFunctionExists.c.o -o cmTC_ea38c 
+        gmake[1]: выход из каталога «/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-fnzziJ»
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindX11.cmake:711 (check_function_exists)"
+      - "/usr/share/cmake-3.28/Modules/FindFLTK.cmake:102 (include)"
+      - "CMakeLists.txt:18 (find_package)"
+    checks:
+      - "Looking for connect"
+    directories:
+      source: "/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-N6JSJ8"
+      binary: "/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-N6JSJ8"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_HAVE_CONNECT"
+      cached: true
+      stdout: |
+        Change Dir: '/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-N6JSJ8'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_a87a9/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_a87a9.dir/build.make CMakeFiles/cmTC_a87a9.dir/build
+        gmake[1]: вход в каталог «/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-N6JSJ8»
+        Building C object CMakeFiles/cmTC_a87a9.dir/CheckFunctionExists.c.o
+        /usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=connect -o CMakeFiles/cmTC_a87a9.dir/CheckFunctionExists.c.o -c /home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-N6JSJ8/CheckFunctionExists.c
+        Linking C executable cmTC_a87a9
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a87a9.dir/link.txt --verbose=1
+        /usr/bin/gcc  -DCHECK_FUNCTION_EXISTS=connect CMakeFiles/cmTC_a87a9.dir/CheckFunctionExists.c.o -o cmTC_a87a9 
+        gmake[1]: выход из каталога «/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-N6JSJ8»
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindX11.cmake:720 (check_function_exists)"
+      - "/usr/share/cmake-3.28/Modules/FindFLTK.cmake:102 (include)"
+      - "CMakeLists.txt:18 (find_package)"
+    checks:
+      - "Looking for remove"
+    directories:
+      source: "/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-jfgA0a"
+      binary: "/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-jfgA0a"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_HAVE_REMOVE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-jfgA0a'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_58343/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_58343.dir/build.make CMakeFiles/cmTC_58343.dir/build
+        gmake[1]: вход в каталог «/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-jfgA0a»
+        Building C object CMakeFiles/cmTC_58343.dir/CheckFunctionExists.c.o
+        /usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=remove -o CMakeFiles/cmTC_58343.dir/CheckFunctionExists.c.o -c /home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-jfgA0a/CheckFunctionExists.c
+        Linking C executable cmTC_58343
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_58343.dir/link.txt --verbose=1
+        /usr/bin/gcc  -DCHECK_FUNCTION_EXISTS=remove CMakeFiles/cmTC_58343.dir/CheckFunctionExists.c.o -o cmTC_58343 
+        gmake[1]: выход из каталога «/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-jfgA0a»
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindX11.cmake:729 (check_function_exists)"
+      - "/usr/share/cmake-3.28/Modules/FindFLTK.cmake:102 (include)"
+      - "CMakeLists.txt:18 (find_package)"
+    checks:
+      - "Looking for shmat"
+    directories:
+      source: "/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-on1EBg"
+      binary: "/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-on1EBg"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_HAVE_SHMAT"
+      cached: true
+      stdout: |
+        Change Dir: '/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-on1EBg'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_1b923/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_1b923.dir/build.make CMakeFiles/cmTC_1b923.dir/build
+        gmake[1]: вход в каталог «/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-on1EBg»
+        Building C object CMakeFiles/cmTC_1b923.dir/CheckFunctionExists.c.o
+        /usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=shmat -o CMakeFiles/cmTC_1b923.dir/CheckFunctionExists.c.o -c /home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-on1EBg/CheckFunctionExists.c
+        Linking C executable cmTC_1b923
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1b923.dir/link.txt --verbose=1
+        /usr/bin/gcc  -DCHECK_FUNCTION_EXISTS=shmat CMakeFiles/cmTC_1b923.dir/CheckFunctionExists.c.o -o cmTC_1b923 
+        gmake[1]: выход из каталога «/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-on1EBg»
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckLibraryExists.cmake:69 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindX11.cmake:739 (check_library_exists)"
+      - "/usr/share/cmake-3.28/Modules/FindFLTK.cmake:102 (include)"
+      - "CMakeLists.txt:18 (find_package)"
+    checks:
+      - "Looking for IceConnectionNumber in ICE"
+    directories:
+      source: "/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-iNGqhm"
+      binary: "/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-iNGqhm"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_LIB_ICE_HAS_ICECONNECTIONNUMBER"
+      cached: true
+      stdout: |
+        Change Dir: '/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-iNGqhm'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_0b5fc/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_0b5fc.dir/build.make CMakeFiles/cmTC_0b5fc.dir/build
+        gmake[1]: вход в каталог «/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-iNGqhm»
+        Building C object CMakeFiles/cmTC_0b5fc.dir/CheckFunctionExists.c.o
+        /usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=IceConnectionNumber -o CMakeFiles/cmTC_0b5fc.dir/CheckFunctionExists.c.o -c /home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-iNGqhm/CheckFunctionExists.c
+        Linking C executable cmTC_0b5fc
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0b5fc.dir/link.txt --verbose=1
+        /usr/bin/gcc  -DCHECK_FUNCTION_EXISTS=IceConnectionNumber CMakeFiles/cmTC_0b5fc.dir/CheckFunctionExists.c.o -o cmTC_0b5fc  -lICE 
+        gmake[1]: выход из каталога «/home/ziigork/Project/U_net/build/CMakeFiles/CMakeScratch/TryCompile-iNGqhm»
+        
+      exitCode: 0
+...

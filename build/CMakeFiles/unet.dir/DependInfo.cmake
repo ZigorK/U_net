@@ -11,6 +11,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/ziigork/Project/U_net/ConcatLayer.cpp" "CMakeFiles/unet.dir/ConcatLayer.cpp.o" "gcc" "CMakeFiles/unet.dir/ConcatLayer.cpp.o.d"
   "/home/ziigork/Project/U_net/ConvolutionalLayer.cpp" "CMakeFiles/unet.dir/ConvolutionalLayer.cpp.o" "gcc" "CMakeFiles/unet.dir/ConvolutionalLayer.cpp.o.d"
   "/home/ziigork/Project/U_net/DeconvLayer.cpp" "CMakeFiles/unet.dir/DeconvLayer.cpp.o" "gcc" "CMakeFiles/unet.dir/DeconvLayer.cpp.o.d"
+  "/home/ziigork/Project/U_net/MainWindow.cpp" "CMakeFiles/unet.dir/MainWindow.cpp.o" "gcc" "CMakeFiles/unet.dir/MainWindow.cpp.o.d"
   "/home/ziigork/Project/U_net/MaxPooling.cpp" "CMakeFiles/unet.dir/MaxPooling.cpp.o" "gcc" "CMakeFiles/unet.dir/MaxPooling.cpp.o.d"
   "/home/ziigork/Project/U_net/ReLULayer.cpp" "CMakeFiles/unet.dir/ReLULayer.cpp.o" "gcc" "CMakeFiles/unet.dir/ReLULayer.cpp.o.d"
   "/home/ziigork/Project/U_net/SGDOptimizer.cpp" "CMakeFiles/unet.dir/SGDOptimizer.cpp.o" "gcc" "CMakeFiles/unet.dir/SGDOptimizer.cpp.o.d"

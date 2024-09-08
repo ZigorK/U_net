@@ -201,6 +201,30 @@ DeconvLayer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/unet.dir/build.make CMakeFiles/unet.dir/DeconvLayer.cpp.s
 .PHONY : DeconvLayer.cpp.s
 
+MainWindow.o: MainWindow.cpp.o
+.PHONY : MainWindow.o
+
+# target to build an object file
+MainWindow.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unet.dir/build.make CMakeFiles/unet.dir/MainWindow.cpp.o
+.PHONY : MainWindow.cpp.o
+
+MainWindow.i: MainWindow.cpp.i
+.PHONY : MainWindow.i
+
+# target to preprocess a source file
+MainWindow.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unet.dir/build.make CMakeFiles/unet.dir/MainWindow.cpp.i
+.PHONY : MainWindow.cpp.i
+
+MainWindow.s: MainWindow.cpp.s
+.PHONY : MainWindow.s
+
+# target to generate assembly for a file
+MainWindow.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unet.dir/build.make CMakeFiles/unet.dir/MainWindow.cpp.s
+.PHONY : MainWindow.cpp.s
+
 MaxPooling.o: MaxPooling.cpp.o
 .PHONY : MaxPooling.o
 
@@ -363,6 +387,9 @@ help:
 	@echo "... DeconvLayer.o"
 	@echo "... DeconvLayer.i"
 	@echo "... DeconvLayer.s"
+	@echo "... MainWindow.o"
+	@echo "... MainWindow.i"
+	@echo "... MainWindow.s"
 	@echo "... MaxPooling.o"
 	@echo "... MaxPooling.i"
 	@echo "... MaxPooling.s"

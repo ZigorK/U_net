@@ -14,6 +14,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
+# Поиск пакета FLTK
+find_package(FLTK REQUIRED)
+include_directories(${FLTK_INCLUDE_DIRS})
+
 # Добавление исходных файлов проекта
 set(SOURCES
     main.cpp
@@ -25,9 +29,10 @@ set(SOURCES
     UNet.cpp
     Utils.cpp
     SGDOptimizer.cpp
+    MainWindow.cpp
 )
 
-# Добавление заголовочных файлов проекта (для IDE, не обязательно)
+# Добавление заголовочных файлов проекта
 set(HEADERS
     ConvolutionalLayer.h
     ReLULayer.h
@@ -39,10 +44,11 @@ set(HEADERS
     Optimizer.h
     SGDOptimizer.h
     Layer.h
+    MainWindow.h
 )
 
 # Создание исполняемого файла
 add_executable(unet ${SOURCES} ${HEADERS})
 
-# Линковка с библиотекой OpenCV
-target_link_libraries(unet ${OpenCV_LIBS})
+# Линковка с библиотеками
+target_link_libraries(unet ${OpenCV_LIBS} ${FLTK_LIBRARIES})

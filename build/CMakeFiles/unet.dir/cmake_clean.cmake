@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/unet.dir/ConvolutionalLayer.cpp.o.d"
   "CMakeFiles/unet.dir/DeconvLayer.cpp.o"
   "CMakeFiles/unet.dir/DeconvLayer.cpp.o.d"
+  "CMakeFiles/unet.dir/MainWindow.cpp.o"
+  "CMakeFiles/unet.dir/MainWindow.cpp.o.d"
   "CMakeFiles/unet.dir/MaxPooling.cpp.o"
   "CMakeFiles/unet.dir/MaxPooling.cpp.o.d"
   "CMakeFiles/unet.dir/ReLULayer.cpp.o"

@@ -52,5 +52,11 @@
   "command": "/usr/bin/g++  -isystem /usr/include/opencv4 -g -g -std=gnu++17 -o CMakeFiles/unet.dir/SGDOptimizer.cpp.o -c /home/ziigork/Project/U_net/SGDOptimizer.cpp",
   "file": "/home/ziigork/Project/U_net/SGDOptimizer.cpp",
   "output": "CMakeFiles/unet.dir/SGDOptimizer.cpp.o"
+},
+{
+  "directory": "/home/ziigork/Project/U_net/build",
+  "command": "/usr/bin/g++  -isystem /usr/include/opencv4 -g -g -std=gnu++17 -o CMakeFiles/unet.dir/MainWindow.cpp.o -c /home/ziigork/Project/U_net/MainWindow.cpp",
+  "file": "/home/ziigork/Project/U_net/MainWindow.cpp",
+  "output": "CMakeFiles/unet.dir/MainWindow.cpp.o"
 }
 ]
